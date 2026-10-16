@@ -1,0 +1,11 @@
+const express=require('express');
+const path=require('path');
+const {Pool}=require('pg');
+const app=express();
+const port=process.env.PORT||3000;
+const pool=process.env.DATABASE_URL?new Pool({connectionString:process.env.DATABASE_URL,ssl:{rejectUnauthorized:false}}):null;
+app.use(express.json());
+app.get('/api/health',async(req,res)=>{let db=false;try{if(pool){await pool.query('select 1');db=true}}catch(e){}res.json({ok:true,service:'birarada-beta',database:db?'postgres':'not-connected'});});
+app.use(express.static(__dirname));
+app.get('*',(req,res)=>res.sendFile(path.join(__dirname,'index.html')));
+app.listen(port,'0.0.0.0',()=>console.log('Birarada beta listening on',port));
