@@ -1,13 +1,16 @@
 {
   "name": "birarada",
-  "version": "3.0.0",
+  "version": "9.0.0",
   "private": true,
-  "description": "Birarada beta social app backend",
+  "description": "Birarada responsive social network release candidate",
   "main": "server.js",
   "scripts": {
+    "preinstall": "node bootstrap.js",
     "start": "node server.js",
     "dev": "node server.js",
-    "check": "node check.js"
+    "check": "node --check server.js && node --check public/app.js && node --check public/admin.js && node --check public/sw.js",
+    "release-check": "node scripts/release-check.js",
+    "setup-production": "node scripts/setup-production.js"
   },
   "engines": {
     "node": ">=20"
@@ -21,6 +24,7 @@
     "jsonwebtoken": "^9.0.2",
     "multer": "^2.0.2",
     "pg": "^8.13.1",
-    "socket.io": "^4.8.1"
+    "dotenv": "^16.4.7",
+    "nodemailer": "^6.9.16"
   }
 }
