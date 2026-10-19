@@ -1,0 +1,3497 @@
+<!doctype html>
+<html lang="tr">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <meta name="theme-color" content="#111314" />
+    <title>Birarada · Bu cihazda dene</title>
+    <style>
+      :root {
+        color-scheme: dark;
+        --bg: #111314;
+        --surface: #1a1d1f;
+        --raised: #232729;
+        --line: #303638;
+        --text: #f4f0e9;
+        --muted: #9da6a5;
+        --accent: #ff9b69;
+        --soft: #38271f;
+        --danger: #ffa3a3;
+        --green: #a5cab4;
+        --radius: 22px;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--text);
+        font:
+          15px/1.6 -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          sans-serif;
+      }
+      button,
+      input,
+      textarea,
+      select {
+        font: inherit;
+      }
+      button,
+      a,
+      input,
+      textarea,
+      select {
+        -webkit-tap-highlight-color: transparent;
+      }
+      button {
+        cursor: pointer;
+      }
+      button:disabled {
+        opacity: 0.45;
+        cursor: not-allowed;
+      }
+      button,
+      a {
+        touch-action: manipulation;
+      }
+      button:focus-visible,
+      a:focus-visible,
+      input:focus-visible,
+      textarea:focus-visible,
+      select:focus-visible {
+        outline: 2px solid var(--accent);
+        outline-offset: 4px;
+      }
+      button {
+        border: 0;
+        color: inherit;
+        background: none;
+      }
+      a {
+        color: var(--accent);
+        text-decoration: none;
+      }
+      svg.icon {
+        width: 22px;
+        height: 22px;
+        fill: none;
+        stroke: currentColor;
+        stroke-width: 1.65;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        flex-shrink: 0;
+        vertical-align: middle;
+      }
+      h1,
+      h2,
+      h3,
+      p {
+        margin: 0;
+      }
+      h1 {
+        font-size: clamp(30px, 5vw, 44px);
+        line-height: 1.13;
+        letter-spacing: -1.6px;
+      }
+      h2 {
+        font-size: 26px;
+        letter-spacing: -0.8px;
+        line-height: 1.25;
+      }
+      h3 {
+        font-size: 17px;
+        letter-spacing: -0.2px;
+      }
+      small,
+      .small {
+        font-size: 12px;
+      }
+      .muted {
+        color: var(--muted);
+      }
+      .accent {
+        color: var(--accent);
+      }
+      .eyebrow {
+        font-size: 10px;
+        letter-spacing: 2.1px;
+        font-weight: 750;
+        text-transform: uppercase;
+      }
+      .row {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      .between {
+        justify-content: space-between;
+      }
+      .wrap {
+        flex-wrap: wrap;
+      }
+      .stack {
+        display: grid;
+        gap: 18px;
+      }
+      .space {
+        height: 14px;
+      }
+      .divider {
+        height: 1px;
+        background: var(--line);
+        margin: 16px 0;
+      }
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 9px;
+        background: var(--accent);
+        color: #271b15;
+        padding: 12px 18px;
+        border: 1px solid transparent;
+        border-radius: 13px;
+        font-weight: 700;
+        font-size: 13px;
+        min-height: 46px;
+      }
+      .btn.secondary {
+        background: var(--surface);
+        color: var(--text);
+        border-color: var(--line);
+      }
+      .btn.subtle {
+        background: transparent;
+        color: var(--muted);
+        border-color: var(--line);
+      }
+      .btn.small {
+        min-height: 36px;
+        padding: 7px 12px;
+        font-size: 12px;
+      }
+      .btn.danger {
+        color: var(--danger);
+        border-color: #663d3d;
+        background: #291f20;
+      }
+      .icon-btn {
+        display: inline-grid;
+        place-items: center;
+        padding: 10px;
+        border-radius: 12px;
+        color: var(--muted);
+        min-height: 42px;
+        min-width: 42px;
+        position: relative;
+      }
+      .icon-btn:hover {
+        background: var(--surface);
+        color: var(--text);
+      }
+      .badge {
+        position: absolute;
+        right: 4px;
+        top: 3px;
+        min-width: 15px;
+        height: 15px;
+        border-radius: 20px;
+        background: var(--accent);
+        color: #221711;
+        font-size: 9px;
+        display: grid;
+        place-items: center;
+        border: 2px solid var(--bg);
+      }
+      .pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        padding: 5px 10px;
+        border: 1px solid var(--line);
+        border-radius: 30px;
+        color: var(--muted);
+        font-size: 11px;
+      }
+      .pill:before {
+        content: "";
+        width: 5px;
+        height: 5px;
+        background: var(--green);
+        border-radius: 50%;
+      }
+      .card {
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        padding: 23px;
+      }
+      .field {
+        display: grid;
+        gap: 7px;
+        font-size: 12px;
+        color: var(--muted);
+      }
+      input:not([type="checkbox"]),
+      textarea,
+      select {
+        width: 100%;
+        min-width: 0;
+        background: var(--surface);
+        color: var(--text);
+        border: 1px solid var(--line);
+        border-radius: 13px;
+        padding: 13px 15px;
+        outline: none;
+      }
+      input:focus,
+      textarea:focus,
+      select:focus {
+        border-color: var(--accent);
+      }
+      textarea {
+        resize: vertical;
+        min-height: 110px;
+      }
+      input::placeholder,
+      textarea::placeholder {
+        color: #758080;
+      }
+      input[type="checkbox"] {
+        width: 20px;
+        height: 20px;
+        accent-color: var(--accent);
+        flex-shrink: 0;
+      }
+      .check {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 15px;
+        border-bottom: 1px solid var(--line);
+        padding: 13px 0;
+        font-size: 13px;
+      }
+      .check:last-child {
+        border: 0;
+      }
+      .field-help {
+        font-size: 11px;
+        color: var(--muted);
+      }
+      .empty {
+        padding: 48px 22px;
+        text-align: center;
+        display: grid;
+        justify-items: center;
+        gap: 14px;
+      }
+      .empty .icon {
+        width: 38px;
+        height: 38px;
+        color: var(--accent);
+      }
+      .empty p {
+        max-width: 330px;
+        color: var(--muted);
+        font-size: 13px;
+      }
+      .avatar {
+        display: inline-grid;
+        place-items: center;
+        background: var(--avatar, #4c5147);
+        color: #f6f1e8;
+        font-weight: 650;
+        font-size: 15px;
+        width: 42px;
+        height: 42px;
+        border-radius: 50%;
+        flex-shrink: 0;
+        overflow: hidden;
+        letter-spacing: -0.5px;
+      }
+      .avatar img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      .avatar.lg {
+        width: 82px;
+        height: 82px;
+        font-size: 29px;
+      }
+      .avatar.sm {
+        width: 32px;
+        height: 32px;
+        font-size: 12px;
+      }
+      .brand {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        font-size: 23px;
+        font-weight: 780;
+        letter-spacing: -1px;
+      }
+      .brand-mark {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--accent);
+        width: 30px;
+        height: 30px;
+      }
+      .brand-mark svg {
+        width: 31px;
+        height: 31px;
+        fill: none;
+        stroke: currentColor;
+        stroke-width: 2.2;
+      }
+      .auth {
+        max-width: 1160px;
+        min-height: 100dvh;
+        margin: auto;
+        display: grid;
+        grid-template-columns: 1.1fr 1fr;
+        align-items: center;
+        gap: 95px;
+        padding: 50px;
+      }
+      .auth-hero {
+        display: grid;
+        gap: 35px;
+      }
+      .hero-art {
+        height: 330px;
+        position: relative;
+        overflow: hidden;
+        border-radius: 90px 90px 22px 22px;
+        background: #252c2b;
+        border: 1px solid #36403a;
+      }
+      .hero-art .sun {
+        position: absolute;
+        width: 148px;
+        height: 148px;
+        left: calc(50% - 74px);
+        top: 42px;
+        border-radius: 50%;
+        background: #f6a577;
+      }
+      .hero-art .hill {
+        position: absolute;
+        border: 1px solid #68705b;
+        width: 120%;
+        height: 230px;
+        border-radius: 50%;
+        left: -40%;
+        bottom: -90px;
+        background: #3e4c40;
+        transform: rotate(-15deg);
+      }
+      .hero-art .hill.two {
+        left: 35%;
+        bottom: -60px;
+        background: #263b35;
+        border-color: #526052;
+        transform: rotate(12deg);
+      }
+      .hero-art .path {
+        position: absolute;
+        width: 1px;
+        height: 220px;
+        background: #c6b590;
+        bottom: -70px;
+        left: 53%;
+        transform: rotate(-35deg);
+      }
+      .hero-art .caption {
+        position: absolute;
+        bottom: 24px;
+        left: 24px;
+        font-size: 10px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: #d8ddc8;
+      }
+      .hero-copy {
+        max-width: 400px;
+      }
+      .hero-copy h1 {
+        font-size: 48px;
+      }
+      .hero-copy h1 em {
+        font-style: normal;
+        color: var(--accent);
+      }
+      .hero-copy p {
+        margin-top: 15px;
+        font-size: 14px;
+        color: var(--muted);
+        max-width: 350px;
+      }
+      .auth-panel {
+        display: grid;
+        gap: 22px;
+        max-width: 400px;
+        width: 100%;
+      }
+      .auth-panel form {
+        display: grid;
+        gap: 15px;
+      }
+      .auth-panel h2 {
+        font-size: 31px;
+      }
+      .local-note {
+        border-left: 2px solid var(--accent);
+        padding-left: 12px;
+        color: var(--muted);
+        font-size: 11px;
+        line-height: 1.7;
+      }
+      .form-error {
+        color: var(--danger);
+        font-size: 12px;
+        min-height: 0;
+      }
+      .app-shell {
+        max-width: 1420px;
+        margin: auto;
+        display: grid;
+        grid-template-columns: 226px minmax(0, 670px) minmax(225px, 290px);
+        gap: 36px;
+        padding: 0 34px;
+      }
+      .sidebar {
+        position: sticky;
+        top: 0;
+        height: 100dvh;
+        padding: 36px 0 24px;
+        display: flex;
+        flex-direction: column;
+      }
+      .sidebar .brand {
+        padding-left: 12px;
+        margin-bottom: 42px;
+      }
+      .side-nav {
+        display: grid;
+        gap: 7px;
+      }
+      .nav-btn {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        padding: 14px 16px;
+        border-radius: 14px;
+        width: 100%;
+        font-size: 13px;
+        color: var(--muted);
+        text-align: left;
+      }
+      .nav-btn.active {
+        background: var(--soft);
+        color: var(--accent);
+      }
+      .nav-btn:hover {
+        background: var(--surface);
+      }
+      .side-bottom {
+        margin-top: auto;
+        display: grid;
+        gap: 18px;
+      }
+      .self-card {
+        padding: 16px 10px;
+        border-top: 1px solid var(--line);
+      }
+      .main {
+        min-width: 0;
+        padding-bottom: 50px;
+      }
+      .topbar {
+        height: 98px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 14px;
+        border-bottom: 1px solid var(--line);
+      }
+      .topbar .mobile-brand {
+        display: none;
+      }
+      .topbar-title {
+        font-size: 13px;
+        color: var(--muted);
+      }
+      .topbar-actions {
+        display: flex;
+        gap: 8px;
+      }
+      .content {
+        padding-top: 26px;
+      }
+      .page-intro {
+        margin-bottom: 25px;
+        display: grid;
+        gap: 8px;
+      }
+      .page-intro .eyebrow {
+        color: var(--accent);
+      }
+      .page-intro p {
+        font-size: 13px;
+        color: var(--muted);
+      }
+      .rail {
+        position: sticky;
+        top: 0;
+        height: 100dvh;
+        padding: 36px 0;
+        display: grid;
+        align-content: start;
+        gap: 25px;
+      }
+      .rail-card {
+        padding-top: 22px;
+        border-top: 1px solid var(--line);
+      }
+      .rail-person {
+        display: flex;
+        align-items: center;
+        gap: 11px;
+        padding: 12px 0;
+      }
+      .rail-person > button:first-child {
+        display: flex;
+        align-items: center;
+        gap: 11px;
+        flex: 1;
+        text-align: left;
+        min-width: 0;
+      }
+      .rail small {
+        font-size: 11px;
+      }
+      .rail .brand {
+        font-size: 14px;
+      }
+      .rail footer {
+        font-size: 10px;
+        line-height: 1.9;
+        color: #727d7b;
+      }
+      .stories {
+        display: flex;
+        gap: 19px;
+        overflow-x: auto;
+        padding: 4px 0 23px;
+        scrollbar-width: none;
+      }
+      .story {
+        display: grid;
+        justify-items: center;
+        gap: 8px;
+        min-width: 62px;
+        color: var(--muted);
+        font-size: 10px;
+      }
+      .story-ring {
+        border: 1.5px solid var(--accent);
+        padding: 4px;
+        border-radius: 50%;
+        position: relative;
+      }
+      .story-ring .avatar {
+        width: 48px;
+        height: 48px;
+        font-size: 18px;
+      }
+      .story-ring.own {
+        border-style: dashed;
+        border-color: #586260;
+      }
+      .story-plus {
+        position: absolute;
+        right: -2px;
+        bottom: -2px;
+        color: #261810;
+        background: var(--accent);
+        border: 3px solid var(--bg);
+        border-radius: 50%;
+        width: 22px;
+        height: 22px;
+        display: grid;
+        place-items: center;
+        font-size: 17px;
+      }
+      .feed-label {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 15px;
+        margin: 10px 0 18px;
+        color: var(--muted);
+        font-size: 11px;
+      }
+      .post {
+        margin-bottom: 22px;
+        border: 1px solid var(--line);
+        background: var(--surface);
+        border-radius: var(--radius);
+        overflow: hidden;
+      }
+      .post-head {
+        display: flex;
+        align-items: center;
+        gap: 11px;
+        padding: 17px 20px;
+      }
+      .post-user {
+        flex: 1;
+        text-align: left;
+        display: flex;
+        align-items: center;
+        gap: 11px;
+        min-width: 0;
+      }
+      .post-user strong {
+        font-size: 13px;
+        font-weight: 650;
+      }
+      .post-user small {
+        display: block;
+        color: var(--muted);
+        font-size: 10px;
+      }
+      .post-media {
+        position: relative;
+        width: 100%;
+        background: #27322e;
+        overflow: hidden;
+      }
+      .post-media img {
+        width: 100%;
+        display: block;
+        aspect-ratio: 1.24;
+        object-fit: cover;
+      }
+      .post-media video {
+        width: 100%;
+        display: block;
+        max-height: 560px;
+        background: #000;
+      }
+      .media-label {
+        position: absolute;
+        left: 16px;
+        bottom: 15px;
+        background: #151b17b3;
+        color: #e6e4d5;
+        padding: 4px 9px;
+        border-radius: 7px;
+        font-size: 9px;
+        letter-spacing: 1.2px;
+        text-transform: uppercase;
+        pointer-events: none;
+      }
+      .post-body {
+        padding: 15px 20px 20px;
+        display: grid;
+        gap: 10px;
+      }
+      .post-actions {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+      }
+      .action-button {
+        display: flex;
+        gap: 6px;
+        align-items: center;
+        color: var(--muted);
+        font-size: 11px;
+        padding: 4px 0;
+        min-height: 32px;
+      }
+      .action-button[aria-pressed="true"] {
+        color: var(--accent);
+      }
+      .action-button[aria-pressed="true"] .heart {
+        fill: var(--accent);
+        stroke: var(--accent);
+      }
+      .post-caption {
+        font-size: 13px;
+        line-height: 1.7;
+        white-space: pre-wrap;
+        overflow-wrap: anywhere;
+      }
+      .post-caption strong {
+        font-weight: 650;
+        margin-right: 5px;
+      }
+      .post-preview {
+        font-size: 11px;
+        line-height: 1.7;
+        color: var(--muted);
+        text-align: left;
+      }
+      .text-post {
+        padding: 8px 20px 0;
+        font-size: 23px;
+        line-height: 1.5;
+        letter-spacing: -0.5px;
+        white-space: pre-wrap;
+        overflow-wrap: anywhere;
+      }
+      .search {
+        display: flex;
+        align-items: center;
+        border: 1px solid var(--line);
+        background: var(--surface);
+        border-radius: 15px;
+        padding: 0 14px;
+        gap: 6px;
+      }
+      .search input {
+        background: none;
+        border: 0;
+        padding-left: 8px;
+        outline: none;
+      }
+      .tabs {
+        display: flex;
+        gap: 7px;
+        overflow-x: auto;
+        margin: 17px 0 21px;
+        scrollbar-width: none;
+      }
+      .tab {
+        padding: 8px 13px;
+        border-radius: 20px;
+        color: var(--muted);
+        font-size: 11px;
+        white-space: nowrap;
+        border: 1px solid var(--line);
+      }
+      .tab.active {
+        background: var(--accent);
+        border-color: var(--accent);
+        color: #291b13;
+      }
+      .people {
+        display: grid;
+        gap: 10px;
+      }
+      .person {
+        display: flex;
+        align-items: center;
+        gap: 13px;
+        padding: 15px;
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        background: var(--surface);
+      }
+      .person .person-info {
+        min-width: 0;
+        flex: 1;
+        text-align: left;
+      }
+      .person strong {
+        font-size: 13px;
+      }
+      .person small {
+        display: block;
+        font-size: 11px;
+        color: var(--muted);
+      }
+      .explore-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 5px;
+      }
+      .grid-item {
+        position: relative;
+        aspect-ratio: 0.9;
+        background: var(--surface);
+        border-radius: 13px;
+        overflow: hidden;
+        padding: 0;
+      }
+      .grid-item img,
+      .grid-item video {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      .grid-item .grid-text {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        font-size: 13px;
+        padding: 12px;
+        overflow: hidden;
+        word-break: break-word;
+        background: #26322c;
+      }
+      .grid-item .grid-count {
+        position: absolute;
+        bottom: 8px;
+        right: 9px;
+        background: #0008;
+        border-radius: 15px;
+        padding: 1px 7px;
+        font-size: 10px;
+      }
+      .profile-cover {
+        height: 115px;
+        position: relative;
+        background: linear-gradient(120deg, #3b4232, #303c35 48%, #4a3329);
+        border: 1px solid #424c40;
+        border-radius: 20px;
+        overflow: hidden;
+      }
+      .profile-cover:after {
+        content: "";
+        position: absolute;
+        right: 22%;
+        top: 30px;
+        width: 95px;
+        height: 95px;
+        background: #c68762;
+        border-radius: 50%;
+        opacity: 0.5;
+      }
+      .profile-overview {
+        padding: 0 16px;
+        margin-top: -35px;
+        position: relative;
+        display: grid;
+        gap: 14px;
+      }
+      .profile-overview > .avatar {
+        border: 5px solid var(--bg);
+      }
+      .stats {
+        display: flex;
+        gap: 28px;
+        padding: 12px 0;
+      }
+      .stats button {
+        font-size: 11px;
+        color: var(--muted);
+        padding: 0;
+      }
+      .stats strong {
+        font-size: 18px;
+        color: var(--text);
+        display: block;
+        line-height: 1.3;
+      }
+      .profile-bio {
+        font-size: 13px;
+        max-width: 440px;
+        white-space: pre-wrap;
+        overflow-wrap: anywhere;
+      }
+      .profile-tools {
+        display: flex;
+        gap: 9px;
+        flex-wrap: wrap;
+      }
+      .settings-list {
+        display: grid;
+        gap: 14px;
+      }
+      .settings-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        width: 100%;
+        text-align: left;
+        padding: 16px 0;
+        border-bottom: 1px solid var(--line);
+        font-size: 13px;
+      }
+      .settings-row:last-child {
+        border: 0;
+      }
+      .settings-row small {
+        display: block;
+        font-size: 11px;
+        color: var(--muted);
+        margin-top: 3px;
+      }
+      .notifications {
+        display: grid;
+        gap: 10px;
+      }
+      .notice {
+        display: flex;
+        gap: 12px;
+        align-items: flex-start;
+        padding: 17px;
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: 17px;
+      }
+      .notice.unread {
+        border-left: 3px solid var(--accent);
+      }
+      .notice .notice-body {
+        flex: 1;
+        font-size: 12px;
+      }
+      .notice small {
+        display: block;
+        color: var(--muted);
+        font-size: 10px;
+        margin-top: 5px;
+      }
+      .chat-list {
+        display: grid;
+        gap: 8px;
+      }
+      .chat-row {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        width: 100%;
+        padding: 17px 14px;
+        border-radius: 17px;
+        text-align: left;
+        border: 1px solid var(--line);
+        background: var(--surface);
+      }
+      .chat-row .chat-info {
+        flex: 1;
+        min-width: 0;
+      }
+      .chat-info p {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        color: var(--muted);
+        font-size: 12px;
+        max-width: 330px;
+      }
+      .chat-row strong {
+        font-size: 13px;
+      }
+      .chat-panel {
+        display: flex;
+        flex-direction: column;
+        height: min(75dvh, 740px);
+        min-height: 400px;
+        border: 1px solid var(--line);
+        border-radius: 22px;
+        overflow: hidden;
+        background: #151819;
+      }
+      .chat-header {
+        padding: 17px;
+        border-bottom: 1px solid var(--line);
+        display: flex;
+        align-items: center;
+        gap: 11px;
+      }
+      .chat-messages {
+        flex: 1;
+        overflow-y: auto;
+        padding: 23px 18px;
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+      }
+      .bubble {
+        max-width: 82%;
+        padding: 11px 14px;
+        border-radius: 16px 16px 16px 4px;
+        background: var(--raised);
+        font-size: 13px;
+        white-space: pre-wrap;
+        overflow-wrap: anywhere;
+        align-self: flex-start;
+      }
+      .bubble.mine {
+        align-self: flex-end;
+        background: #493226;
+        border-radius: 16px 16px 4px 16px;
+      }
+      .bubble small {
+        display: block;
+        text-align: right;
+        color: var(--muted);
+        font-size: 9px;
+        margin-top: 5px;
+      }
+      .bubble button {
+        padding: 0;
+        color: var(--muted);
+        font-size: 9px;
+      }
+      .message-form {
+        display: flex;
+        gap: 8px;
+        padding: 13px;
+        border-top: 1px solid var(--line);
+      }
+      .message-form input {
+        flex: 1;
+        min-width: 0;
+      }
+      .message-form .btn {
+        padding: 10px 15px;
+        flex-shrink: 0;
+      }
+      .upload-zone {
+        display: grid;
+        justify-items: center;
+        align-content: center;
+        gap: 10px;
+        min-height: 170px;
+        border: 1px dashed #5b655d;
+        background: #1c2421;
+        border-radius: 18px;
+        padding: 25px;
+        cursor: pointer;
+        text-align: center;
+      }
+      .upload-zone .icon {
+        color: var(--accent);
+        width: 32px;
+        height: 32px;
+      }
+      .upload-zone input {
+        font-size: 11px;
+        padding: 8px;
+        background: var(--surface);
+        max-width: 270px;
+      }
+      .upload-preview {
+        max-width: 100%;
+        max-height: 350px;
+        border-radius: 15px;
+        display: block;
+        margin: auto;
+      }
+      .video-list {
+        display: grid;
+        gap: 20px;
+      }
+      .video-card {
+        position: relative;
+        background: #000;
+        border-radius: 23px;
+        overflow: hidden;
+      }
+      .video-card video {
+        width: 100%;
+        height: min(72dvh, 650px);
+        object-fit: contain;
+        display: block;
+      }
+      .video-details {
+        padding: 16px;
+        background: var(--surface);
+      }
+      .bottom-nav {
+        display: none;
+      }
+      dialog {
+        padding: 0;
+        border: 1px solid var(--line);
+        border-radius: 24px;
+        background: var(--bg);
+        color: var(--text);
+        width: min(510px, calc(100% - 28px));
+        max-height: 88dvh;
+        box-shadow: 0 24px 100px #0008;
+      }
+      dialog::backdrop {
+        background: #050808b5;
+        backdrop-filter: blur(3px);
+      }
+      .modal-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 18px 23px;
+        border-bottom: 1px solid var(--line);
+      }
+      .modal-body {
+        padding: 23px;
+        display: grid;
+        gap: 16px;
+        overflow-wrap: anywhere;
+      }
+      .modal-body form {
+        display: grid;
+        gap: 15px;
+      }
+      .comment-row {
+        display: flex;
+        gap: 11px;
+        padding: 9px 0;
+      }
+      .comment-row p {
+        font-size: 12px;
+        white-space: pre-wrap;
+        overflow-wrap: anywhere;
+      }
+      .comment-row strong {
+        font-size: 11px;
+      }
+      .story-view {
+        position: relative;
+        min-height: 400px;
+        height: min(72dvh, 620px);
+        display: flex;
+        flex-direction: column;
+        background: #17231f;
+        overflow: hidden;
+      }
+      .story-view .story-media {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      .story-shade {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(#0007, transparent 40%, #0009);
+      }
+      .story-top {
+        position: relative;
+        padding: 15px;
+        display: grid;
+        gap: 15px;
+      }
+      .story-progress {
+        display: flex;
+        gap: 4px;
+      }
+      .story-progress > span {
+        height: 3px;
+        background: #ffffff55;
+        flex: 1;
+        border-radius: 4px;
+        overflow: hidden;
+      }
+      .story-progress i {
+        display: block;
+        background: #fff;
+        height: 100%;
+        width: 0;
+      }
+      .story-content {
+        position: relative;
+        margin-top: auto;
+        padding: 28px 24px;
+        color: white;
+        font-size: 25px;
+        letter-spacing: -0.8px;
+        white-space: pre-wrap;
+        overflow-wrap: anywhere;
+      }
+      .story-controls {
+        position: relative;
+        display: flex;
+        justify-content: space-between;
+        padding: 0 12px 12px;
+      }
+      .story-controls .btn {
+        background: #0004;
+        color: white;
+        border-color: #ffffff44;
+      }
+      .story-reply {
+        position: relative;
+        padding: 0 15px 15px;
+        display: flex;
+        gap: 8px;
+      }
+      .story-reply input {
+        background: #0005;
+        color: white;
+        border-color: #ffffff55;
+      }
+      .toast {
+        position: fixed;
+        bottom: 25px;
+        left: 50%;
+        transform: translateX(-50%) translateY(15px);
+        padding: 13px 19px;
+        background: #ece7db;
+        color: #202722;
+        max-width: calc(100vw - 32px);
+        width: max-content;
+        border-radius: 13px;
+        box-shadow: 0 6px 40px #0006;
+        z-index: 100;
+        font-size: 12px;
+        opacity: 0;
+        pointer-events: none;
+        transition: 0.2s;
+      }
+      .toast.visible {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+      }
+      .loading {
+        display: grid;
+        place-items: center;
+        min-height: 100dvh;
+        gap: 10px;
+        align-content: center;
+      }
+      .loading .brand {
+        font-size: 34px;
+        animation: appear 0.65s ease both;
+      }
+      .loading p {
+        color: var(--muted);
+        font-size: 12px;
+      }
+      .auth-switch {
+        font-size: 12px;
+        color: var(--muted);
+        text-align: center;
+      }
+      .auth-switch button {
+        color: var(--accent);
+        padding: 0 3px;
+        font-size: 12px;
+      }
+      .screen-note {
+        border: 1px solid var(--line);
+        border-radius: 13px;
+        padding: 10px 13px;
+        font-size: 11px;
+        color: var(--muted);
+        margin-bottom: 20px;
+      }
+      .file-error {
+        font-size: 12px;
+        color: var(--danger);
+      }
+      @keyframes appear {
+        from {
+          opacity: 0;
+          transform: translateY(8px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        html {
+          animation: none !important;
+          transition: none !important;
+          scroll-behavior: auto !important;
+        }
+      }
+      @media (min-width: 1500px) {
+        .app-shell {
+          gap: 48px;
+        }
+      }
+      @media (max-width: 1120px) {
+        .app-shell {
+          grid-template-columns: 200px minmax(0, 650px);
+          gap: 30px;
+          max-width: 1000px;
+        }
+        .rail {
+          display: none;
+        }
+        .auth {
+          gap: 50px;
+        }
+        .hero-copy h1 {
+          font-size: 41px;
+        }
+      }
+      @media (max-width: 760px) {
+        .auth {
+          grid-template-columns: 1fr;
+          max-width: 480px;
+          padding: 30px 24px;
+          min-height: 100dvh;
+          gap: 26px;
+          align-content: center;
+        }
+        .auth-hero {
+          gap: 20px;
+        }
+        .auth-hero .hero-art,
+        .auth-hero .hero-copy {
+          display: none;
+        }
+        .auth-hero > .brand {
+          font-size: 26px;
+        }
+        .auth-panel {
+          max-width: none;
+        }
+        .auth-panel h2 {
+          font-size: 34px;
+        }
+        .app-shell {
+          display: block;
+          padding: 0 18px;
+          max-width: 640px;
+        }
+        .sidebar,
+        .rail {
+          display: none;
+        }
+        .main {
+          padding-bottom: 100px;
+        }
+        .topbar {
+          height: 78px;
+          position: sticky;
+          top: 0;
+          background: #111314f7;
+          z-index: 10;
+        }
+        .topbar-title {
+          display: none;
+        }
+        .topbar .mobile-brand {
+          display: flex;
+        }
+        .topbar-actions {
+          gap: 1px;
+        }
+        .topbar-actions .icon-btn {
+          padding: 9px;
+        }
+        .content {
+          padding-top: 21px;
+        }
+        .page-intro h1 {
+          font-size: 32px;
+        }
+        .stories {
+          gap: 16px;
+          padding-bottom: 16px;
+        }
+        .story-ring .avatar {
+          width: 45px;
+          height: 45px;
+        }
+        .feed-label {
+          margin-top: 5px;
+        }
+        .post {
+          margin-bottom: 19px;
+          border-radius: 19px;
+        }
+        .post-head {
+          padding: 14px;
+        }
+        .post-body {
+          padding: 13px 15px 16px;
+        }
+        .post-media img {
+          aspect-ratio: 1.04;
+        }
+        .post-caption {
+          font-size: 12px;
+        }
+        .card {
+          padding: 19px;
+        }
+        .bottom-nav {
+          display: flex;
+          align-items: center;
+          justify-content: space-around;
+          position: fixed;
+          z-index: 20;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          background: #161a1bf5;
+          border-top: 1px solid var(--line);
+          padding: 9px 8px calc(9px + env(safe-area-inset-bottom));
+          backdrop-filter: blur(12px);
+        }
+        .bottom-nav button {
+          display: grid;
+          justify-items: center;
+          gap: 4px;
+          padding: 5px 2px;
+          min-width: 54px;
+          min-height: 49px;
+          color: var(--muted);
+          font-size: 9px;
+        }
+        .bottom-nav button .icon {
+          width: 22px;
+          height: 22px;
+        }
+        .bottom-nav button.active {
+          color: var(--accent);
+        }
+        .bottom-nav button[data-page="create"] .create-icon {
+          background: var(--accent);
+          color: #2f2119;
+          border-radius: 11px;
+          padding: 5px;
+          width: 36px;
+          height: 31px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+        .bottom-nav button[data-page="create"] .icon {
+          width: 21px;
+          height: 21px;
+        }
+        .toast {
+          bottom: calc(94px + env(safe-area-inset-bottom));
+        }
+        .profile-overview {
+          padding: 0 7px;
+        }
+        .profile-cover {
+          height: 100px;
+        }
+        .stats {
+          gap: 25px;
+        }
+        .profile-overview .profile-tools .btn {
+          flex: 1;
+        }
+        .chat-panel {
+          height: calc(100dvh - 205px);
+          min-height: 350px;
+        }
+        .chat-info p {
+          max-width: 230px;
+        }
+        dialog {
+          max-height: 90dvh;
+        }
+        .modal-body {
+          padding: 19px;
+        }
+        .text-post {
+          font-size: 21px;
+          padding: 5px 15px;
+        }
+        .screen-note {
+          font-size: 10px;
+        }
+        .video-card video {
+          height: calc(100dvh - 265px);
+          min-height: 350px;
+        }
+      }
+      @media (max-width: 360px) {
+        .app-shell {
+          padding: 0 12px;
+        }
+        .brand {
+          font-size: 21px;
+        }
+        .topbar-actions .icon-btn {
+          min-width: 36px;
+          padding: 7px;
+        }
+        .bottom-nav button {
+          min-width: 48px;
+          font-size: 8px;
+        }
+        .profile-tools .btn {
+          font-size: 11px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <svg width="0" height="0" style="position: absolute" aria-hidden="true">
+      <defs>
+        <symbol id="i-home" viewBox="0 0 24 24">
+          <path d="m3 10 9-7 9 7v10H3Z" />
+          <path d="M9 20v-7h6v7" />
+        </symbol>
+        <symbol id="i-search" viewBox="0 0 24 24">
+          <circle cx="10.5" cy="10.5" r="6.5" />
+          <path d="m16 16 5 5" />
+        </symbol>
+        <symbol id="i-add" viewBox="0 0 24 24">
+          <path d="M12 4v16M4 12h16" />
+        </symbol>
+        <symbol id="i-video" viewBox="0 0 24 24">
+          <rect x="4" y="3" width="16" height="18" rx="5" />
+          <path d="m10 8 6 4-6 4Z" />
+        </symbol>
+        <symbol id="i-user" viewBox="0 0 24 24">
+          <circle cx="12" cy="7" r="4" />
+          <path d="M4 21v-3a8 8 0 0 1 16 0v3" />
+        </symbol>
+        <symbol id="i-heart" viewBox="0 0 24 24">
+          <path
+            class="heart"
+            d="M12 21S2 15 2 8.5A5.5 5.5 0 0 1 12 5a5.5 5.5 0 0 1 10 3.5C22 15 12 21 12 21Z"
+          />
+        </symbol>
+        <symbol id="i-comment" viewBox="0 0 24 24">
+          <path d="M21 11a9 9 0 0 1-9 9H4l-2 2V11a9 9 0 0 1 19 0Z" />
+          <path d="M7 9h10M7 13h7" />
+        </symbol>
+        <symbol id="i-send" viewBox="0 0 24 24">
+          <path d="m3 3 19 9-19 9 3-9Z" />
+          <path d="M6 12h15" />
+        </symbol>
+        <symbol id="i-bell" viewBox="0 0 24 24">
+          <path d="M4 17h16l-2-4V9a6 6 0 0 0-12 0v4Z" />
+          <path d="M9 21h6M12 1v2" />
+        </symbol>
+        <symbol id="i-bookmark" viewBox="0 0 24 24">
+          <path d="M6 3h12v19l-6-4-6 4Z" />
+        </symbol>
+        <symbol id="i-more" viewBox="0 0 24 24">
+          <circle cx="5" cy="12" r="1" />
+          <circle cx="12" cy="12" r="1" />
+          <circle cx="19" cy="12" r="1" />
+        </symbol>
+        <symbol id="i-arrow" viewBox="0 0 24 24">
+          <path d="m10 5 7 7-7 7M4 12h13" />
+        </symbol>
+        <symbol id="i-back" viewBox="0 0 24 24">
+          <path d="m14 5-7 7 7 7M20 12H7" />
+        </symbol>
+        <symbol id="i-close" viewBox="0 0 24 24">
+          <path d="m5 5 14 14M19 5 5 19" />
+        </symbol>
+        <symbol id="i-photo" viewBox="0 0 24 24">
+          <rect x="3" y="3" width="18" height="18" rx="4" />
+          <circle cx="8" cy="8" r="2" />
+          <path d="m3 18 6-6 4 4 3-4 5 6" />
+        </symbol>
+        <symbol id="i-settings" viewBox="0 0 24 24">
+          <path d="M4 6h16M4 12h16M4 18h16" />
+          <circle cx="8" cy="6" r="2" fill="var(--bg)" />
+          <circle cx="16" cy="12" r="2" fill="var(--bg)" />
+          <circle cx="10" cy="18" r="2" fill="var(--bg)" />
+        </symbol>
+        <symbol id="i-lock" viewBox="0 0 24 24">
+          <rect x="5" y="10" width="14" height="12" rx="3" />
+          <path d="M8 10V6a4 4 0 0 1 8 0v4M12 15v3" />
+        </symbol>
+        <symbol id="i-check" viewBox="0 0 24 24">
+          <path d="m4 12 5 5L20 6" />
+        </symbol>
+        <symbol id="i-logout" viewBox="0 0 24 24">
+          <path d="M9 3H4v18h5M8 12h13m-5-5 5 5-5 5" />
+        </symbol>
+        <symbol id="i-leaf" viewBox="0 0 24 24">
+          <path d="M21 3C7-1-2 12 7 18S24 15 21 3Z" />
+          <path d="m4 22 13-13" />
+        </symbol>
+      </defs>
+    </svg>
+    <div id="app">
+      <div class="loading">
+        <div class="brand"><span class="accent">birarada</span></div>
+        <p>Yeni insanlarla, daha güzel anlara.</p>
+      </div>
+    </div>
+    <dialog id="dialog" aria-label="Birarada penceresi"></dialog>
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+    <script>
+      "use strict";
+      const VERSION = 1,
+        DB_KEY = "birarada_html_state_v1",
+        SESSION_KEY = "birarada_html_session_v1";
+      const $ = (s) => document.querySelector(s),
+        E = (v) =>
+          String(v ?? "").replace(
+            /[&<>"']/g,
+            (c) =>
+              ({
+                "&": "&amp;",
+                "<": "&lt;",
+                ">": "&gt;",
+                '"': "&quot;",
+                "'": "&#39;",
+              })[c],
+          );
+      const I = (n) =>
+        `<svg class="icon" aria-hidden="true"><use href="#i-${n}"></use></svg>`;
+      const id = () =>
+        crypto.randomUUID
+          ? crypto.randomUUID()
+          : Date.now().toString(36) + Math.random().toString(36).slice(2);
+      const brand = () =>
+        `<span class="brand"><span class="brand-mark"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M7 25V11a7 7 0 1 1 7 7H7m8 7V11a7 7 0 1 1 7 7h-7"/></svg></span>birarada<span class="accent">.</span></span>`;
+      const app = $("#app"),
+        dialog = $("#dialog");
+      let data,
+        meId = null,
+        page = "feed",
+        pageArg = null,
+        authMode = "login",
+        authError = "",
+        store = null,
+        storageMode = "memory",
+        saving = false,
+        toastTimer,
+        storyTimer,
+        storyState = null,
+        createKind = "post",
+        draftMedia = null,
+        exploreMode = "people",
+        exploreSearch = "",
+        profileTab = "posts",
+        editingMessage = null,
+        sessionMemory = null,
+        mediaGeneration = 0;
+      const colors = [
+        "#665746",
+        "#455a53",
+        "#65505c",
+        "#4d5c68",
+        "#726042",
+        "#5e644b",
+      ];
+      const user = (uid) => data.users.find((u) => u.id === uid),
+        me = () => user(meId);
+      const currentTime = () => Date.now();
+      function relative(t) {
+        const d = Math.max(0, Date.now() - t);
+        if (d < 60000) return "şimdi";
+        if (d < 3600000) return Math.floor(d / 60000) + " dk";
+        if (d < 86400000) return Math.floor(d / 3600000) + " sa";
+        if (d < 7 * 86400000) return Math.floor(d / 86400000) + " gün";
+        return new Date(t).toLocaleDateString("tr-TR", {
+          day: "numeric",
+          month: "short",
+        });
+      }
+      function avatar(u, size = "") {
+        return `<span class="avatar ${size}" style="--avatar:${colors[Math.abs((u?.name || "B").charCodeAt(0)) % colors.length]}">${
+          u?.avatar
+            ? `<img src="${E(u.avatar)}" alt="">`
+            : E(
+                (u?.name || "Birarada")
+                  .split(" ")
+                  .map((s) => s[0])
+                  .slice(0, 2)
+                  .join("")
+                  .toLocaleUpperCase("tr"),
+              )
+        }</span>`;
+      }
+      function landscape(kind) {
+        const scenes = {
+          coast: `<rect width="800" height="650" fill="#cfbfa7"/><circle cx="595" cy="170" r="90" fill="#e39b6b"/><path d="M0 330Q180 270 350 340T800 310V650H0Z" fill="#668b83"/><path d="M0 425Q210 375 460 440T800 440V650H0Z" fill="#385e59"/><path d="M0 495Q230 445 410 510T800 490V650H0Z" fill="#e1ceb0"/><path d="M0 440Q220 390 430 455T800 448" stroke="#b6c3a7" stroke-width="3" fill="none"/><path d="m175 650 140-120 90 120" fill="#9c9472" opacity=".5"/>`,
+          city: `<rect width="800" height="650" fill="#dac5a6"/><circle cx="420" cy="205" r="95" fill="#d68e60"/><path d="M0 375h75V245h75v85h100V195h90v180h40V285h80V375h65V220h95v155h65v-90h80v90h35v275H0Z" fill="#6d7664"/><path d="M0 465h115V335h100v130h90V350h100v115h60V325h125v140h80V365h130v285H0Z" fill="#394c43"/><path d="M0 525Q200 485 400 525T800 525" stroke="#baaa88" stroke-width="2" fill="none"/><path d="m430 650-40-125" stroke="#8f9b7b" stroke-width="40"/>`,
+          forest: `<rect width="800" height="650" fill="#b8c2a9"/><circle cx="620" cy="170" r="85" fill="#e3c38d"/><path d="M0 390 180 185 350 390 480 220 800 400V650H0Z" fill="#6b8470"/><path d="M0 465 250 315 510 500 800 350V650H0Z" fill="#385c4e"/><g fill="#224535"><path d="m70 90-65 390h130Zm100 90-65 370h130Zm540-40-70 420h140Z"/></g><path d="M400 650q-100-110-25-200t-20-130" fill="none" stroke="#c9b68b" stroke-width="35"/>`,
+        };
+        return (
+          "data:image/svg+xml;charset=utf-8," +
+          encodeURIComponent(
+            `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 650">${scenes[kind] || scenes.coast}<g opacity=".06" stroke="#fff"><path d="M0 100h800M0 200h800M0 300h800M0 400h800M0 500h800M0 600h800"/></g></svg>`,
+          )
+        );
+      }
+      function seed() {
+        const now = Date.now();
+        return {
+          version: VERSION,
+          users: [
+            {
+              id: "demo-me",
+              name: "Deniz Yılmaz",
+              username: "denizy",
+              email: "deniz@ornek.test",
+              bio: "Biraz şehir, biraz deniz. Güzel anların peşinde. ☀",
+              website: "",
+              private: true,
+              allowDM: false,
+              demo: true,
+              at: now,
+            },
+            {
+              id: "demo-lina",
+              name: "Lina Aydın",
+              username: "lina_aydin",
+              email: "lina@ornek.test",
+              bio: "Küçük kaçamaklar, uzun yürüyüşler.",
+              website: "",
+              private: false,
+              allowDM: true,
+              demo: true,
+              at: now,
+            },
+            {
+              id: "demo-arda",
+              name: "Arda Demir",
+              username: "ardademir",
+              email: "arda@ornek.test",
+              bio: "Işığın peşinden.",
+              website: "",
+              private: false,
+              allowDM: true,
+              demo: true,
+              at: now,
+            },
+            {
+              id: "demo-ece",
+              name: "Ece Kaya",
+              username: "ecekaya",
+              email: "ece@ornek.test",
+              bio: "Az eşya, bolca hikâye.",
+              website: "",
+              private: true,
+              allowDM: false,
+              demo: true,
+              at: now,
+            },
+          ],
+          posts: [
+            {
+              id: "sample-coast",
+              uid: "demo-lina",
+              caption:
+                "Bazen hiçbir yere yetişmemek de bir plan.\nBugünün küçük mutluluğu burada. #yavaşla #birarada",
+              media: landscape("coast"),
+              type: "image",
+              location: "Ege kıyıları",
+              likes: ["demo-arda", "demo-ece"],
+              saves: [],
+              comments: [
+                {
+                  id: "c1",
+                  uid: "demo-arda",
+                  text: "Tam da ihtiyacımız olan manzara.",
+                  at: now - 1400000,
+                },
+              ],
+              at: now - 2100000,
+              visibility: "public",
+              commentsEnabled: true,
+              hideLikes: false,
+              sample: true,
+            },
+            {
+              id: "sample-city",
+              uid: "demo-arda",
+              caption:
+                "Şehrin en sevdiğim saati. Eve biraz daha uzun yoldan dönelim mi? #günbatımı",
+              media: landscape("city"),
+              type: "image",
+              location: "İstanbul",
+              likes: ["demo-lina"],
+              saves: [],
+              comments: [],
+              at: now - 7200000,
+              visibility: "public",
+              commentsEnabled: true,
+              hideLikes: false,
+              sample: true,
+            },
+            {
+              id: "sample-forest",
+              uid: "demo-lina",
+              caption:
+                "Birlikte yürüyünce yol daha kısa geliyor. #doğa #haftasonu",
+              media: landscape("forest"),
+              type: "image",
+              location: "Küçük bir mola",
+              likes: ["demo-arda"],
+              saves: [],
+              comments: [],
+              at: now - 18000000,
+              visibility: "public",
+              commentsEnabled: true,
+              hideLikes: false,
+              sample: true,
+            },
+          ],
+          stories: [
+            {
+              id: "s-lina",
+              uid: "demo-lina",
+              media: landscape("coast"),
+              type: "image",
+              text: "Bugün biraz yavaş. ☀",
+              at: now - 1200000,
+              closeOnly: false,
+              views: [],
+            },
+            {
+              id: "s-arda",
+              uid: "demo-arda",
+              media: landscape("city"),
+              type: "image",
+              text: "Son ışığı yakaladık.",
+              at: now - 3600000,
+              closeOnly: false,
+              views: [],
+            },
+          ],
+          follows: [
+            { from: "demo-me", to: "demo-lina", status: "accepted" },
+            { from: "demo-lina", to: "demo-me", status: "accepted" },
+            { from: "demo-me", to: "demo-arda", status: "accepted" },
+          ],
+          chats: [
+            {
+              id: "chat-lina",
+              members: ["demo-me", "demo-lina"],
+              messages: [
+                {
+                  id: "m1",
+                  from: "demo-lina",
+                  text: "Buradaki sohbet bu cihazda kayıtlı bir örnek. Hesap değiştirerek iki tarafı da deneyebilirsin. ☀",
+                  at: now - 600000,
+                  seen: ["demo-lina"],
+                },
+              ],
+              pinned: [],
+            },
+          ],
+          notifications: [
+            {
+              id: "n1",
+              to: "demo-me",
+              from: "demo-lina",
+              type: "follow",
+              text: "seni takip etmeye başladı.",
+              at: now - 3600000,
+              read: false,
+            },
+          ],
+          blocks: [],
+          mutes: [],
+          reports: [],
+          closeFriends: { "demo-me": ["demo-lina"] },
+          drafts: {},
+          settings: {},
+        };
+      }
+      function notify(to, type, text, postId = null) {
+        if (to === meId) return;
+        data.notifications.unshift({
+          id: id(),
+          to,
+          from: meId,
+          type,
+          text,
+          postId,
+          at: Date.now(),
+          read: false,
+        });
+      }
+      function blocked(a, b) {
+        return data.blocks.some(
+          (x) => (x.from === a && x.to === b) || (x.from === b && x.to === a),
+        );
+      }
+      function isFollowing(a, b) {
+        return data.follows.some(
+          (f) => f.from === a && f.to === b && f.status === "accepted",
+        );
+      }
+      function relation(uid) {
+        return data.follows.find((f) => f.from === meId && f.to === uid);
+      }
+      function visible(p) {
+        return (
+          p.uid === meId ||
+          (!blocked(meId, p.uid) &&
+            (p.visibility === "public" || isFollowing(meId, p.uid)))
+        );
+      }
+      function visiblePosts() {
+        return data.posts
+          .filter(
+            (p) =>
+              visible(p) &&
+              !data.mutes.some((x) => x.from === meId && x.to === p.uid),
+          )
+          .sort((a, b) => b.at - a.at);
+      }
+      function canMessage(other) {
+        return (
+          other !== meId &&
+          !blocked(meId, other) &&
+          (user(other)?.allowDM || isFollowing(other, meId))
+        );
+      }
+      function storyVisible(s) {
+        return (
+          Date.now() - s.at < 86400000 &&
+          (s.uid === meId ||
+            (!blocked(meId, s.uid) &&
+              (!user(s.uid)?.private || isFollowing(meId, s.uid)) &&
+              (!s.closeOnly ||
+                (data.closeFriends[s.uid] || []).includes(meId))))
+        );
+      }
+      async function initStore() {
+        try {
+          store = await new Promise((resolve, reject) => {
+            const r = indexedDB.open(DB_KEY, 1);
+            r.onupgradeneeded = () => r.result.createObjectStore("kv");
+            r.onsuccess = () => resolve(r.result);
+            r.onerror = () => reject(r.error);
+            r.onblocked = () => reject(Error("blocked"));
+          });
+          storageMode = "idb";
+          return await new Promise((resolve, reject) => {
+            const r = store.transaction("kv").objectStore("kv").get("state");
+            r.onsuccess = () => resolve(r.result);
+            r.onerror = () => reject(r.error);
+          });
+        } catch {
+          store = null;
+          try {
+            const raw = localStorage.getItem(DB_KEY);
+            localStorage.setItem(DB_KEY + "_probe", "1");
+            localStorage.removeItem(DB_KEY + "_probe");
+            storageMode = "local";
+            return raw ? JSON.parse(raw) : null;
+          } catch {
+            storageMode = "memory";
+            return null;
+          }
+        }
+      }
+      async function persist() {
+        if (storageMode === "idb") {
+          await new Promise((resolve, reject) => {
+            const tx = store.transaction("kv", "readwrite");
+            tx.objectStore("kv").put(data, "state");
+            tx.oncomplete = resolve;
+            tx.onerror = () => reject(tx.error);
+            tx.onabort = () => reject(tx.error);
+          });
+        } else if (storageMode === "local") {
+          localStorage.setItem(DB_KEY, JSON.stringify(data));
+        }
+      }
+      async function change(fn, message = "", redraw = true) {
+        if (saving) throw Error("Önceki işlem sürüyor. Bir an bekle.");
+        saving = true;
+        const previous = structuredClone(data);
+        try {
+          fn();
+          await persist();
+          if (redraw) render();
+          if (message) toast(message);
+        } catch (e) {
+          data = previous;
+          throw Error(
+            e?.name === "QuotaExceededError"
+              ? "Cihaz depolaması dolu. Daha küçük bir medya seç veya test verilerini sıfırla."
+              : e.message || "Değişiklik kaydedilemedi.",
+          );
+        } finally {
+          saving = false;
+        }
+      }
+      function setSession(value) {
+        meId = value;
+        sessionMemory = value;
+        try {
+          value
+            ? sessionStorage.setItem(SESSION_KEY, value)
+            : sessionStorage.removeItem(SESSION_KEY);
+        } catch {}
+      }
+      function getSession() {
+        try {
+          return sessionStorage.getItem(SESSION_KEY);
+        } catch {
+          return sessionMemory;
+        }
+      }
+      function toast(text) {
+        const el = $("#toast");
+        el.textContent = text;
+        el.classList.add("visible");
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(() => el.classList.remove("visible"), 4500);
+      }
+      function modal(title, body) {
+        clearInterval(storyTimer);
+        storyState = null;
+        dialog.innerHTML = `<div class="modal-head"><h3>${E(title)}</h3><button class="icon-btn" data-action="close-modal" aria-label="Pencereyi kapat">${I("close")}</button></div><div class="modal-body">${body}</div>`;
+        if (!dialog.open) dialog.showModal();
+      }
+      function closeModal() {
+        clearInterval(storyTimer);
+        storyState = null;
+        dialog.close();
+        dialog.innerHTML = "";
+      }
+      function empty(title, text, button = "") {
+        return `<div class="empty">${I("leaf")}<h3>${E(title)}</h3><p>${E(text)}</p>${button}</div>`;
+      }
+      function followButton(u, small = false) {
+        const f = relation(u.id);
+        return `<button class="btn ${f ? "secondary" : ""} ${small ? "small" : ""}" data-action="follow" data-id="${E(u.id)}">${f ? (f.status === "pending" ? "İstek gönderildi" : "Takiptesin") : u.private ? "İstek gönder" : "Takip et"}</button>`;
+      }
+      function personRow(u, button = true) {
+        return `<div class="person">${avatar(u)}<button class="person-info" data-action="profile" data-id="${E(u.id)}"><strong>${E(u.name)}</strong><small>@${E(u.username)} ${u.demo ? "· örnek hesap" : ""}</small></button>${button && u.id !== meId ? followButton(u, true) : ""}</div>`;
+      }
+      function auth() {
+        const reg = authMode === "register";
+        return `<section class="auth"><div class="auth-hero">${brand()}<div class="hero-copy"><span class="eyebrow accent">Yeni bir merhaba.</span><div class="space"></div><h1>Güzel anlar,<br><em>birarada.</em></h1><p>Yeni insanlarla, daha güzel anlara.<br>Küçük bir çevre. Paylaşacak çok şey.</p></div><div class="hero-art" aria-hidden="true"><div class="sun"></div><div class="hill"></div><div class="hill two"></div><div class="path"></div><span class="caption">Daha yavaş. Daha yakın.</span></div></div><div class="auth-panel"><span class="pill">Tek dosyalık yerel deneme</span><div><h2>${reg ? "Aramıza katıl." : "İyi ki geldin."}</h2><p class="muted small" style="margin-top:10px">${reg ? "Bu cihazda kendi test hesabını oluştur." : "Bir merhaba, güzel bir başlangıç olabilir."}</p></div><form id="${reg ? "register-form" : "login-form"}">${reg ? `<label class="field">Görünen ad<input name="displayName" placeholder="Sana nasıl seslenelim?" required minlength="2" maxlength="50" autocomplete="name"></label><label class="field">Kullanıcı adı<input name="username" placeholder="ornegin_deniz" required pattern="[a-z0-9_]{3,24}" maxlength="24" autocomplete="username"><span class="field-help">3–24 küçük harf, rakam veya alt çizgi.</span></label>` : ""}<label class="field">E-posta<input name="email" type="email" placeholder="sen@ornek.com" required autocomplete="email" maxlength="120"></label><label class="field">Şifre<input name="password" type="password" placeholder="En az 8 karakter" required minlength="8" maxlength="128" autocomplete="${reg ? "new-password" : "current-password"}"></label><div class="form-error" role="alert">${E(authError)}</div><button class="btn" type="submit">${reg ? "Yerel hesap oluştur" : "Giriş yap"} ${I("arrow")}</button></form><div class="auth-switch">${reg ? "Zaten test hesabın var mı?" : "Burada yeni misin?"} <button data-action="${reg ? "show-login" : "show-register"}">${reg ? "Giriş yap" : "Hesap oluştur"}</button></div><div class="row" style="gap:12px"><span style="height:1px;background:var(--line);flex:1"></span><small class="muted">veya hemen keşfet</small><span style="height:1px;background:var(--line);flex:1"></span></div><button id="demo-login" class="btn secondary" data-action="demo-login">Örnek hesapla dene ${I("leaf")}</button><p class="local-note">Bu HTML, cihazında çalışan bir test sürümüdür. Örnek içerikler ve hesaplar içerir. Gerçek Firebase hesabına bağlanmaz; şifrelerini veya özel bilgilerini kullanma. ${storageMode === "memory" ? "Bu tarayıcıda kayıt kapalı; sekme kapanınca veriler kaybolur." : "Eklediğin veriler yalnızca bu tarayıcıda saklanır."}</p></div></section>`;
+      }
+      const navItems = [
+        ["feed", "home", "Ana Sayfa"],
+        ["explore", "search", "Keşfet"],
+        ["create", "add", "Oluştur"],
+        ["videos", "video", "Kısa Videolar"],
+        ["profile", "user", "Profil"],
+      ];
+      function nav(mobile = false) {
+        return navItems
+          .map(
+            ([key, ico, label]) =>
+              `<button class="${mobile ? "" : "nav-btn"} ${page === key ? "active" : ""}" data-page="${key}" ${page === key ? 'aria-current="page"' : ""}>${key === "create" && mobile ? `<span class="create-icon">${I(ico)}</span>` : I(ico)}<span>${label}</span></button>`,
+          )
+          .join("");
+      }
+      function shell(content) {
+        const unread = data.notifications.filter(
+            (n) => n.to === meId && !n.read,
+          ).length,
+          unseen = data.chats.filter(
+            (c) =>
+              c.members.includes(meId) &&
+              c.messages.some((m) => m.from !== meId && !m.seen.includes(meId)),
+          ).length;
+        return `<div class="app-shell"><aside class="sidebar">${brand()}<nav class="side-nav" aria-label="Ana gezinme">${nav()}</nav><div class="side-bottom"><div><span class="pill">${storageMode === "memory" ? "Geçici yerel oturum" : "Bu cihazda test"}</span><p class="muted" style="font-size:10px;padding:9px 12px">Bağımsız HTML · örnek içerikler</p></div><div class="self-card row">${avatar(me(), "sm")}<button style="flex:1;text-align:left" data-page="profile"><strong style="font-size:12px">${E(me().name)}</strong><div class="muted" style="font-size:10px">@${E(me().username)}</div></button><button class="icon-btn" data-page="settings" aria-label="Ayarlar">${I("settings")}</button></div></div></aside><main class="main"><header class="topbar"><span class="topbar-title">Yeni insanlarla, daha güzel anlara.</span><span class="mobile-brand">${brand()}</span><div class="topbar-actions"><button class="icon-btn" data-page="notifications" aria-label="Bildirimler">${I("bell")}${unread ? `<span class="badge">${unread}</span>` : ""}</button><button class="icon-btn" data-action="open-messages" aria-label="Mesajlar">${I("send")}${unseen ? `<span class="badge">${unseen}</span>` : ""}</button><button class="icon-btn" data-page="settings" aria-label="Ayarlar">${I("settings")}</button></div></header><div class="content" id="view">${content}</div></main><aside class="rail"><span class="pill">${new Date().toLocaleDateString("tr-TR", { day: "numeric", month: "long" })} · kendine bir an ayır</span><div class="rail-card"><div class="row between"><h3 style="font-size:13px">Yeni bir merhaba</h3><button class="accent small" data-page="explore">Tümünü gör</button></div>${data.users
+          .filter((u) => u.id !== meId && !blocked(meId, u.id))
+          .slice(0, 3)
+          .map(
+            (u) =>
+              `<div class="rail-person"><button data-action="profile" data-id="${E(u.id)}">${avatar(u, "sm")}<span><strong style="font-size:12px">${E(u.name)}</strong><small class="muted" style="display:block">@${E(u.username)}</small></span></button>${followButton(u, true)}</div>`,
+          )
+          .join(
+            "",
+          )}</div><div class="card" style="background:#202922;border-color:#394437"><span class="eyebrow" style="color:#bdc9a9">Birarada daha iyi.</span><h3 style="margin:13px 0 9px;font-size:22px;line-height:1.2">Büyük bir an<br>olması gerekmez.</h3><p class="muted" style="font-size:11px">Bugün seni gülümseten küçük bir şey paylaş.</p><button class="btn small" data-page="create" style="margin-top:17px">Bir an bırak ${I("add")}</button></div><footer>Bu sürümde tüm işlemler bu cihazda gerçekleşir.<br>Sunucu bağlantısı ve gerçek bildirim gönderimi yoktur.<br><br>birarada · yeni insanlarla, daha güzel anlara.</footer></aside></div><nav class="bottom-nav" aria-label="Ana gezinme">${nav(true)}</nav>`;
+      }
+      function postCard(p) {
+        const u = user(p.uid);
+        if (!u) return "";
+        const liked = p.likes.includes(meId),
+          saved = p.saves.includes(meId);
+        return `<article class="post" data-post="${E(p.id)}"><div class="post-head"><button class="post-user" data-action="profile" data-id="${E(u.id)}">${avatar(u)}<span><strong>${E(u.name)}</strong><small>@${E(u.username)} · ${relative(p.at)}${p.location ? " · " + E(p.location) : ""}</small></span></button><button class="icon-btn" data-action="post-menu" data-id="${E(p.id)}" aria-label="Gönderi seçenekleri">${I("more")}</button></div>${p.media ? `<div class="post-media" data-double-like="${E(p.id)}">${p.type === "video" ? `<video src="${E(p.media)}" controls playsinline preload="metadata"></video>` : `<img src="${E(p.media)}" alt="${E(p.caption.slice(0, 100) || "Paylaşılan an")}" loading="lazy" draggable="false">`}${p.sample ? '<span class="media-label">Örnek görsel · bu cihazda dene</span>' : ""}</div>` : `<div class="text-post">${E(p.caption)}</div>`}<div class="post-body"><div class="post-actions"><button class="action-button" data-action="like" data-id="${E(p.id)}" aria-label="${liked ? "Beğeniyi geri al" : "Beğen"}" aria-pressed="${liked}">${I("heart")}${p.hideLikes ? "" : `<span>${p.likes.length}</span>`}</button><button class="action-button" data-action="comments" data-id="${E(p.id)}" aria-label="Yorumlar" ${!p.commentsEnabled ? "disabled" : ""}>${I("comment")}<span>${p.comments.length || ""}</span></button><button class="action-button" data-action="share" data-id="${E(p.id)}" aria-label="Gönderiyi paylaş">${I("send")}</button><button class="action-button" style="margin-left:auto" data-action="save" data-id="${E(p.id)}" aria-label="${saved ? "Kaydı kaldır" : "Kaydet"}" aria-pressed="${saved}">${I("bookmark")}</button></div>${p.media ? `<p class="post-caption"><strong>${E(u.username)}</strong> ${E(p.caption)}</p>` : ""}${p.comments.length ? `<button class="post-preview" data-action="comments" data-id="${E(p.id)}">${p.comments.length} yorumun tümünü gör</button>` : ""}${!p.commentsEnabled ? '<small class="muted">Bu gönderide yorumlar kapalı.</small>' : ""}</div></article>`;
+      }
+      function storyStrip() {
+        const stories = data.stories.filter(storyVisible),
+          owners = [...new Set(stories.map((s) => s.uid))];
+        return `<div class="stories"><button class="story" data-action="new-story"><span class="story-ring own">${avatar(me())}<span class="story-plus">+</span></span><span>Anını ekle</span></button>${owners
+          .map((uid) => {
+            const u = user(uid);
+            return `<button class="story" data-action="story" data-id="${E(uid)}"><span class="story-ring">${avatar(u)}</span><span>${uid === meId ? "Senin Anların" : E(u.name.split(" ")[0])}</span></button>`;
+          })
+          .join("")}</div>`;
+      }
+      function feedPage() {
+        const posts = visiblePosts();
+        return `<div class="page-intro"><span class="eyebrow">Kendi çevrende.</span><h1>Biraz daha yakın.</h1><p>Tanıdık yüzler, yeni hikâyeler, küçük mutluluklar.</p></div>${storyStrip()}<div class="feed-label"><span>MEYDAN · ${posts.length} paylaşım</span><button class="row small muted" data-action="refresh">${I("leaf")} Yenile</button></div>${posts.map(postCard).join("") || empty("Burada senin sesin eksik.", "İlk paylaşımını yap veya Keşfet’ten yeni insanlarla bağlantı kur.", `<button class="btn" data-page="create">Bir şey paylaş</button>`)}`;
+      }
+      function exploreResults() {
+        const q = exploreSearch.toLocaleLowerCase("tr").trim();
+        if (exploreMode === "people") {
+          const list = data.users.filter(
+            (u) =>
+              u.id !== meId &&
+              !blocked(meId, u.id) &&
+              (u.name + " " + u.username).toLocaleLowerCase("tr").includes(q),
+          );
+          return `<div class="people">${list.map((u) => personRow(u)).join("") || empty("Henüz bir eşleşme yok.", "Farklı bir isim veya kullanıcı adı dene.")}</div>`;
+        }
+        const list = visiblePosts()
+          .filter((p) => !q || p.caption.toLocaleLowerCase("tr").includes(q))
+          .sort((a, b) =>
+            exploreMode === "trending"
+              ? b.likes.length - a.likes.length
+              : b.at - a.at,
+          );
+        return `<div class="explore-grid">${list.map((p) => `<button class="grid-item" data-action="open-post" data-id="${E(p.id)}" aria-label="${E(p.caption.slice(0, 70))}">${p.media ? (p.type === "video" ? `<video src="${E(p.media)}" muted preload="metadata"></video>` : `<img src="${E(p.media)}" alt="" loading="lazy">`) : `<span class="grid-text">${E(p.caption.slice(0, 110))}</span>`}${p.hideLikes ? "" : `<span class="grid-count">♡ ${p.likes.length}</span>`}</button>`).join("")}</div>${!list.length ? empty("Bu arama biraz sessiz.", "İçerikte geçen bir kelime veya #etiket ara.") : ""}`;
+      }
+      function explorePage() {
+        return `<div class="page-intro"><span class="eyebrow">Bir merhaba uzağında.</span><h1>Çevrene bak.</h1><p>Bu cihazdaki kişiler ve paylaşımlar arasında keşfe çık.</p></div><label class="search">${I("search")}<input id="explore-search" placeholder="İnsan, içerik veya #etiket ara" value="${E(exploreSearch)}" autocomplete="off" aria-label="Keşfet araması"></label><div class="tabs">${[
+          ["people", "İnsanlar"],
+          ["posts", "Paylaşımlar"],
+          ["trending", "Sevilenler"],
+        ]
+          .map(
+            ([mode, label]) =>
+              `<button class="tab ${exploreMode === mode ? "active" : ""}" data-action="explore-mode" data-mode="${mode}">${label}</button>`,
+          )
+          .join("")}</div><div id="explore-results">${exploreResults()}</div>`;
+      }
+      function createPage() {
+        const saved = data.drafts[meId] || {};
+        return `<div class="page-intro"><span class="eyebrow">Küçük anlar, güzel izler.</span><h1>Bir an bırak.</h1><p>Paylaşımların yalnızca bu HTML’in yerel verilerine eklenir.</p></div><div class="tabs">${[
+          ["post", "Gönderi"],
+          ["story", "An"],
+          ["video", "Kısa video"],
+        ]
+          .map(
+            ([kind, label]) =>
+              `<button class="tab ${createKind === kind ? "active" : ""}" data-action="create-kind" data-kind="${kind}">${label}</button>`,
+          )
+          .join(
+            "",
+          )}</div><form id="create-form" class="card stack"><label class="field">${createKind === "story" ? "Anına bir not" : "Aklında ne var?"}<textarea name="caption" placeholder="Bugün seni gülümseten bir şey…" maxlength="2200">${E(saved.caption || "")}</textarea></label><label class="upload-zone">${I(createKind === "video" ? "video" : "photo")}<strong style="font-size:13px">${createKind === "video" ? "Cihazından bir video seç" : "Bir fotoğraf veya video ekle"}</strong><span class="muted small">Fotoğraf: en fazla 12 MB · video: en fazla 16 MB</span><input id="media-input" type="file" accept="${createKind === "video" ? "video/mp4,video/webm,video/ogg" : "image/jpeg,image/png,image/webp,image/gif,video/mp4,video/webm,video/ogg"}" aria-label="Medya seç"></label><div id="media-preview">${draftMedia ? mediaPreview() : ""}</div><label class="field">Konum notu · isteğe bağlı<input name="location" placeholder="Örn. sahil yürüyüşü" maxlength="80" value="${E(saved.location || "")}"><span class="field-help">Cihaz konumuna erişilmez. Yalnızca yazdığın metin paylaşılır.</span></label>${createKind === "story" ? `<label class="check"><span>Yalnızca Yakınlar <small class="muted" style="display:block">Ayarlar’dan Yakınlar listeni düzenleyebilirsin.</small></span><input name="closeOnly" type="checkbox"></label>` : `<label class="check"><span>Yorumlara izin ver</span><input name="commentsEnabled" type="checkbox" checked></label><label class="check"><span>Beğeni sayısını gizle</span><input name="hideLikes" type="checkbox"></label>`}<p class="field-help">${createKind === "story" ? "Anlar 24 saat sonra görünmez." : me().private ? "Hesabın gizli. Paylaşımın yalnızca onayladığın takipçilere görünür." : "Hesabın açık. Paylaşımın bu cihazdaki diğer hesaplara görünür."}</p><div class="row"><button class="btn secondary" type="button" data-action="save-draft">Taslağı kaydet</button><button class="btn" type="submit" style="flex:1">${createKind === "story" ? "Anını paylaş" : "Paylaş"} ${I("arrow")}</button></div></form>`;
+      }
+      function mediaPreview() {
+        return `${draftMedia.type === "video" ? `<video class="upload-preview" src="${E(draftMedia.uri)}" controls playsinline></video>` : `<img class="upload-preview" src="${E(draftMedia.uri)}" alt="Seçilen medya">`}<button class="btn small subtle" type="button" data-action="remove-media" style="margin-top:10px">Medyayı kaldır</button>`;
+      }
+      function profilePage(uid = meId) {
+        const u = user(uid);
+        if (!u)
+          return empty(
+            "Bu profil bulunamadı.",
+            "Kullanıcı hesabı bu cihazda bulunmuyor.",
+          );
+        if (blocked(meId, uid) && uid !== meId)
+          return empty(
+            "Bu hesap engellenmiş.",
+            "Ayarlar’dan engellediğin hesapları yönetebilirsin.",
+          );
+        const own = uid === meId,
+          posts = data.posts.filter((p) => p.uid === uid && visible(p)),
+          all =
+            own && profileTab === "saved"
+              ? data.posts.filter((p) => p.saves.includes(meId) && visible(p))
+              : posts;
+        return `<div class="profile-cover"></div><div class="profile-overview">${avatar(u, "lg")}<div class="row between"><div><h2>${E(u.name)}</h2><p class="muted small">@${E(u.username)} · ${u.demo ? "örnek hesap" : "yerel hesap"} ${u.private ? "· gizli" : ""}</p></div>${own ? `<button class="icon-btn" data-page="settings" aria-label="Profil ayarları">${I("settings")}</button>` : `<button class="icon-btn" data-action="user-menu" data-id="${E(uid)}" aria-label="Kullanıcı seçenekleri">${I("more")}</button>`}</div><p class="profile-bio">${E(u.bio || "Kendine ait bir hikâye.")}</p>${safeWebsite(u.website) ? `<a class="small" href="${E(safeWebsite(u.website))}" target="_blank" rel="noopener noreferrer">${E(u.website)}</a>` : ""}<div class="stats"><button data-action="profile-count" data-id="${E(uid)}" data-kind="posts"><strong>${posts.length}</strong>paylaşım</button><button data-action="connections" data-id="${E(uid)}" data-kind="followers"><strong>${data.follows.filter((f) => f.to === uid && f.status === "accepted" && !blocked(f.from, uid)).length}</strong>takipçi</button><button data-action="connections" data-id="${E(uid)}" data-kind="following"><strong>${data.follows.filter((f) => f.from === uid && f.status === "accepted" && !blocked(uid, f.to)).length}</strong>takip</button></div><div class="profile-tools">${own ? `<button class="btn secondary" data-action="edit-profile">Profili düzenle</button><button class="btn secondary" data-action="switch-account">Örnek hesap değiştir</button>` : `${followButton(u)}<button class="btn secondary" data-action="message-user" data-id="${E(uid)}" ${!canMessage(uid) ? "disabled" : ""}>${I("send")} Mesaj</button>`}</div>${!own && !canMessage(uid) ? '<p class="field-help">Bu hesap, yalnızca takip ettiği kişilerden mesaj alıyor.</p>' : ""}</div><div class="tabs"><button class="tab ${profileTab === "posts" ? "active" : ""}" data-action="profile-tab" data-tab="posts">Paylaşımlar</button>${own ? `<button class="tab ${profileTab === "saved" ? "active" : ""}" data-action="profile-tab" data-tab="saved">Kaydedilenler</button>` : ""}</div>${!own && u.private && !isFollowing(meId, uid) ? empty("Burası yakın çevresine açık.", "Gönderileri görmek için takip isteği gönder.") : all.map(postCard).join("") || empty(profileTab === "saved" ? "Birazını kendine sakla." : "Henüz bir paylaşım yok.", profileTab === "saved" ? "Gönderilerdeki kaydet simgesine dokun." : "Güzel bir anı paylaşarak başlayabilirsin.", own ? `<button class="btn" data-page="create">Bir şey paylaş</button>` : "")}`;
+      }
+      function videosPage() {
+        const list = visiblePosts().filter(
+          (p) => p.type === "video" && p.media,
+        );
+        return `<div class="page-intro"><span class="eyebrow">Biraz hareket.</span><h1>Kısa Videolar.</h1><p>Bu cihazdan paylaştığın videolar burada görünür.</p></div><div class="video-list">${list.map((p) => `<article class="video-card"><video src="${E(p.media)}" controls playsinline muted preload="metadata" data-auto-video></video><div class="video-details"><button data-action="profile" data-id="${E(p.uid)}"><strong>@${E(user(p.uid)?.username)}</strong></button><p class="post-caption" style="margin:9px 0">${E(p.caption)}</p><div class="row"><button class="action-button" data-action="like" data-id="${E(p.id)}" aria-pressed="${p.likes.includes(meId)}">${I("heart")} ${p.hideLikes ? "" : p.likes.length}</button><button class="action-button" data-action="comments" data-id="${E(p.id)}" ${!p.commentsEnabled ? "disabled" : ""}>${I("comment")} ${p.comments.length}</button><button class="action-button" data-action="save" data-id="${E(p.id)}" aria-pressed="${p.saves.includes(meId)}">${I("bookmark")}</button></div></div></article>`).join("") || empty("İlk kısa video senden olsun.", "İnternet videosu indirilmez. Cihazından küçük bir MP4 veya WebM seçip paylaş.", `<button class="btn" data-action="new-video">Video ekle</button>`)}</div>`;
+      }
+      function notificationsPage() {
+        const list = data.notifications
+            .filter((n) => n.to === meId && !blocked(meId, n.from))
+            .sort((a, b) => b.at - a.at),
+          requests = data.follows.filter(
+            (f) =>
+              f.to === meId && f.status === "pending" && !blocked(meId, f.from),
+          );
+        return `<div class="page-intro"><span class="eyebrow">Çevrenden küçük haberler.</span><h1>Senden haber var.</h1><p>Bu cihazdaki hesapların etkileşimleri burada görünür.</p></div>${requests.length ? `<div class="stack" style="margin-bottom:23px">${requests.map((f) => `<div class="card"><div class="row">${avatar(user(f.from))}<span class="small">${E(user(f.from)?.name)} seni takip etmek istiyor.</span></div><div class="row" style="margin-top:14px"><button class="btn small" data-action="accept-follow" data-id="${E(f.from)}">Kabul et</button><button class="btn small secondary" data-action="reject-follow" data-id="${E(f.from)}">Reddet</button></div></div>`).join("")}</div>` : ""}<div class="row between" style="margin-bottom:16px"><span class="muted small">${list.length} bildirim</span><button class="small accent" data-action="read-notifications">Tümünü okundu işaretle</button></div><div class="notifications">${list.map((n) => `<div class="notice ${!n.read ? "unread" : ""}">${avatar(user(n.from), "sm")}<div class="notice-body"><button data-action="profile" data-id="${E(n.from)}" style="font-weight:650;padding:0">${E(user(n.from)?.name || "Bir kullanıcı")}</button> ${E(n.text)}<small>${relative(n.at)} · yerel etkileşim</small></div>${n.postId ? `<button class="icon-btn" data-action="open-post" data-id="${E(n.postId)}" aria-label="Gönderiye git">${I("arrow")}</button>` : ""}</div>`).join("") || empty("Şimdilik sakin.", "Takip, beğeni, yorum ve yerel mesaj etkileşimleri burada görünür.")}</div>`;
+      }
+      function chatsPage() {
+        const list = data.chats
+          .filter(
+            (c) =>
+              c.members.includes(meId) &&
+              !blocked(
+                meId,
+                c.members.find((u) => u !== meId),
+              ),
+          )
+          .sort(
+            (a, b) =>
+              (b.pinned.includes(meId) ? 1 : 0) -
+                (a.pinned.includes(meId) ? 1 : 0) ||
+              (b.messages.at(-1)?.at || 0) - (a.messages.at(-1)?.at || 0),
+          );
+        return `<div class="page-intro"><span class="eyebrow">İki kelime, güzel bir başlangıç.</span><h1>Bir merhaba.</h1><p>Bu cihazdaki yerel sohbetler. Diğer tarafı denemek için örnek hesabı değiştir.</p></div><div class="row" style="margin-bottom:22px"><button class="btn small" data-page="explore">Yeni sohbet</button><button class="btn small secondary" data-action="switch-account">Örnek hesap değiştir</button></div><div class="chat-list">${
+          list
+            .map((c) => {
+              const other = user(c.members.find((x) => x !== meId)),
+                last = c.messages.at(-1),
+                unread = c.messages.filter(
+                  (m) => m.from !== meId && !m.seen.includes(meId),
+                ).length;
+              return `<button class="chat-row" data-action="open-chat" data-id="${E(c.id)}">${avatar(other)}<span class="chat-info"><strong>${E(other?.name)} ${c.pinned.includes(meId) ? "· sabit" : ""}</strong><p>${E(last?.text || "İlk merhabayı sen ver.")}</p></span><span class="small ${unread ? "accent" : "muted"}">${unread || relative(last?.at || Date.now())}</span></button>`;
+            })
+            .join("") ||
+          empty(
+            "Bir sohbet için güzel bir gün.",
+            "Keşfet’ten bir kişinin profilini açıp mesaj gönderebilirsin.",
+          )
+        }</div>`;
+      }
+      function conversationPage(cid) {
+        const c = data.chats.find(
+          (c) => c.id === cid && c.members.includes(meId),
+        );
+        if (!c)
+          return empty("Sohbet bulunamadı.", "Mesaj listesinden yeniden dene.");
+        const other = user(c.members.find((x) => x !== meId));
+        if (blocked(meId, other.id))
+          return empty(
+            "Bu sohbet engellenmiş.",
+            "Engellediğin hesapları Ayarlar’dan yönetebilirsin.",
+          );
+        return `<div class="chat-panel"><div class="chat-header"><button class="icon-btn" data-page="messages" aria-label="Sohbetlere dön">${I("back")}</button>${avatar(other, "sm")}<button data-action="profile" data-id="${E(other.id)}" style="text-align:left;flex:1"><strong style="font-size:13px">${E(other.name)}</strong><small class="muted" style="display:block">Bu cihazdaki yerel sohbet</small></button><button class="icon-btn" data-action="pin-chat" data-id="${E(c.id)}" aria-label="Sohbeti sabitle">${I("bookmark")}</button></div><div class="chat-messages" id="chat-messages">${c.messages.map((m) => `<div class="bubble ${m.from === meId ? "mine" : ""}">${E(m.text)}<small>${m.edited ? "düzenlendi · " : ""}${new Date(m.at).toLocaleTimeString("tr-TR", { hour: "2-digit", minute: "2-digit" })}${m.from === meId ? " · " + (m.seen.includes(other.id) ? "görüldü" : "kaydedildi") : ""}${m.from === meId ? ` <button data-action="message-menu" data-id="${E(m.id)}" aria-label="Mesaj seçenekleri">•••</button>` : ""}</small></div>`).join("") || '<p class="muted small">Burada ilk merhaban için yer var.</p>'}</div>${canMessage(other.id) ? `<form id="message-form" class="message-form"><input id="message-text" name="text" placeholder="${editingMessage ? "Mesajı düzenle…" : "Bir şey söyle…"}" maxlength="2000" required aria-label="Mesaj metni" autocomplete="off"><button class="btn" type="submit" aria-label="Mesajı gönder">${editingMessage ? "Kaydet" : I("send")}</button></form>` : '<p class="muted small" style="padding:15px">Bu hesap şu an senden yeni mesaj kabul etmiyor.</p>'}</div>`;
+      }
+      function settingsPage() {
+        const p = me();
+        return `<div class="page-intro"><span class="eyebrow">Kendine ait bir alan.</span><h1>Senin tercihlerin.</h1><p>Gizlilik, çevren ve yerel test verilerin.</p></div><div class="settings-list"><div class="card"><span class="eyebrow accent">Hesap</span><button class="settings-row" data-action="edit-profile"><span>Profili düzenle<small>${E(p.name)} · @${E(p.username)}</small></span>${I("arrow")}</button><button class="settings-row" data-action="toggle-private"><span>Gizli hesap<small>${p.private ? "Açık · yeni paylaşımların takipçilerine görünür" : "Kapalı · yeni paylaşımların herkese görünür"}</small></span>${I(p.private ? "lock" : "user")}</button><button class="settings-row" data-action="toggle-dm"><span>Yabancılardan mesaj al<small>${p.allowDM ? "Açık" : "Kapalı · yalnızca takip ettiğin kişiler"}</small></span>${I(p.allowDM ? "check" : "lock")}</button><button class="settings-row" data-action="close-friends"><span>Yakınlar<small>Anlarını daha küçük bir çevreyle paylaş.</small></span>${I("arrow")}</button></div><div class="card"><span class="eyebrow accent">Çevren</span><button class="settings-row" data-action="manage-blocks"><span>Engellenen hesaplar<small>${data.blocks.filter((x) => x.from === meId).length} hesap</small></span>${I("arrow")}</button><button class="settings-row" data-action="manage-mutes"><span>Sessize alınan hesaplar<small>${data.mutes.filter((x) => x.from === meId).length} hesap</small></span>${I("arrow")}</button><button class="settings-row" data-action="switch-account"><span>Örnek hesap değiştir<small>Takip ve mesajlaşmanın diğer tarafını dene.</small></span>${I("user")}</button></div><div class="card"><span class="eyebrow accent">Bu sürüm hakkında</span><p class="muted small" style="margin-top:15px">Tek HTML dosyası. Tüm hesaplar, mesajlar ve paylaşımlar bu tarayıcıya aittir. Gerçek Firebase, Google girişi, e-posta veya anlık bildirim gönderimi yoktur. ${storageMode === "memory" ? "Tarayıcın kalıcı kaydı desteklemiyor; veriler geçicidir." : "Verilerin bu tarayıcıda kalır; dosyayı başka tarayıcıda açtığında aynı veriler görünmez."}</p><div class="settings-row"><span>Tema ve dil<small>Koyu tema · Türkçe</small></span>${I("leaf")}</div><button class="settings-row" data-action="reset-data"><span style="color:var(--danger)">Test verilerini sıfırla<small>Bu HTML’deki hesapları ve eklediklerini sil.</small></span>${I("arrow")}</button></div><button class="btn secondary" data-action="logout">${I("logout")} Çıkış yap</button></div>`;
+      }
+      function render() {
+        document.querySelectorAll("video").forEach((v) => v.pause());
+        if (!me()) {
+          setSession(null);
+          app.innerHTML = auth();
+          return;
+        }
+        const scroll = window.scrollY;
+        let body;
+        switch (page) {
+          case "explore":
+            body = explorePage();
+            break;
+          case "create":
+            body = createPage();
+            break;
+          case "profile":
+            body = profilePage(pageArg || meId);
+            break;
+          case "videos":
+            body = videosPage();
+            break;
+          case "notifications":
+            body = notificationsPage();
+            break;
+          case "messages":
+            body = chatsPage();
+            break;
+          case "chat":
+            body = conversationPage(pageArg);
+            break;
+          case "settings":
+            body = settingsPage();
+            break;
+          default:
+            body = feedPage();
+        }
+        app.innerHTML = shell(body);
+        requestAnimationFrame(() => {
+          window.scrollTo(0, scroll);
+          const chat = $("#chat-messages");
+          if (chat) chat.scrollTop = chat.scrollHeight;
+        });
+        observeVideos();
+      }
+      function go(next, arg = null) {
+        if (page === "create" && next !== "create") {
+          mediaGeneration++;
+          draftMedia = null;
+        }
+        page = next;
+        pageArg = arg;
+        editingMessage = null;
+        if (next !== "profile") profileTab = "posts";
+        window.scrollTo(0, 0);
+        render();
+      }
+      let videoObserver;
+      function observeVideos() {
+        videoObserver?.disconnect();
+        const videos = document.querySelectorAll("[data-auto-video]");
+        if (!videos.length) return;
+        videoObserver = new IntersectionObserver(
+          (entries) => {
+            for (const entry of entries) {
+              if (
+                entry.isIntersecting &&
+                entry.intersectionRatio > 0.7 &&
+                !document.hidden
+              ) {
+                document.querySelectorAll("video").forEach((v) => {
+                  if (v !== entry.target) v.pause();
+                });
+                entry.target.play().catch(() => {});
+              } else entry.target.pause();
+            }
+          },
+          { threshold: [0, 0.7] },
+        );
+        videos.forEach((v) => videoObserver.observe(v));
+      }
+      document.addEventListener("visibilitychange", () => {
+        if (document.hidden)
+          document.querySelectorAll("video").forEach((v) => v.pause());
+      });
+      function safeWebsite(raw) {
+        try {
+          const url = new URL(raw);
+          return ["https:", "http:"].includes(url.protocol) ? url.href : "";
+        } catch {
+          return "";
+        }
+      }
+      function commentsModal(pid) {
+        const p = data.posts.find((p) => p.id === pid && visible(p));
+        if (!p) return toast("Bu gönderiye artık erişemiyorsun.");
+        modal(
+          "Biraz sohbet edelim.",
+          `<div>${p.comments.map((c) => `<div class="comment-row">${avatar(user(c.uid), "sm")}<div><strong>@${E(user(c.uid)?.username)}</strong><p>${E(c.text)}</p><small class="muted">${relative(c.at)}</small></div>${c.uid === meId ? `<button class="small muted" data-action="delete-comment" data-id="${E(c.id)}" data-post="${E(pid)}" style="margin-left:auto">Sil</button>` : ""}</div>`).join("") || '<p class="muted small">İlk yorumu sen bırak.</p>'}</div>${p.commentsEnabled ? `<form id="comment-form" data-post="${E(pid)}"><label class="field">Yorumun<textarea name="text" maxlength="1000" placeholder="Bir şey söyle…" required></textarea></label><button class="btn" type="submit">Yorum gönder</button></form>` : '<p class="muted small">Bu gönderide yorumlar kapalı.</p>'}`,
+        );
+      }
+      function editProfileModal() {
+        const u = me();
+        modal(
+          "Kendin gibi.",
+          `<form id="profile-form"><label class="field">Görünen ad<input name="name" required minlength="2" maxlength="50" value="${E(u.name)}"></label><label class="field">Kullanıcı adı<input name="username" required pattern="[a-z0-9_]{3,24}" maxlength="24" value="${E(u.username)}"></label><label class="field">Bio<textarea name="bio" maxlength="180">${E(u.bio)}</textarea></label><label class="field">Web sitesi<input name="website" type="url" placeholder="https://" maxlength="250" value="${E(u.website)}"></label><label class="field">Profil fotoğrafı<input type="file" id="avatar-input" accept="image/jpeg,image/png,image/webp,image/gif"></label><p class="field-help">Fotoğraf seçilmezse mevcut avatar korunur.</p><button class="btn" type="submit">Değişiklikleri kaydet</button></form>`,
+        );
+      }
+      function switchAccounts() {
+        modal(
+          "Örnek hesap değiştir",
+          `<p class="muted small">Bunlar bu cihazdaki örnek kişilerdir. Diğer hesaba geçip gelen mesajı okuyabilir, takip isteğini yanıtlayabilirsin. Kendi oluşturduğun hesaplara giriş ekranından şifreyle erişilir.</p>${data.users
+            .filter((u) => u.demo)
+            .map(
+              (u) =>
+                `<button class="person" data-action="switch-to" data-id="${E(u.id)}">${avatar(u)}<span class="person-info"><strong>${E(u.name)}</strong><small>@${E(u.username)} · örnek hesap</small></span>${u.id === meId ? I("check") : I("arrow")}</button>`,
+            )
+            .join("")}`,
+        );
+      }
+      async function openChat(cid) {
+        const c = data.chats.find(
+          (c) => c.id === cid && c.members.includes(meId),
+        );
+        if (!c) throw Error("Sohbet bulunamadı.");
+        const other = c.members.find((x) => x !== meId);
+        if (blocked(meId, other)) throw Error("Bu sohbet engellenmiş.");
+        await change(
+          () =>
+            c.messages.forEach((m) => {
+              if (!m.seen.includes(meId)) m.seen.push(meId);
+            }),
+          "",
+          false,
+        );
+        go("chat", cid);
+      }
+      function chatFor(uid) {
+        let c = data.chats.find(
+          (c) =>
+            c.members.length === 2 &&
+            c.members.includes(uid) &&
+            c.members.includes(meId),
+        );
+        if (!c) {
+          c = { id: id(), members: [meId, uid], messages: [], pinned: [] };
+          data.chats.push(c);
+        }
+        return c;
+      }
+      async function sendLocal(uid, text) {
+        if (!canMessage(uid))
+          throw Error(
+            "Bu kişi yalnızca takip ettiği hesaplardan mesaj alıyor.",
+          );
+        let cid;
+        await change(
+          () => {
+            const c = chatFor(uid);
+            cid = c.id;
+            c.messages.push({
+              id: id(),
+              from: meId,
+              text: text.trim().slice(0, 2000),
+              at: Date.now(),
+              seen: [meId],
+            });
+            notify(uid, "message", "sana bir mesaj gönderdi.");
+          },
+          "",
+          false,
+        );
+        return cid;
+      }
+      async function followUser(uid) {
+        if (uid === meId || !user(uid) || blocked(meId, uid))
+          throw Error("Bu hesap için takip işlemi yapılamıyor.");
+        let pending = false,
+          removed = false;
+        await change(
+          () => {
+            const existing = relation(uid);
+            if (existing) {
+              data.follows = data.follows.filter((f) => f !== existing);
+              removed = true;
+            } else {
+              pending = user(uid).private;
+              data.follows.push({
+                from: meId,
+                to: uid,
+                status: pending ? "pending" : "accepted",
+              });
+              notify(
+                uid,
+                "follow",
+                pending
+                  ? "seni takip etmek istiyor."
+                  : "seni takip etmeye başladı.",
+              );
+            }
+          },
+          removed
+            ? ""
+            : pending
+              ? "Takip isteğin gönderildi."
+              : "Bağlantı kuruldu.",
+        );
+        toast(
+          removed
+            ? "Takip veya istek kaldırıldı."
+            : pending
+              ? "Takip isteğin gönderildi."
+              : "Bağlantı kuruldu.",
+        );
+      }
+      async function likePost(pid, onlyAdd = false) {
+        const p = data.posts.find((p) => p.id === pid && visible(p));
+        if (!p) throw Error("Gönderiye erişilemiyor.");
+        const liked = p.likes.includes(meId);
+        if (onlyAdd && liked) return;
+        await change(() => {
+          p.likes = liked
+            ? p.likes.filter((x) => x !== meId)
+            : [...p.likes, meId];
+          if (!liked) notify(p.uid, "like", "gönderini beğendi.", p.id);
+        });
+      }
+      async function prepareMedia(file) {
+        if (!file) return null;
+        const video = ["video/mp4", "video/webm", "video/ogg"].includes(
+            file.type,
+          ),
+          image = [
+            "image/jpeg",
+            "image/png",
+            "image/webp",
+            "image/gif",
+          ].includes(file.type);
+        if (!video && !image)
+          throw Error("JPG, PNG, WebP, GIF veya MP4/WebM/OGG dosyası seç.");
+        if (file.size > (video ? 16 : 12) * 1024 * 1024)
+          throw Error(
+            video
+              ? "Video en fazla 16 MB olabilir."
+              : "Fotoğraf en fazla 12 MB olabilir.",
+          );
+        if (video) {
+          const probe = document.createElement("video");
+          if (!probe.canPlayType(file.type))
+            throw Error(
+              "Bu tarayıcı video biçimini desteklemiyor. MP4 (H.264) veya WebM dene.",
+            );
+          const probeURL = URL.createObjectURL(file);
+          try {
+            await new Promise((resolve, reject) => {
+              const timer = setTimeout(
+                () =>
+                  reject(
+                    Error(
+                      "Video açılamadı. Daha küçük bir MP4 veya WebM dene.",
+                    ),
+                  ),
+                10000,
+              );
+              probe.preload = "metadata";
+              probe.onloadedmetadata = () => {
+                clearTimeout(timer);
+                if (
+                  !Number.isFinite(probe.duration) ||
+                  probe.duration <= 0 ||
+                  !probe.videoWidth
+                )
+                  reject(Error("Video dosyası okunamadı."));
+                else resolve();
+              };
+              probe.onerror = () => {
+                clearTimeout(timer);
+                reject(
+                  Error("Bu video açılamadı. MP4 (H.264) veya WebM dene."),
+                );
+              };
+              probe.src = probeURL;
+            });
+          } finally {
+            probe.removeAttribute("src");
+            probe.load();
+            URL.revokeObjectURL(probeURL);
+          }
+          return {
+            type: "video",
+            uri: await new Promise((resolve, reject) => {
+              const r = new FileReader();
+              r.onload = () => resolve(r.result);
+              r.onerror = () => reject(Error("Video okunamadı."));
+              r.readAsDataURL(file);
+            }),
+          };
+        }
+        const url = URL.createObjectURL(file);
+        try {
+          const img = new Image();
+          img.src = url;
+          await img.decode();
+          if (!img.naturalWidth || !img.naturalHeight)
+            throw Error("Fotoğraf okunamadı.");
+          const scale = Math.min(
+              1,
+              1400 / img.naturalWidth,
+              1400 / img.naturalHeight,
+            ),
+            canvas = document.createElement("canvas");
+          canvas.width = Math.max(1, Math.round(img.naturalWidth * scale));
+          canvas.height = Math.max(1, Math.round(img.naturalHeight * scale));
+          canvas
+            .getContext("2d")
+            .drawImage(img, 0, 0, canvas.width, canvas.height);
+          return { type: "image", uri: canvas.toDataURL("image/jpeg", 0.82) };
+        } finally {
+          URL.revokeObjectURL(url);
+        }
+      }
+      async function hashPassword(password, salt = null) {
+        if (!crypto.subtle)
+          throw Error(
+            "Bu tarayıcı yerel şifre kaydını desteklemiyor. Güncel Chrome veya Edge kullanabilir ya da örnek hesabı açabilirsin.",
+          );
+        const saltBytes = salt
+          ? Uint8Array.from(atob(salt), (c) => c.charCodeAt(0))
+          : crypto.getRandomValues(new Uint8Array(16));
+        const key = await crypto.subtle.importKey(
+          "raw",
+          new TextEncoder().encode(password),
+          "PBKDF2",
+          false,
+          ["deriveBits"],
+        );
+        const bits = await crypto.subtle.deriveBits(
+          {
+            name: "PBKDF2",
+            salt: saltBytes,
+            iterations: 120000,
+            hash: "SHA-256",
+          },
+          key,
+          256,
+        );
+        return {
+          salt: btoa(String.fromCharCode(...saltBytes)),
+          hash: btoa(String.fromCharCode(...new Uint8Array(bits))),
+        };
+      }
+      function postMenu(pid) {
+        const p = data.posts.find((p) => p.id === pid && visible(p));
+        if (!p) return toast("Gönderi bulunamadı.");
+        modal(
+          "Gönderi seçenekleri",
+          p.uid === meId
+            ? `<button class="btn secondary" data-action="toggle-comments" data-id="${E(pid)}">Yorumları ${p.commentsEnabled ? "kapat" : "aç"}</button><button class="btn danger" data-action="confirm-delete-post" data-id="${E(pid)}">Gönderiyi sil</button>`
+            : `<button class="btn secondary" data-action="mute" data-id="${E(p.uid)}">Bu hesabı sessize al</button><button class="btn secondary" data-action="report" data-id="${E(p.uid)}" data-post="${E(pid)}">İçeriği şikâyet et</button><button class="btn danger" data-action="block-confirm" data-id="${E(p.uid)}">Hesabı engelle</button>`,
+        );
+      }
+      function storyOpen(uid, index = 0) {
+        clearInterval(storyTimer);
+        const list = data.stories.filter(
+          (s) => s.uid === uid && storyVisible(s),
+        );
+        if (!list.length || index >= list.length) {
+          closeModal();
+          return;
+        }
+        const s = list[index],
+          u = user(uid);
+        storyState = { uid, index, list, start: Date.now() };
+        dialog.innerHTML = `<div class="story-view">${s.media ? (s.type === "video" ? `<video class="story-media" src="${E(s.media)}" autoplay muted playsinline loop></video>` : `<img class="story-media" src="${E(s.media)}" alt="Anın görseli">`) : ""}<div class="story-shade"></div><div class="story-top"><div class="story-progress">${list.map((_, i) => `<span><i id="story-progress-${i}" style="width:${i < index ? "100%" : "0"}"></i></span>`).join("")}</div><div class="row">${avatar(u, "sm")}<span style="flex:1;font-size:12px;font-weight:650">${E(u.name)}<small style="display:block;color:#d2d9d4">${relative(s.at)}${s.closeOnly ? " · Yakınlar" : ""}</small></span><button class="icon-btn" style="color:white" data-action="close-modal" aria-label="Anı kapat">${I("close")}</button></div></div><div class="story-content">${E(s.text)}</div><div class="story-controls"><button class="btn small" data-action="story-prev" ${index === 0 ? "disabled" : ""}>${I("back")} Önceki</button>${uid === meId ? `<button class="btn small" data-action="story-views" data-id="${E(s.id)}">${s.views.length} görüntüleme</button>` : ""}<button class="btn small" data-action="story-next">Sonraki ${I("arrow")}</button></div>${uid !== meId && canMessage(uid) ? `<form id="story-reply" class="story-reply" data-id="${E(uid)}"><input name="text" placeholder="Bu An’a yanıt ver…" maxlength="500" required aria-label="An yanıtı"><button class="btn small" type="submit">${I("send")}</button></form>` : ""}</div>`;
+        if (!dialog.open) dialog.showModal();
+        if (uid !== meId && !s.views.includes(meId)) {
+          change(() => s.views.push(meId), "", false).catch((e) =>
+            toast(e.message),
+          );
+        }
+        storyTimer = setInterval(() => {
+          if (!storyState) return;
+          const focused =
+            dialog.contains(document.activeElement) &&
+            document.activeElement.tagName === "INPUT";
+          if (focused || document.hidden) {
+            storyState.start += 100;
+            return;
+          }
+          const progress = Math.min(1, (Date.now() - storyState.start) / 8000),
+            bar = $("#story-progress-" + index);
+          if (bar) bar.style.width = progress * 100 + "%";
+          if (progress >= 1) storyOpen(uid, index + 1);
+        }, 100);
+      }
+      const actions = {
+        "demo-login": () => {
+          setSession("demo-me");
+          authError = "";
+          go("feed");
+        },
+        "show-register": () => {
+          authMode = "register";
+          authError = "";
+          render();
+        },
+        "show-login": () => {
+          authMode = "login";
+          authError = "";
+          render();
+        },
+        logout: () => {
+          closeModal();
+          setSession(null);
+          authMode = "login";
+          authError = "";
+          draftMedia = null;
+          render();
+          window.scrollTo(0, 0);
+        },
+        profile: (el) => {
+          profileTab = "posts";
+          go("profile", el.dataset.id);
+        },
+        "open-messages": () => go("messages"),
+        "switch-account": () => switchAccounts(),
+        "switch-to": (el) => {
+          mediaGeneration++;
+          draftMedia = null;
+          const u = user(el.dataset.id);
+          if (!u?.demo) throw Error("Bu hesap için giriş ekranını kullan.");
+          closeModal();
+          setSession(u.id);
+          profileTab = "posts";
+          go("feed");
+          toast(u.name + " · örnek hesap açıldı.");
+        },
+        follow: (el) => followUser(el.dataset.id),
+        like: (el) => likePost(el.dataset.id),
+        save: async (el) => {
+          const p = data.posts.find(
+            (p) => p.id === el.dataset.id && visible(p),
+          );
+          if (!p) throw Error("Gönderi bulunamadı.");
+          const saved = p.saves.includes(meId);
+          await change(
+            () => {
+              p.saves = saved
+                ? p.saves.filter((x) => x !== meId)
+                : [...p.saves, meId];
+            },
+            saved ? "Kayıt kaldırıldı." : "Kendine sakladın.",
+          );
+        },
+        comments: (el) => commentsModal(el.dataset.id),
+        "post-menu": (el) => postMenu(el.dataset.id),
+        "close-modal": () => closeModal(),
+        "open-post": (el) => {
+          const p = data.posts.find(
+            (p) => p.id === el.dataset.id && visible(p),
+          );
+          if (!p) throw Error("Bu gönderiye artık erişemiyorsun.");
+          closeModal();
+          go("feed");
+          requestAnimationFrame(() => {
+            document
+              .querySelector(`[data-post="${CSS.escape(p.id)}"]`)
+              ?.scrollIntoView({ behavior: "smooth", block: "center" });
+          });
+        },
+        "profile-tab": (el) => {
+          profileTab = el.dataset.tab;
+          render();
+        },
+        "profile-count": () =>
+          toast("Görebildiğin paylaşımlar aşağıda listeleniyor."),
+        "edit-profile": () => editProfileModal(),
+        connections: (el) => {
+          const uid = el.dataset.id,
+            kind = el.dataset.kind,
+            u = user(uid);
+          if (uid !== meId && u?.private && !isFollowing(meId, uid))
+            throw Error("Bu hesabın takip listesi gizli.");
+          const list = data.follows
+            .filter(
+              (f) =>
+                f.status === "accepted" &&
+                (kind === "followers" ? f.to === uid : f.from === uid),
+            )
+            .map((f) => user(kind === "followers" ? f.from : f.to))
+            .filter((u) => u && !blocked(meId, u.id));
+          modal(
+            kind === "followers" ? "Takipçiler" : "Takip ettikleri",
+            list.map((u) => personRow(u, false)).join("") ||
+              '<p class="muted small">Henüz kimse yok.</p>',
+          );
+        },
+        "explore-mode": (el) => {
+          exploreMode = el.dataset.mode;
+          render();
+        },
+        "new-story": () => {
+          createKind = "story";
+          draftMedia = null;
+          go("create");
+        },
+        "new-video": () => {
+          createKind = "video";
+          draftMedia = null;
+          go("create");
+        },
+        "create-kind": (el) => {
+          const f = $("#create-form");
+          if (f) {
+            const values = new FormData(f);
+            data.drafts[meId] = {
+              caption: values.get("caption") || "",
+              location: values.get("location") || "",
+            };
+          }
+          createKind = el.dataset.kind;
+          mediaGeneration++;
+          draftMedia = null;
+          render();
+        },
+        "remove-media": () => {
+          mediaGeneration++;
+          draftMedia = null;
+          const p = $("#media-preview");
+          if (p) p.innerHTML = "";
+          const input = $("#media-input");
+          if (input) input.value = "";
+        },
+        "save-draft": async () => {
+          const f = $("#create-form");
+          if (!f) return;
+          const d = new FormData(f);
+          await change(
+            () => {
+              data.drafts[meId] = {
+                caption: String(d.get("caption") || ""),
+                location: String(d.get("location") || ""),
+              };
+            },
+            "Açıklama taslağın bu cihazda kaydedildi. Medyayı yeniden seçmelisin.",
+            false,
+          );
+        },
+        "accept-follow": async (el) => {
+          const from = el.dataset.id;
+          await change(() => {
+            const f = data.follows.find(
+              (f) => f.from === from && f.to === meId && f.status === "pending",
+            );
+            if (!f) throw Error("İstek artık bulunamadı.");
+            if (blocked(meId, from)) throw Error("Bu hesap engellenmiş.");
+            f.status = "accepted";
+            notify(from, "follow", "takip isteğini kabul etti.");
+          }, "Yeni bir bağlantı kuruldu.");
+        },
+        "reject-follow": (el) =>
+          change(() => {
+            data.follows = data.follows.filter(
+              (f) =>
+                !(
+                  f.from === el.dataset.id &&
+                  f.to === meId &&
+                  f.status === "pending"
+                ),
+            );
+          }, "Takip isteği kaldırıldı."),
+        "read-notifications": () =>
+          change(
+            () =>
+              data.notifications
+                .filter((n) => n.to === meId)
+                .forEach((n) => (n.read = true)),
+            "Bildirimler okundu.",
+          ),
+        "message-user": async (el) => {
+          const other = el.dataset.id;
+          if (!canMessage(other))
+            throw Error("Bu hesap senden mesaj kabul etmiyor.");
+          let cid;
+          await change(
+            () => {
+              cid = chatFor(other).id;
+            },
+            "",
+            false,
+          );
+          await openChat(cid);
+        },
+        "open-chat": (el) => openChat(el.dataset.id),
+        "pin-chat": (el) =>
+          change(() => {
+            const c = data.chats.find(
+              (c) => c.id === el.dataset.id && c.members.includes(meId),
+            );
+            if (!c) throw Error("Sohbet bulunamadı.");
+            c.pinned = c.pinned.includes(meId)
+              ? c.pinned.filter((x) => x !== meId)
+              : [...c.pinned, meId];
+          }, "Sohbet tercihi güncellendi."),
+        "message-menu": (el) => {
+          const c = data.chats.find(
+              (c) => c.id === pageArg && c.members.includes(meId),
+            ),
+            m = c?.messages.find(
+              (m) => m.id === el.dataset.id && m.from === meId,
+            );
+          if (!m) throw Error("Bu mesaj için işlem yapılamıyor.");
+          modal(
+            "Mesaj seçenekleri",
+            `<button class="btn secondary" data-action="edit-message" data-id="${E(m.id)}">Mesajı düzenle</button><button class="btn danger" data-action="delete-message" data-id="${E(m.id)}">Bu cihazdaki mesajı sil</button>`,
+          );
+        },
+        "edit-message": (el) => {
+          const c = data.chats.find(
+              (c) => c.id === pageArg && c.members.includes(meId),
+            ),
+            m = c?.messages.find(
+              (m) => m.id === el.dataset.id && m.from === meId,
+            );
+          if (!m) throw Error("Mesaj bulunamadı.");
+          editingMessage = m.id;
+          closeModal();
+          render();
+          const input = $("#message-text");
+          input.value = m.text;
+          input.focus();
+        },
+        "delete-message": async (el) => {
+          await change(() => {
+            const c = data.chats.find(
+              (c) => c.id === pageArg && c.members.includes(meId),
+            );
+            if (!c) throw Error("Sohbet bulunamadı.");
+            c.messages = c.messages.filter(
+              (m) => !(m.id === el.dataset.id && m.from === meId),
+            );
+          }, "Mesaj bu cihazdan silindi.");
+          closeModal();
+        },
+        "toggle-private": () =>
+          change(() => {
+            me().private = !me().private;
+          }, "Hesap gizliliği güncellendi. Önceki gönderilerin görünürlüğü değişmedi."),
+        "toggle-dm": () =>
+          change(() => {
+            me().allowDM = !me().allowDM;
+          }, "Mesaj tercihin güncellendi."),
+        "toggle-comments": async (el) => {
+          await change(() => {
+            const p = data.posts.find(
+              (p) => p.id === el.dataset.id && p.uid === meId,
+            );
+            if (!p) throw Error("Gönderi bulunamadı.");
+            p.commentsEnabled = !p.commentsEnabled;
+          }, "Yorum tercihi güncellendi.");
+          closeModal();
+        },
+        "confirm-delete-post": (el) =>
+          modal(
+            "Bu anı kaldır?",
+            `<p class="muted small">Gönderi ve yorumları bu cihazdaki test verilerinden silinir.</p><button class="btn danger" data-action="delete-post" data-id="${E(el.dataset.id)}">Gönderiyi sil</button>`,
+          ),
+        "delete-post": async (el) => {
+          await change(() => {
+            data.posts = data.posts.filter(
+              (p) => !(p.id === el.dataset.id && p.uid === meId),
+            );
+          }, "Gönderi kaldırıldı.");
+          closeModal();
+        },
+        "delete-comment": async (el) => {
+          await change(
+            () => {
+              const p = data.posts.find(
+                (p) => p.id === el.dataset.post && visible(p),
+              );
+              if (!p) throw Error("Gönderi bulunamadı.");
+              p.comments = p.comments.filter(
+                (c) => !(c.id === el.dataset.id && c.uid === meId),
+              );
+            },
+            "",
+            false,
+          );
+          render();
+          commentsModal(el.dataset.post);
+        },
+        "user-menu": (el) =>
+          modal(
+            "Çevreni sen seç.",
+            `<button class="btn secondary" data-action="mute" data-id="${E(el.dataset.id)}">Sessize al / geri al</button><button class="btn secondary" data-action="report" data-id="${E(el.dataset.id)}">Hesabı şikâyet et</button><button class="btn danger" data-action="block-confirm" data-id="${E(el.dataset.id)}">Hesabı engelle</button>`,
+          ),
+        mute: async (el) => {
+          const uid = el.dataset.id;
+          await change(() => {
+            const exists = data.mutes.some(
+              (x) => x.from === meId && x.to === uid,
+            );
+            data.mutes = exists
+              ? data.mutes.filter((x) => !(x.from === meId && x.to === uid))
+              : [...data.mutes, { from: meId, to: uid }];
+          }, "Akış tercihin güncellendi.");
+          closeModal();
+        },
+        "block-confirm": (el) =>
+          modal(
+            "Hesabı engelle?",
+            `<p class="muted small">Bu cihazdaki testte birbirinizin paylaşımlarını göremez ve yeni mesaj gönderemezsiniz.</p><button class="btn danger" data-action="block" data-id="${E(el.dataset.id)}">Engelle</button>`,
+          ),
+        block: async (el) => {
+          const uid = el.dataset.id;
+          if (uid === meId) throw Error("Kendini engelleyemezsin.");
+          await change(
+            () => {
+              if (!data.blocks.some((x) => x.from === meId && x.to === uid))
+                data.blocks.push({ from: meId, to: uid });
+              data.follows = data.follows.filter(
+                (f) =>
+                  !(
+                    (f.from === meId && f.to === uid) ||
+                    (f.from === uid && f.to === meId)
+                  ),
+              );
+            },
+            "",
+            false,
+          );
+          closeModal();
+          go("feed");
+          toast("Hesap engellendi.");
+        },
+        report: (el) =>
+          modal(
+            "Bir sorun mu var?",
+            `<form id="report-form" data-id="${E(el.dataset.id)}" data-post="${E(el.dataset.post || "")}"><label class="field">Şikâyet nedeni<select name="reason"><option>Uygunsuz içerik</option><option>Zorbalık veya taciz</option><option>Spam veya yanıltıcı içerik</option><option>Başka bir sorun</option></select></label><p class="local-note">Şikâyet yalnızca bu cihazda test kaydı olarak tutulur. Gerçek bir moderasyon ekibine iletilmez.</p><button class="btn" type="submit">Yerel şikâyet kaydı oluştur</button></form>`,
+          ),
+        "manage-blocks": () =>
+          modal(
+            "Engellediklerin",
+            data.blocks
+              .filter((x) => x.from === meId)
+              .map(
+                (x) =>
+                  `<div class="person">${avatar(user(x.to), "sm")}<span class="person-info">${E(user(x.to)?.name)}</span><button class="btn small secondary" data-action="unblock" data-id="${E(x.to)}">Engeli kaldır</button></div>`,
+              )
+              .join("") ||
+              '<p class="muted small">Engellediğin bir hesap yok.</p>',
+          ),
+        unblock: async (el) => {
+          await change(() => {
+            data.blocks = data.blocks.filter(
+              (x) => !(x.from === meId && x.to === el.dataset.id),
+            );
+          }, "Engel kaldırıldı.");
+          closeModal();
+        },
+        "manage-mutes": () =>
+          modal(
+            "Sessize aldıkların",
+            data.mutes
+              .filter((x) => x.from === meId)
+              .map(
+                (x) =>
+                  `<div class="person">${avatar(user(x.to), "sm")}<span class="person-info">${E(user(x.to)?.name)}</span><button class="btn small secondary" data-action="mute" data-id="${E(x.to)}">Geri al</button></div>`,
+              )
+              .join("") ||
+              '<p class="muted small">Sessize aldığın bir hesap yok.</p>',
+          ),
+        "close-friends": () =>
+          modal(
+            "Yakınların",
+            `<form id="close-friends-form"><p class="muted small">Yalnızca Yakınlar seçeneğiyle paylaştığın Anları bu kişiler görebilir. Gizli hesabında ayrıca onaylı takipçi olmaları gerekir.</p>${data.users
+              .filter((u) => u.id !== meId && !blocked(meId, u.id))
+              .map(
+                (u) =>
+                  `<label class="check"><span>${E(u.name)}</span><input type="checkbox" name="members" value="${E(u.id)}" ${(data.closeFriends[meId] || []).includes(u.id) ? "checked" : ""}></label>`,
+              )
+              .join(
+                "",
+              )}<button class="btn" type="submit">Listeyi kaydet</button></form>`,
+          ),
+        "reset-data": () =>
+          modal(
+            "Test verileri silinsin mi?",
+            `<p class="muted small">Bu HTML’de oluşturduğun hesaplar, mesajlar ve medyalar silinir. Örnek içerikler yeniden hazırlanır.</p><button class="btn danger" data-action="reset-confirm">Evet, yerel testi sıfırla</button>`,
+          ),
+        "reset-confirm": async () => {
+          mediaGeneration++;
+          draftMedia = null;
+          await change(
+            () => {
+              data = seed();
+            },
+            "",
+            false,
+          );
+          setSession(null);
+          closeModal();
+          authMode = "login";
+          render();
+          toast("Yerel test sıfırlandı.");
+        },
+        story: (el) => storyOpen(el.dataset.id),
+        "story-next": () => {
+          if (storyState) storyOpen(storyState.uid, storyState.index + 1);
+        },
+        "story-prev": () => {
+          if (storyState)
+            storyOpen(storyState.uid, Math.max(0, storyState.index - 1));
+        },
+        "story-views": (el) => {
+          const s = data.stories.find(
+            (s) => s.id === el.dataset.id && s.uid === meId,
+          );
+          if (s)
+            modal(
+              "Bu An’ı görenler",
+              s.views.map((uid) => personRow(user(uid), false)).join("") ||
+                '<p class="muted small">Henüz görüntülenmedi.</p>',
+            );
+        },
+        refresh: () => {
+          render();
+          toast("Bu cihazdaki akış güncel.");
+        },
+        share: (el) => {
+          const p = data.posts.find(
+            (p) => p.id === el.dataset.id && visible(p),
+          );
+          if (!p) throw Error("Gönderi bulunamadı.");
+          modal(
+            "Bir anı paylaş",
+            `<p class="muted small">Bu yerel gönderinin herkese açık bir bağlantısı yoktur. Açıklamayı kopyalayıp kendin paylaşabilirsin.</p><textarea id="share-text" readonly>${E("@" + user(p.uid)?.username + ": " + p.caption)}</textarea><button class="btn" data-action="copy-share">Metni kopyala</button>`,
+          );
+        },
+        "copy-share": async () => {
+          const input = $("#share-text");
+          if (navigator.clipboard?.writeText) {
+            try {
+              await navigator.clipboard.writeText(input.value);
+              toast("Metin kopyalandı.");
+              return;
+            } catch {}
+          }
+          input.focus();
+          input.select();
+          if (document.execCommand("copy")) toast("Metin kopyalandı.");
+          else
+            toast("Metin seçildi. Ctrl+C veya uzun basarak kopyalayabilirsin.");
+        },
+      };
+      document.addEventListener("click", async (event) => {
+        const el = event.target.closest("[data-action],[data-page]");
+        if (!el || el.disabled) return;
+        try {
+          if (el.dataset.page) {
+            closeModal();
+            if (el.dataset.page === "profile") {
+              profileTab = "posts";
+              go("profile", meId);
+            } else go(el.dataset.page);
+            return;
+          }
+          const fn = actions[el.dataset.action];
+          if (fn) {
+            await fn(el, event);
+            if (
+              dialog.open &&
+              ["profile", "open-post"].includes(el.dataset.action)
+            )
+              closeModal();
+          }
+        } catch (e) {
+          toast(e.message || "İşlem tamamlanamadı.");
+        }
+      });
+      document.addEventListener("dblclick", (event) => {
+        const media = event.target.closest("[data-double-like]");
+        if (media && !event.target.closest("video"))
+          likePost(media.dataset.doubleLike, true).catch((e) =>
+            toast(e.message),
+          );
+      });
+      document.addEventListener("input", (event) => {
+        if (event.target.id === "explore-search") {
+          exploreSearch = event.target.value;
+          $("#explore-results").innerHTML = exploreResults();
+        }
+      });
+      document.addEventListener("change", async (event) => {
+        if (event.target.id === "media-input") {
+          const input = event.target,
+            token = ++mediaGeneration;
+          draftMedia = null;
+          const button = $("#create-form button[type=submit]");
+          if (button) button.disabled = true;
+          try {
+            toast("Medya bu cihazda hazırlanıyor…");
+            const prepared = await prepareMedia(input.files[0]);
+            if (
+              token !== mediaGeneration ||
+              page !== "create" ||
+              !input.isConnected
+            )
+              return;
+            draftMedia = prepared;
+            const preview = $("#media-preview");
+            if (preview) preview.innerHTML = draftMedia ? mediaPreview() : "";
+            toast("Medya hazır.");
+          } catch (e) {
+            if (token !== mediaGeneration || !input.isConnected) return;
+            draftMedia = null;
+            input.value = "";
+            const preview = $("#media-preview");
+            if (preview) preview.innerHTML = "";
+            toast(e.message);
+          } finally {
+            if (button?.isConnected && token === mediaGeneration)
+              button.disabled = false;
+          }
+        }
+      });
+      document.addEventListener("submit", async (event) => {
+        const form = event.target;
+        if (!(form instanceof HTMLFormElement)) return;
+        event.preventDefault();
+        const button = form.querySelector("button[type=submit]");
+        if (button) button.disabled = true;
+        const values = new FormData(form),
+          submittedBy = meId;
+        const requireActive = () => {
+          if (meId !== submittedBy || !form.isConnected)
+            throw Error("Hesap veya ekran değişti; işlemi yeniden dene.");
+        };
+        try {
+          if (form.id === "register-form") {
+            const name = String(values.get("displayName")).trim(),
+              username = String(values.get("username")).trim().toLowerCase(),
+              email = String(values.get("email")).trim().toLowerCase(),
+              password = String(values.get("password"));
+            if (
+              name.length < 2 ||
+              !/^[a-z0-9_]{3,24}$/.test(username) ||
+              password.length < 8
+            )
+              throw Error(
+                "Adını, kullanıcı adını ve en az 8 karakterli şifreni kontrol et.",
+              );
+            if (
+              data.users.some(
+                (u) => u.email === email || u.username === username,
+              )
+            )
+              throw Error(
+                "Bu e-posta veya kullanıcı adı bu cihazda zaten kayıtlı.",
+              );
+            const credential = await hashPassword(password),
+              uid = id();
+            requireActive();
+            await change(
+              () =>
+                data.users.push({
+                  id: uid,
+                  name,
+                  username,
+                  email,
+                  credential,
+                  bio: "",
+                  website: "",
+                  avatar: "",
+                  private: true,
+                  allowDM: false,
+                  demo: false,
+                  at: Date.now(),
+                }),
+              "",
+              false,
+            );
+            setSession(uid);
+            authError = "";
+            go("feed");
+            toast("Yerel test hesabın hazır. Hesabın varsayılan olarak gizli.");
+          } else if (form.id === "login-form") {
+            const email = String(values.get("email")).trim().toLowerCase(),
+              u = data.users.find((u) => u.email === email);
+            if (!u?.credential)
+              throw Error(
+                "Bu cihazdaki e-posta veya şifre eşleşmedi. Örnek hesaplar için “Örnek hesapla dene”yi kullan.",
+              );
+            const attempt = await hashPassword(
+              String(values.get("password")),
+              u.credential.salt,
+            );
+            requireActive();
+            if (attempt.hash !== u.credential.hash)
+              throw Error("E-posta veya şifre yanlış.");
+            setSession(u.id);
+            authError = "";
+            go("feed");
+          } else if (form.id === "create-form") {
+            const caption = String(values.get("caption") || "").trim(),
+              location = String(values.get("location") || "").trim();
+            if (!caption && !draftMedia)
+              throw Error("Bir açıklama veya medya ekle.");
+            if (createKind === "video" && draftMedia?.type !== "video")
+              throw Error("Kısa video için cihazından bir video seç.");
+            const media = draftMedia,
+              kind = createKind;
+            await change(
+              () => {
+                if (kind === "story")
+                  data.stories.unshift({
+                    id: id(),
+                    uid: meId,
+                    media: media?.uri || "",
+                    type: media?.type || "text",
+                    text: caption,
+                    closeOnly: values.get("closeOnly") === "on",
+                    at: Date.now(),
+                    views: [],
+                  });
+                else
+                  data.posts.unshift({
+                    id: id(),
+                    uid: meId,
+                    caption,
+                    location,
+                    media: media?.uri || "",
+                    type: media?.type || "text",
+                    likes: [],
+                    saves: [],
+                    comments: [],
+                    at: Date.now(),
+                    visibility: me().private ? "followers" : "public",
+                    commentsEnabled: values.get("commentsEnabled") === "on",
+                    hideLikes: values.get("hideLikes") === "on",
+                    sample: false,
+                  });
+                delete data.drafts[meId];
+              },
+              "",
+              false,
+            );
+            draftMedia = null;
+            go(kind === "video" ? "videos" : "feed");
+            toast(
+              kind === "story"
+                ? "Anın bu cihazda paylaşıldı."
+                : "Paylaşımın bu cihazda kaydedildi.",
+            );
+          } else if (form.id === "comment-form") {
+            const p = data.posts.find(
+              (p) => p.id === form.dataset.post && visible(p),
+            );
+            if (!p?.commentsEnabled)
+              throw Error("Bu gönderiye yorum yapılamıyor.");
+            const text = String(values.get("text")).trim();
+            if (!text) throw Error("Yorumunu yaz.");
+            await change(
+              () => {
+                p.comments.push({
+                  id: id(),
+                  uid: meId,
+                  text: text.slice(0, 1000),
+                  at: Date.now(),
+                });
+                notify(p.uid, "comment", "gönderine yorum yaptı.", p.id);
+              },
+              "",
+              false,
+            );
+            render();
+            commentsModal(p.id);
+          } else if (form.id === "profile-form") {
+            const name = String(values.get("name")).trim(),
+              username = String(values.get("username")).trim(),
+              bio = String(values.get("bio") || ""),
+              website = String(values.get("website") || "").trim();
+            if (name.length < 2 || !/^[a-z0-9_]{3,24}$/.test(username))
+              throw Error(
+                "Kullanıcı adı küçük harf, rakam veya alt çizgi içermeli.",
+              );
+            if (
+              data.users.some((u) => u.id !== meId && u.username === username)
+            )
+              throw Error("Bu kullanıcı adı alınmış.");
+            if (website && !safeWebsite(website))
+              throw Error("Web adresi http:// veya https:// ile başlamalı.");
+            const file = $("#avatar-input").files[0],
+              photo = file ? await prepareMedia(file) : null;
+            if (photo && photo.type !== "image")
+              throw Error("Profil fotoğrafı için bir görsel seç.");
+            requireActive();
+            await change(
+              () =>
+                Object.assign(me(), {
+                  name,
+                  username,
+                  bio: bio.slice(0, 180),
+                  website,
+                  ...(photo ? { avatar: photo.uri } : {}),
+                }),
+              "",
+              false,
+            );
+            closeModal();
+            go("profile", meId);
+            toast("Profilin güncellendi.");
+          } else if (form.id === "message-form") {
+            const c = data.chats.find(
+              (c) => c.id === pageArg && c.members.includes(meId),
+            );
+            if (!c) throw Error("Sohbet bulunamadı.");
+            const text = String(values.get("text")).trim();
+            if (!text) throw Error("Mesajını yaz.");
+            const other = c.members.find((x) => x !== meId);
+            if (editingMessage) {
+              if (!canMessage(other))
+                throw Error("Bu hesaba mesaj gönderilemiyor.");
+              await change(
+                () => {
+                  const m = c.messages.find(
+                    (m) => m.id === editingMessage && m.from === meId,
+                  );
+                  if (!m) throw Error("Mesaj artık bulunamadı.");
+                  m.text = text.slice(0, 2000);
+                  m.edited = true;
+                },
+                "",
+                false,
+              );
+              editingMessage = null;
+            } else await sendLocal(other, text);
+            render();
+            $("#message-text")?.focus();
+          } else if (form.id === "report-form") {
+            await change(
+              () =>
+                data.reports.push({
+                  id: id(),
+                  from: meId,
+                  target: form.dataset.id,
+                  postId: form.dataset.post || null,
+                  reason: String(values.get("reason")),
+                  at: Date.now(),
+                }),
+              "",
+              false,
+            );
+            closeModal();
+            toast(
+              "Şikâyet bu cihazda test kaydı olarak tutuldu; bir sunucuya gönderilmedi.",
+            );
+          } else if (form.id === "close-friends-form") {
+            const members = values
+              .getAll("members")
+              .map(String)
+              .filter(
+                (uid) => user(uid) && uid !== meId && !blocked(meId, uid),
+              );
+            await change(
+              () => {
+                data.closeFriends[meId] = members;
+              },
+              "",
+              false,
+            );
+            closeModal();
+            toast("Yakınlar listen güncellendi.");
+          } else if (form.id === "story-reply") {
+            const uid = form.dataset.id,
+              text = String(values.get("text")).trim();
+            if (!text) throw Error("Yanıtını yaz.");
+            await sendLocal(uid, "Anına yanıt: " + text);
+            closeModal();
+            toast("Yanıt bu cihazdaki sohbete eklendi.");
+          }
+        } catch (e) {
+          if (["login-form", "register-form"].includes(form.id)) {
+            authError = e.message;
+            render();
+          } else toast(e.message || "İşlem tamamlanamadı.");
+        } finally {
+          if (button?.isConnected) button.disabled = false;
+        }
+      });
+      dialog.addEventListener("click", (event) => {
+        if (event.target === dialog) {
+          const rect = dialog.getBoundingClientRect();
+          if (
+            event.clientX < rect.left ||
+            event.clientX > rect.right ||
+            event.clientY < rect.top ||
+            event.clientY > rect.bottom
+          )
+            closeModal();
+        }
+      });
+      dialog.addEventListener("close", () => {
+        clearInterval(storyTimer);
+        storyState = null;
+        dialog.querySelectorAll("video").forEach((v) => v.pause());
+      });
+      (async () => {
+        try {
+          const saved = await initStore();
+          data =
+            saved?.version === VERSION && Array.isArray(saved.users)
+              ? saved
+              : seed();
+          if (!saved) {
+            try {
+              await persist();
+            } catch {
+              storageMode = "memory";
+              store = null;
+            }
+          }
+          meId = getSession();
+          if (!user(meId)) setSession(null);
+          render();
+          if (storageMode === "memory")
+            toast(
+              "Tarayıcın kayıt izni vermiyor. Bu oturumdaki değişiklikler geçici olacak.",
+            );
+        } catch (e) {
+          app.innerHTML = `<section class="auth"><div class="auth-panel">${brand()}<h2>Dosya açılamadı.</h2><p class="muted">Güncel Chrome veya Edge ile tekrar açmayı dene.</p><p class="form-error">${E(e.message)}</p></div></section>`;
+        }
+      })();
+    </script>
+  </body>
+</html>
