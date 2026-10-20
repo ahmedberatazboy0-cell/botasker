@@ -15,3 +15,9 @@ Birarada-Windows.zip, Birarada.zip, Birarada-1.0.0-Kaynak.zip ve Birarada-Sarkil
 ## Windows tarayıcı yolu düzeltmesi
 
 Kurulu Chrome/Edge bulunamıyorsa Birarada-Tarayici-Duzeltmesi.zip dosyasını mevcut Birarada klasörünün içine çıkarıp aynı adlı dosyaları değiştirin. Güncel tam kaynak ZIP de bu düzeltmeyi içerir. Windows ortam değişkeni adlarının harf farkı ve kullanıcıya özel kurulum yolları düzeltildi. 12 başlatıcı testi ve eski ZIP üzerine uygulanan yamayla Node BAT önkontrolü geçti; Windows yolları testlerde modellenmiştir. Devam eden derlemeyi durdurup dosya değiştirmeyin; yama sonraki çalıştırma içindir. İmzalı AAB henüz üretilmiş değildir.
+
+## Firestore test batch düzeltmesi
+
+Birarada-Derleme-Duzeltmesi.zip, tarayıcı yolu düzeltmesini ve tests/rules.test.ts içindeki Firestore bağlantısı hatasının düzeltmesini birlikte içerir. İçindekileri mevcut Birarada klasörüne kopyalayıp aynı dosyaları değiştirin; AAB_OLUSTUR.bat dosyasını yeniden çalıştırın. Güncel tam kaynak ZIP de bu düzeltmeyi içerir.
+
+Kullanıcının Windows kaydında 40 güvenlik testinin 39'u geçti. Kalan test farklı Firestore örneklerine ait belge referanslarını aynı batch içinde birleştiriyordu. Her batch ve belge referansları aynı bağlantı örneğinden oluşturulacak şekilde düzeltildi. Gerçek SDK ile yerel hata yeniden üretildi ve düzeltmenin işlem grubu oluşturabildiği doğrulandı; tip kontrolü geçti. Güncel 40 testin tam emulator tekrar sonucu henüz alınmadı. Testler kaldırılmadı, güvenlik kuralları bu düzeltmede değiştirilmedi.

@@ -1,0 +1,21 @@
+{
+  "checkedAt": "2026-10-20T17:59:56.982910+00:00",
+  "userReportedWindowsRun": {
+    "authEmulatorPassed": 1,
+    "firestorePassed": 39,
+    "firestoreFailed": 1,
+    "notesRulesPassed": 6,
+    "failedTest": "profile and username release atomically only for their authenticated owner",
+    "failureCode": "invalid-argument",
+    "failureMessage": "Provided document reference is from a different Firestore instance."
+  },
+  "fix": "Reuse one Firestore instance for each batch and its document references",
+  "localValidation": {
+    "actualSdkMixedInstanceFailureReproduced": true,
+    "actualSdkSameInstanceBatchConstruction": "passed",
+    "typecheck": "passed",
+    "networkOrCommitPerformed": false,
+    "fullEmulatorRerun": false
+  },
+  "signedAabProduced": false
+}

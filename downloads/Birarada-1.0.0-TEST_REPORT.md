@@ -4,6 +4,12 @@ Tarih: 20 Ekim 2026 (Türkiye saati). Linux, Node.js 24.19, Expo SDK 54, React N
 
 Uygulama adı **Birarada**, Android/iOS kimliği **`com.birarada.app`**, sürüm **`1.0.0`**, ilk Android sürüm kodu **`1`**, Firebase projesi **`birarada-5650c`**. İmzalı mağaza AAB'si, canlı Firebase kurulumu ve gerçek cihaz doğrulaması tamamlanmadı. Bu nedenle bu kaynak paketi üretim yayını onayı değildir.
 
+## Kullanıcının Windows çalıştırması ve batch fixture düzeltmesi
+
+20 Ekim 2026 tarihinde kullanıcının paylaştığı konsol kaydında tip kontrolü, 17 birim, 6 yayın ayarı ve 1 Auth emulator testi geçti. Firestore Emulator 1.22.0 üzerinde 40 testten 39'u geçti; notlara ait altı güvenlik testi de başarılıydı. Profil/kullanıcı adı atomik silme testi, `db(uid)` çağrılarının yeni Firestore örnekleri üretip batch ile belge referanslarını farklı bağlantılara ait kılması nedeniyle istemci tarafında `invalid-argument` hatası verdi. Bu sonuçlar kullanıcının Windows kaydına aittir; bulut ortamında yapılmış bir çalışma değildir.
+
+Test, Eve ve Alice için birer bağlantıyı yerel değişkende tutup batch ve belge referanslarını aynı örnekten oluşturacak şekilde düzeltildi. Yerel gerçek Firebase SDK kontrolü eski karışık bağlantı hatasını yeniden üretti; aynı bağlantıyla iki silme işleminin batch'e eklenmesi başarılı oldu. Ağ isteği/commit yapılmadı. Tip kontrolü geçti. Güncellenmiş 40 testin tam emulator tekrar çalıştırması henüz yapılmadı; bulutun emulator indirme engeli sürüyor. Hiçbir test kaldırılmadı, güvenlik kuralları bu düzeltmede değiştirilmedi.
+
 ## Windows tarayıcı yolu düzeltmesi
 
 Windows'ta process.env kopyası ProgramFiles ve ProgramFiles(x86) gibi anahtarların büyük/küçük harfe duyarsız erişimini kaybediyordu. Başlatıcı araması bu farkı giderir; ProgramW6432 ve kullanıcıya özel Chrome/Edge kurulumlarını da kapsar. CHROMIUM_PATH değerinin etrafındaki çift tırnaklar temizlenir. Yanlış açıkça seçilmiş bir tarayıcı yolu sessizce başka tarayıcıya geçmez. 12 başlatıcı testi geçti; yeni testler gerçek Windows anahtar biçimleri, 32/64 bit dizinler, boşluk/Türkçe karakterler ve açık yol seçimini kapsar. Windows yolları testlerde modellenmiştir; gerçek Windows çift tıklaması burada yapılmadı. Node üzerinden BAT önkontrolü geçti.

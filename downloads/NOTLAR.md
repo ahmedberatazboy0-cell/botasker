@@ -18,3 +18,7 @@ Not şikâyeti, o anda okunabilen notun metnini, şarkı adını, bağlantısın
 - `tests/rules.test.ts` içinde 40 Firestore testi hazırlanmıştır; 6 yeni test notların erişimi, engel, süre, güvenli yazımı, hesap temizliği ve şikâyet kanıtını kapsar. Firestore Emulator JAR indirmesindeki ağ engeli devam ettiği için bu testler henüz çalıştırılamadı; geçti sayılmaz.
 
 Yayın öncesinde iki gerçek hesapla kayıt/not paylaşma/düzenleme/silme, takip kabulü/geri çekme, iki yönlü engel, şikâyet ve hesap silme akışları Firestore üzerinde doğrulanmalı. 24 saat sınırı, uygulamanın arka plandan dönüşü ve bağlantı kesintisi de gerçek telefonda denenmelidir. Güncellenen kuralların ve yasal sayfaların canlıya dağıtımı ile imzalı AAB üretimi tamamlanmadı.
+
+## Kullanıcının Windows emulator sonucu
+
+20 Ekim 2026'da paylaşılan Windows konsol kaydında notlara ait altı Firestore güvenlik testi geçti. Tüm güvenlik testlerinde sonuç 39/40 idi; kalan hata not kurallarından değil, profil/kullanıcı adı silme testinin farklı Firestore örneklerini aynı batch içinde kullanmasından kaynaklandı. Test düzeltildi; tam 40 testin güncel sonuçları yeniden alınmalı. Bu harici kayıt, canlı Firebase yayını veya gerçek mobil cihaz doğrulaması değildir.
