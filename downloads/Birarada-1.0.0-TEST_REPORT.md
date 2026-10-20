@@ -4,9 +4,17 @@ Tarih: 20 Ekim 2026 (Türkiye saati). Linux, Node.js 24.19, Expo SDK 54, React N
 
 Uygulama adı **Birarada**, Android/iOS kimliği **`com.birarada.app`**, sürüm **`1.0.0`**, ilk Android sürüm kodu **`1`**, Firebase projesi **`birarada-5650c`**. İmzalı mağaza AAB'si, canlı Firebase kurulumu ve gerçek cihaz doğrulaması tamamlanmadı. Bu nedenle bu kaynak paketi üretim yayını onayı değildir.
 
+## 20 Ekim 2026: onboarding düzeltmesinin gerçek doğrulaması
+
+Kullanıcının ilettiği `Birarada-current-run-report.md` okundu. Raporda adı geçen Gemini ZIP'i eklenmediği için bu arşivin içeriği veya verilen SHA-256 değeri doğrulanmadı. Aynı sınırlı düzeltme mevcut Codex kaynağına bağımsız uygulandı: ilk gezinme `commit` aşamasını 30 saniye bekler, gerçek “Arkadaşlarını bul” ekranı ayrıca en fazla 90 saniye beklenir; onboarding testinin toplam bütçesi 120 saniyedir. Normal config ve Windows yardımcısının ürettiği config tek worker kullanır. Kendi JS kodunu taşıyan BAT da yeniden üretildi. Testler veya iddialar kaldırılmadı.
+
+Bu ortamda mevcut bağımlılıklarla **tip kontrolü**, **12/12 derleme yardımcısı testi** (gerçek Expo config çözümlemesi dahil), BAT sözdizimi ve Node üzerinden BAT `--check` önkontrolü geçti. Windows yardımcısının ürettiği config, farklı çalışma klasöründen kullanılarak **4/4 arayüz testi geçti (7,9 saniye)**. Ek gerçek Chromium koşusunda Metro JavaScript isteği kasıtlı olarak **32 saniye geciktirildi**; onboarding'in bütün mevcut kontrolleri **38,2 saniyede geçti**. Geçici gecikme düzeneği teslim edilen teste eklenmedi. Bu, fiziksel Windows/Android cihaz testi değildir.
+
+Uygulamanın `src/` altındaki **26 dosyanın SHA-256 değerleri değişmedi**; şarkılı notlar korundu. Bu turda Auth/Firestore emulator ve native derleme yeniden çalıştırılmadı; aşağıdaki Windows 40/40 Firestore sonucu önceki kullanıcı kaydına aittir. Expo/Firebase oturumu ve gerçek EAS proje kimliği yok; bilinen ağ engelleri sürüyor. **İmzalı AAB üretilmedi; kaynak ZIP'i mağazaya yüklenebilir dosya değildir.** Ayrıntı: [ONBOARDING_DUZELTMESI.md](docs/ONBOARDING_DUZELTMESI.md).
+
 ## En son Windows sonucu ve Gemini devri
 
-Kullanıcının sonraki Windows kaydında **40/40 Firestore güvenlik testi geçti**, fail 0. Önceki batch bağlantısı hatası çözülmüş görünüyor. Arayüz tarafında üç not testi geçti; onboarding testi ilk `page.goto` çağrısında 30000 ms zaman aşımıyla durdu. Başlatıcı bu yüzden Expo hesabı ve AAB adımına ulaşmadı. Onboarding için süre/ilk yükleme düzeltmesi henüz uygulanmadı; kullanıcı devam işini Gemini'ye devretmek istedi. Güncel ve ayrıntılı devir notu [GEMINI_DEVIR_NOTU.md](docs/GEMINI_DEVIR_NOTU.md), kopyalanacak prompt proje kökündeki GEMINIYE_YAPISTIR.txt dosyasındadır. Aşağıdaki 39/40 veya bulutta çalıştırılamadı kayıtları önceki çalışmalara aittir.
+Kullanıcının sonraki Windows kaydında **40/40 Firestore güvenlik testi geçti**, fail 0. Önceki batch bağlantısı hatası çözülmüş görünüyor. Arayüz tarafında üç not testi geçti; onboarding testi ilk `page.goto` çağrısında 30000 ms zaman aşımıyla durdu. Başlatıcı bu yüzden Expo hesabı ve AAB adımına ulaşmadı. Bu kayıt düzeltme öncesidir; sonradan uygulanan ve doğrulanan süre/ilk yükleme düzeltmesi yukarıdaki bölümde açıklanmıştır. Kullanıcı devam işini Gemini'ye devretmek istemişti. Güncel ve ayrıntılı devir notu [GEMINI_DEVIR_NOTU.md](docs/GEMINI_DEVIR_NOTU.md), kopyalanacak prompt proje kökündeki GEMINIYE_YAPISTIR.txt dosyasındadır. Aşağıdaki 39/40 veya bulutta çalıştırılamadı kayıtları önceki çalışmalara aittir.
 
 ## Kullanıcının Windows çalıştırması ve batch fixture düzeltmesi
 

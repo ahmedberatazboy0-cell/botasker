@@ -8,7 +8,11 @@ ZIP'te tek bir `Birarada/` mobil proje kökü vardır. Expo SDK 54, React Native
 
 Hedef üretim imzalı Android AAB'dir. Şu anda AAB/APK yoktur. `com.birarada.app` kimliği Android ve iOS için sabittir. Kaynak sürümü `1.0.0`, ilk versionCode `1`; daha önce Play'e yükleme yapıldıysa yeni sürüm kodu ve mevcut imza eşleşmesi zorunludur. Kullanıcı başlangıçta mevcut uygulama güncellemesi demiş, sonra henüz EAS projesi olmadığını ve ilk sürüm bilgilerini vermiştir; mağaza kaydı ve imza durumu hesap üzerinden doğrulanmalıdır.
 
-## En son gerçek Windows sonucu
+## Devri izleyen doğrulanmış onboarding düzeltmesi
+
+Kullanıcı Gemini raporunu geri iletti; güncel Gemini ZIP'i gelmedi. Raporda anlatılan `commit` 30 saniye + gerçek ilk ekran 90 saniye + toplam test 120 saniye ve tek worker düzeltmesi mevcut kaynağa bağımsız uygulandı. Kendi kodunu taşıyan BAT ve üretilen config de güncellendi. Codex'te tip kontrolü, 12/12 yardımcı test ve üretilen config ile 4/4 UI testi geçti. İlk Metro bundle isteği 32 saniye geciktirilerek bütün onboarding kontrolleri ayrıca 38,2 saniyede geçti. Uygulama kaynakları değişmedi. İmzalı AAB hâlâ yoktur. Ayrıntı: [ONBOARDING_DUZELTMESI.md](ONBOARDING_DUZELTMESI.md).
+
+## Düzeltme öncesindeki en son gerçek Windows sonucu
 
 Kullanıcının gönderdiği konsol kaydında:
 
@@ -23,7 +27,7 @@ Kullanıcının gönderdiği konsol kaydında:
 | Playwright not düzenleyicisi | 3/3 geçti; gerçek bileşenin callbacks'i testte simüle edilir. |
 | Playwright onboarding | `page.goto` ilk `http://127.0.0.1:8081/` yüklemesinde **30000 ms timeout**; 3 test geçti, 1 başarısız. |
 
-Başlatıcı bu son arayüz hatasında durdu; 2/4 Expo hesabı adımına geçilmedi. Son kayıtta ilk sayfaya `load` beklenirken zaman aşımı var. Soğuk Metro paketlemesi, makine yükü, sayfanın/bundle'ın HTTP yanıtı ve gerçek tarayıcı hataları araştırılmalı. Test bütçesini makul biçimde artırmak/ilk DOM ve uygulama hazır durumunu ayrı beklemek ve gerekirse tek worker kullanmak düşünülebilir; bu değişiklikler henüz uygulanmadı. Mevcut iddiaları koruyup tekrar çalıştır. Sadece testi atlayarak devam etme.
+Başlatıcı bu son arayüz hatasında durdu; 2/4 Expo hesabı adımına geçilmedi. Son kayıtta ilk sayfaya `load` beklenirken zaman aşımı var. Soğuk Metro paketlemesi, makine yükü, sayfanın/bundle'ın HTTP yanıtı ve gerçek tarayıcı hataları araştırılmalı. Test bütçesini makul biçimde artırmak/ilk DOM ve uygulama hazır durumunu ayrı beklemek ve gerekirse tek worker kullanmak düşünülebilir; bu değişiklikler sonradan uygulanıp yukarıdaki bölümde açıklandığı şekilde doğrulandı. Yeni Windows çalıştırmasında mevcut iddiaları koruyup tekrar çalıştır. Sadece testi atlayarak devam etme.
 
 `PERMISSION_DENIED` kayıtları büyük ölçüde negatif güvenlik testlerindeki beklenen retlerdir; test toplamı başarılıdır. Emulatorün test sonu `SIGINT` ile kapatılması normaldir. Canlı Firebase kurallarını açmak bu testi çözme yöntemi değildir.
 
