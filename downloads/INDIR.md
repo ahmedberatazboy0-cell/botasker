@@ -11,3 +11,7 @@ AAB_OLUSTUR.bat için Node.js LTS, Java 21 ve Chrome/Edge gerekir. Kontroller ba
 Bu ZIP kaynak kodudur. İmzalı AAB içermez; doğrudan Play Console'a yüklenmez ve yayın onayı değildir. İmzalı AAB, canlı Firebase ve yasal sayfa kurulumu, Firestore/cihaz kontrolleri tamamlanmadı.
 
 Birarada-Windows.zip, Birarada.zip, Birarada-1.0.0-Kaynak.zip ve Birarada-Sarkili-Notlar-Kaynak.zip bu temiz paketin diğer adlarıdır. Eski doğrudan HTML indirmeleri ayrı, eski demoya aittir; mobil uygulama yerine kullanılmamalıdır.
+
+## Windows tarayıcı yolu düzeltmesi
+
+Kurulu Chrome/Edge bulunamıyorsa Birarada-Tarayici-Duzeltmesi.zip dosyasını mevcut Birarada klasörünün içine çıkarıp aynı adlı dosyaları değiştirin. Güncel tam kaynak ZIP de bu düzeltmeyi içerir. Windows ortam değişkeni adlarının harf farkı ve kullanıcıya özel kurulum yolları düzeltildi. 12 başlatıcı testi ve eski ZIP üzerine uygulanan yamayla Node BAT önkontrolü geçti; Windows yolları testlerde modellenmiştir. Devam eden derlemeyi durdurup dosya değiştirmeyin; yama sonraki çalıştırma içindir. İmzalı AAB henüz üretilmiş değildir.

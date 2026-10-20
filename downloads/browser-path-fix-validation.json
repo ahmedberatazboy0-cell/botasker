@@ -1,0 +1,9 @@
+{
+  "checkedAt": "2026-10-20T17:50:02.597343+00:00",
+  "issue": "Copied Windows environment loses case-insensitive ProgramFiles lookup",
+  "helperTestsPassed": 12,
+  "windowsPaths": "modeled with actual ProgramFiles casing and win32 paths",
+  "nativeWindowsExecutionTested": false,
+  "nodeBatPrecheck": "passed",
+  "signedAabProduced": false
+}

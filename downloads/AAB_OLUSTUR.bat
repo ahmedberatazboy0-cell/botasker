@@ -55,7 +55,9 @@ function sourceRoot(directory) {
     )
       return path.resolve(root);
   }
-  throw Error("Bu dosyayı Birarada kaynak paketindeki mobile klasörüne koy.");
+  throw Error(
+    "Bu dosyayı package.json ve app.json ile aynı Birarada klasörüne koy.",
+  );
 }
 
 function commandSpec(
@@ -95,30 +97,38 @@ function runCommand(command, args, { cwd, env, capture = false }) {
   };
 }
 
-function chromePath(env, exists = fs.existsSync) {
-  if (env.CHROMIUM_PATH)
-    return exists(env.CHROMIUM_PATH) ? env.CHROMIUM_PATH : null;
-  const candidates = [
-    env.PROGRAMFILES &&
-      path.join(env.PROGRAMFILES, "Google/Chrome/Application/chrome.exe"),
-    env["PROGRAMFILES(X86)"] &&
-      path.join(
-        env["PROGRAMFILES(X86)"],
-        "Google/Chrome/Application/chrome.exe",
-      ),
-    env.LOCALAPPDATA &&
-      path.join(env.LOCALAPPDATA, "Google/Chrome/Application/chrome.exe"),
-    env.PROGRAMFILES &&
-      path.join(env.PROGRAMFILES, "Microsoft/Edge/Application/msedge.exe"),
-    env["PROGRAMFILES(X86)"] &&
-      path.join(
-        env["PROGRAMFILES(X86)"],
-        "Microsoft/Edge/Application/msedge.exe",
-      ),
-    "/usr/bin/chromium",
-    "/usr/bin/google-chrome",
-    "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+function environmentValue(env, name) {
+  // A spread copy of process.env loses Windows' case-insensitive property access.
+  const key = Object.keys(env).find(
+    (key) => key.toUpperCase() === name.toUpperCase(),
+  );
+  return env[name] ?? (key ? env[key] : undefined);
+}
+
+function chromePath(env, exists = fs.existsSync, platform = process.platform) {
+  const override = environmentValue(env, "CHROMIUM_PATH");
+  if (override) {
+    const executable = override.trim().replace(/^"(.*)"$/, "$1");
+    return exists(executable) ? executable : null;
+  }
+  const paths = platform === "win32" ? path.win32 : path;
+  const roots = [
+    ...new Set(
+      ["ProgramW6432", "ProgramFiles", "ProgramFiles(x86)", "LOCALAPPDATA"]
+        .map((key) => environmentValue(env, key))
+        .filter(Boolean),
+    ),
   ];
+  const candidates = roots.flatMap((root) => [
+    paths.join(root, "Google", "Chrome", "Application", "chrome.exe"),
+    paths.join(root, "Microsoft", "Edge", "Application", "msedge.exe"),
+  ]);
+  if (platform !== "win32")
+    candidates.push(
+      "/usr/bin/chromium",
+      "/usr/bin/google-chrome",
+      "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+    );
   return candidates.find((p) => p && exists(p)) || null;
 }
 
