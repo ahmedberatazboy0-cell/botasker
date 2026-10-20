@@ -1,0 +1,44 @@
+{
+  "checkedAt": "2026-10-20T17:11:18.313513+00:00",
+  "feature": "Spotify/YouTube bağlantılı 24 saatlik notlar",
+  "package": "com.birarada.app",
+  "version": "1.0.0",
+  "versionCode": 1,
+  "typecheck": "passed",
+  "unitTests": {
+    "passed": 17,
+    "notesTests": 8
+  },
+  "releaseGuardUnitTests": {
+    "passed": 6
+  },
+  "browserTests": {
+    "passed": 4,
+    "notesTests": 3,
+    "firebaseCallbacks": "simulated",
+    "portableHelperWorkingDirectory": "passed"
+  },
+  "exports": {
+    "web": "passed",
+    "androidHermes": "passed",
+    "iosHermes": "passed",
+    "nativeAab": false
+  },
+  "firestoreRulesTests": {
+    "prepared": 40,
+    "newNotesTests": 6,
+    "executed": false,
+    "blocker": "Firestore emulator download blocked by network policy"
+  },
+  "liveFirebaseDeployed": false,
+  "liveLegalPagesDeployed": false,
+  "deviceTestsExecuted": false,
+  "signedAabProduced": false,
+  "readyForPlayStore": false,
+  "releaseBlockers": [
+    "Expo and Firebase account access unavailable in this session",
+    "Required Expo/emulator/React Native artifact domains blocked",
+    "Firestore runtime and real device tests incomplete",
+    "Native signing and production AAB not produced"
+  ]
+}

@@ -4,25 +4,33 @@ Tarih: 20 Ekim 2026 (Türkiye saati). Linux, Node.js 24.19, Expo SDK 54, React N
 
 Uygulama adı **Birarada**, Android/iOS kimliği **`com.birarada.app`**, sürüm **`1.0.0`**, ilk Android sürüm kodu **`1`**, Firebase projesi **`birarada-5650c`**. İmzalı mağaza AAB'si, canlı Firebase kurulumu ve gerçek cihaz doğrulaması tamamlanmadı. Bu nedenle bu kaynak paketi üretim yayını onayı değildir.
 
-## Son ekleme: Git/GitHub gerektirmeyen Windows derlemesi
+## Son ekleme: Spotify/YouTube bağlantılı notlar
 
-Kullanıcı GitHub kullanılmamasını istedi. Bu ekleme yerel dosyalarda yapıldı; yeni dosyalar GitHub'a gönderilmedi. `AAB_OLUSTUR.bat`, kaynaklardan gerçek yerel kontrolleri çalıştırır; başarılı olursa resmi Expo girişini ve gerçek proje oluşturma/bağlama akışını açıp EAS AAB derlemesini başlatır. Proje kimliği uydurulmaz ve Codex ortam değişkeni ekranına elle girilmez. Orijinal kaynaklar korunur, çalışma kopyası ve gerçek public proje bilgisi `.birarada-release` içinde tutulur. Git/VCS kullanımı kapalıdır, kaynak arşivi ve EAS yolu sabitlenir.
+Kullanıcının seçimiyle notlara şarkı adı ve Spotify/YouTube bağlantısı eklendi. Ana Sayfa ve Profil'den açılan düzenleyici, takip edilenlerin notları, profil üzerinde not gösterimi, güncelleme/silme, 24 saat sonra görünürlüğün kapanması, iki yönlü engel ve gerçek içerik kopyalı şikâyet kuralları hazırlanmıştır. Hesap temizliği notu da kaldırır. Yasal metinler yeni işlenen verileri ve harici müzik hizmetine geçişi açıklar. Ses dosyası yükleme veya uygulama içinde şarkı çalma eklenmedi. Ayrıntı: [NOTLAR.md](docs/NOTLAR.md).
 
-`npm run test:no-github`: **10 geçti**. Hata/durdurma, eksik giriş ve ağ ayrımı, yanlış kimlik reddi, kimlik koruma, dosya/çalışma kilidi ve komut güvenliği testleri ile gerçek Expo config çözümlemesi geçmiştir. EAS ağ yanıtları modellenmiştir; gerçek hesap/AAB testi değildir. `typecheck` ve Windows'a uyarlanan Node başlangıç komutuyla `test:ui` tekrar geçti (**1**). BAT önkontrolü Node üzerinden Linux'ta geçti; gerçek Windows çift tıklaması yapılmadı. Aşağıdaki 34 Firestore testinin ve native derlemenin ağ engelleri devam eder. Ayrıntılar [derleme rehberindedir](docs/GITHUB_GEREKTIRMEYEN_DERLEME.md).
+Son kaynaklarla tip kontrolü, **17 birim**, **6 yayın ayarı** ve **4 arayüz testi** geçti. Dört arayüz testi Windows yardımcısının farklı çalışma klasörü akışından da tekrar geçti; test paketinin yol çözümlemesi buna göre düzeltildi. Not düzenleyicisinin 3 arayüz testi gerçek bileşeni Chromium'da sınar; veri callbacks'i simüle edilmiştir, Firestore uçtan uca testi değildir. Android/iOS Hermes ve web paketlemesi başarılıdır. Notlara ait 6 yeni güvenlik testiyle toplam **40 Firestore testi** hazırlanmıştır; emulator indirme engeli değişmediği için çalıştırılmadılar. Güncel Firestore kuralları canlıya dağıtılmadı. İmzalı AAB yoktur.
+
+## Git/GitHub gerektirmeyen Windows derlemesi
+
+`AAB_OLUSTUR.bat`, kaynaklardan gerçek yerel kontrolleri çalıştırır; başarılı olursa resmi Expo girişini ve gerçek proje oluşturma/bağlama akışını açıp EAS AAB derlemesini başlatır. Proje kimliği uydurulmaz ve Codex ortam değişkeni ekranına elle girilmez. Orijinal kaynaklar korunur, çalışma kopyası ve gerçek public proje bilgisi `.birarada-release` içinde tutulur. Derleme için Git/VCS kullanımı kapalıdır. Kullanıcının sonraki isteğiyle kaynak indirme paketi GitHub üzerinden paylaşılmıştır; bu, EAS hesabının bağlandığı veya AAB üretildiği anlamına gelmez.
+
+`npm run test:no-github`: **10 geçti**. Hata/durdurma, eksik giriş ve ağ ayrımı, yanlış kimlik reddi, kimlik koruma, dosya/çalışma kilidi ve komut güvenliği testleri ile gerçek Expo config çözümlemesi geçmiştir. EAS ağ yanıtları modellenmiştir; gerçek hesap/AAB testi değildir. Windows'a uyarlanan Node başlangıç komutu ve BAT önkontrolü Node üzerinden Linux'ta geçti; gerçek Windows çift tıklaması yapılmadı. Firestore testlerinin ve native derlemenin ağ engelleri devam eder. Ayrıntılar [derleme rehberindedir](docs/GITHUB_GEREKTIRMEYEN_DERLEME.md).
 
 ## Tamamlanan kontroller
 
 | Kontrol | Gerçek sonuç ve kapsam |
 | --- | --- |
 | `npm run typecheck` | Geçti. Strict TypeScript; uygulama ve test dosyaları. |
-| `npm test` | **9 geçti.** Türkçe hata eşlemeleri ve kullanıcı adları; silmeden önce yeniden doğrulama, her temizlik hatasında Auth hesabını koruma, Auth'u en son silme, yarıda kalan işlemi tekrar deneme; profil kaldırıldıktan sonra Auth silmesini tekrar deneme regresyonu; canlı/sayfalı akış kayıtlarının güncelliği ve tekilleştirilmesi. Bunlar birim testleridir. |
+| `npm test` | **17 geçti.** Türkçe hata eşlemeleri ve kullanıcı adları; silmeden önce yeniden doğrulama, temizlik hatasında Auth hesabını koruma ve tekrar deneme; akış kayıtlarının güncelliği ve tekilleştirilmesi; güvenli şarkı bağlantıları, not doğrulaması ve 24 saat sınırı. Bunlar birim testleridir. |
 | `npm run test:release` | **6 geçti.** Sabit uygulama kimliği, çelişkili kimlik/sürüm/proje ayarlarının reddi, emulator/Storage bayrakları, eksik EAS UUID'si ve güvensiz/yertutucu URL'lerin reddi. Testteki sentetik UUID gerçek bir EAS projesi değildir. |
 | `npm run test:auth` | **1 geçti.** Gerçek Firebase Authentication Emulator üzerinde kayıt, çıkış, yanlış şifrenin reddi, giriş ve şifre sıfırlama isteği. Demo hesap temizlendi; canlı hesap oluşturulmadı. |
-| `npm run test:ui` | **1 genişletilmiş test geçti.** 390×844 Chromium'da açılış, üç onboarding ekranı, giriş/sıfırlama geçişi ve tercihin yeniden yüklemede korunması. Kayıt için geçerli e-posta/şifre ve topluluk kuralları onayı; onayı geri çekme/sıfırlama; kısa şifrenin reddi; checkbox erişilebilirliği; yasal ve destek bağlantılarının tam adresleri. Gerçek kayıt isteği gönderilmedi, tarayıcı çalışma zamanı hatası yok. |
+| `npm run test:ui` | **4 test geçti.** 390×844 Chromium'da onboarding/giriş/kayıt onayı ve yasal bağlantılar; gerçek not düzenleyicisinde şarkı bağlantısı doğrulaması, hata durumunda taslağı koruma, onaylı silme ve eşzamanlı güncellemelerde taslağı koruma. Gerçek kayıt isteği gönderilmedi. Not veri callbacks'i simülasyondur; Firebase entegrasyonu değildir. |
 | `npm run test:launcher` | **10 geçti.** Node/Java sürümleri, güvenli test ortamı, dolu porttaki servisi koruma, HTTP hazır olma/hata/zaman aşımı, beklenmedik süreç çıkışı ve yalnız başlatılan süreç ağacını kapatma. Linux üzerinde; gerçek Windows çift tıklaması doğrulanmadı. |
 | `expo export --platform all --max-workers 2` | Geçti. Son kaynaklardan Web JS, Android/iOS Hermes ve asset paketleri üretildi. APK, AAB veya IPA değildir. |
 | Firebase Hosting emulator + Chromium | **22 kontrol geçti.** Dört yasal sayfa ve CSS HTTP 200; alakasız rotalar 404; 320/390/1280 pikselde taşmasız görünüm, gezinme, mailto talebi ve klavye erişimi. Script/harici takip kaynağı yok, tarayıcı hatası yok. Canlıya dağıtım değildir. |
 | Android prebuild | İzole kopyada geçti. Sabit paket/sürüm, ikon kaynakları ve native proje üretildi. Ana manifestte `INTERNET`, kapalı yedekleme ve gereksiz izinlerin engellenmesi incelendi; nihai birleşmiş binary manifestinin yerine geçmez. |
+
+Not düzenleme ekranı: [music-note-mobile.png](artifacts/music-note-mobile.png). Hosting için aşağıdaki 22 kontrol, önceki metinlerle yapılmıştır; yeni paragrafların canlı yayını doğrulanmadı.
 
 Hosting kanıtı: [hosting-validation.json](artifacts/hosting-validation.json), [mobil görünüm](artifacts/privacy-mobile.png). Uygulama açılış görüntüsü: [auth-mobile.png](artifacts/auth-mobile.png).
 
@@ -40,7 +48,7 @@ Android cihaz/emulator çalıştırma yapılmadı; ortamda `/dev/kvm` yok. Expo/
 
 ## Çalıştırılamayan güvenlik ve entegrasyon kontrolleri
 
-`npm run test:rules`, resmî Firestore Emulator JAR indirmesinin `storage.googleapis.com` isteğinde ortam proxy'sinden HTTP 403 aldı. Runner aşamasına ulaşılmadı: **hazırlanmış 34 Firestore güvenlik testi çalışmadı; hiçbirinin geçtiği iddia edilmiyor.** Kuralların çalışma zamanı derlemesi de doğrulanmadı. TLS ve checksum kontrolleri kapatılmadı, testler atlanarak başarı üretilmedi.
+`npm run test:rules`, resmî Firestore Emulator JAR indirmesinin `storage.googleapis.com` isteğinde ortam proxy'sinden HTTP 403 aldı. Runner aşamasına ulaşılmadı: **hazırlanmış 40 Firestore güvenlik testi çalışmadı; hiçbirinin geçtiği iddia edilmiyor.** Kuralların çalışma zamanı derlemesi de doğrulanmadı. TLS ve checksum kontrolleri kapatılmadı, testler atlanarak başarı üretilmedi.
 
 Hazır testler profil/kullanıcı adı atomikliği, onay kaydı, tür/alan sınırları, değişmez sayaçlar, gizli gönderi/takip/engel erişimi, sorgu kapsamları, beğeni/yorum yetkileri, takip istekleri, sohbet üyeliği ve DM tercihleri, mesaj düzenleme/görüldü, atomik takip bildirimleri, gerekçeli raporlar, silme durumu ve alt kayıt temizleme izinlerini kapsıyor. Statik inceleme çalışma zamanı testlerinin yerini tutmaz.
 
@@ -64,7 +72,7 @@ Temizlik istemci tarafından birden fazla işlemde yapılır, sunucu tarafında 
 
 ## Desteklenen kapsam ve eksikler
 
-Kodda email/şifre Auth, profil tamamlama/düzenleme, public sayfalı akış, profil gönderileri, metin paylaşımı, beğeni/yorum/kaydetme, takip istekleri, kullanıcı adı öneki araması, metin DM, takip bildirimleri, engelleme/raporlama, ayarlar ve hesap silme bulunuyor. Bu liste, yukarıda çalıştırılamayan Firebase akışlarının doğrulandığı anlamına gelmez.
+Kodda email/şifre Auth, profil tamamlama/düzenleme, şarkı bağlantılı notlar, public sayfalı akış, profil gönderileri, metin paylaşımı, beğeni/yorum/kaydetme, takip istekleri, kullanıcı adı öneki araması, metin DM, takip bildirimleri, engelleme/raporlama, ayarlar ve hesap silme bulunuyor. Bu liste, yukarıda çalıştırılamayan Firebase akışlarının doğrulandığı anlamına gelmez.
 
 Storage kapalıdır; kurallar medya URL'lerini ve Storage erişimini reddeder. Galeri/kamera/kısa video sekmesi ve native Google düğmesi gizlidir. Anlar/Yakınlar, öne çıkanlar, grup/ses/medya DM, cevap/reaksiyon/yazıyor bilgisi, hashtag/içerik araması, repost, push, güvenilir sayaç agregasyonu, yaş denetimleri ve native Google OAuth tamamlanmadı. Native Firestore JS SDK kalıcı disk önbelleği sağlamaz; web IndexedDB cache vardır.
 
@@ -72,7 +80,7 @@ Profil alanları giriş yapan kullanıcılara açıktır; e-posta Auth'ta kalır
 
 ## Yayın için kalan somut işler
 
-1. Ortam ayarlarındaki ağ taslağını gözden geçirip kaydedin ve ortamı yayımlayın. `repo.reactnative.dev` erişimiyle native derlemeyi, `storage.googleapis.com` erişimiyle 34 güvenlik testini ve kritik uygulama + emulator entegrasyon akışlarını tamamlayın. EAS giriş API'sinin HTTP 403 engeli de giderilmeli. Taslak kaydı bu engellerin ortadan kalktığı anlamına gelmez.
+1. Ortam ayarlarındaki ağ taslağını gözden geçirip kaydedin ve ortamı yayımlayın. `repo.reactnative.dev` erişimiyle native derlemeyi, `storage.googleapis.com` erişimiyle 40 güvenlik testini ve kritik uygulama + emulator entegrasyon akışlarını tamamlayın. EAS giriş API'sinin HTTP 403 engeli de giderilmeli. Taslak kaydı bu engellerin ortadan kalktığı anlamına gelmez.
 2. Firebase'e kendi hesabınızla güvenli giriş yapın, sağlayıcıları ve backend'i doğrulayın; test edilmiş kuralları/indeksleri dağıtın. Yasal sayfaları mevcut siteyi koruyarak yayımlayıp oturumsuz canlı URL'leri kontrol edin.
 3. Yeni EAS projesini kendi hesabınızda oluşturup gerçek UUID'yi bağlayın; gerçek telefonda iki hesapla bütün kritik akışları ve hesap silmeyi test edin. Ardından üretim imzasıyla ilk AAB'yi oluşturun.
 4. İşleyen moderasyon/çocuk güvenliği/destek ve silme talebi süreçlerini, saklama sürelerini ve veri sorumlusu açıklamalarını kesinleştirin. Play Data safety, hedef yaş, içerik derecelendirmesi, mağaza kaydı ve hesap özelindeki test koşullarını gerçek davranışa göre tamamlayın. Önce internal testing ve pre-launch report sonuçlarını inceleyin.
