@@ -52,3 +52,7 @@ Kullanıcının daha önce Windows'ta oluşturduğu EAS projesi **@ahmedberat/bi
 `ahmedberatazboy0@gmail.com` için canlı Auth hesabı/owner claim bu ortamda oluşturulmadı. Sunucu yapılandırması + kullanıcının gerçek e-posta doğrulamasından sonra uygulamadaki resmî hesap etkinleştirmesi gerekir. Sağlanan parola kaynaklara veya raporlara yazılmadı.
 
 Kurulum: `FIREBASE_KUR.bat`, [CANLI_KURULUM.md](docs/CANLI_KURULUM.md), [HOSTING.md](docs/HOSTING.md), ardından `AAB_OLUSTUR.bat`. Play incelemesi, hesap özelindeki test şartları, veri beyanları ve işletilen moderasyon/destek süreçleri ayrıca gerekir. Her şeyin hatasız veya bu gece yayımlanacağı iddia edilmez.
+
+## CMD Storage yardimcisi
+
+`STORAGE_KUR.cjs` mevcut Firebase CLI oturumunu kullanir; tokenlari ciktiya veya dosyaya yazmaz. Resmi `@googleapis/firebasestorage@17.0.1` tanimindaki `v1beta/projects/{project}/defaultBucket` POST semasi dogrulandi. Proje sabittir; varsa farkli bucket korunur. Olusturma yalniz mevcut billing aciksa europe-west1/STANDARD olarak denenir; faturalandirma baglantisi veya plan degisikligi yapilmaz. Basaridan once beklenen bucket tekrar okunur ve kaynaktaki istemci erisimini kapatan kurallar dagitilir. Alti akis/koruma testi gecti; bu ortamdan gercek bucket olusturulmadi.
