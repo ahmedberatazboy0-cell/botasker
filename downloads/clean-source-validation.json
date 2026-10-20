@@ -1,0 +1,21 @@
+{
+  "checkedAt": "2026-10-20T17:39:10.658505+00:00",
+  "delivery": "standalone mobile project under Birarada/",
+  "demoHtmlIncluded": false,
+  "demoLaunchersIncluded": false,
+  "legacyExpressIncluded": false,
+  "extractedProjectChecks": {
+    "typecheck": "passed",
+    "unitTests": 17,
+    "releaseGuardTests": 6,
+    "buildHelperTests": 10,
+    "browserTests": 4,
+    "actualBatNodePrecheck": "passed"
+  },
+  "dependencySource": "existing lockfile installation linked into extracted project",
+  "browserNotesDataCallbacks": "simulated",
+  "windowsDoubleClickTested": false,
+  "firestoreRuntimeTestsExecuted": false,
+  "signedAabProduced": false,
+  "playStoreReady": false
+}

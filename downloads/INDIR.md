@@ -1,9 +1,13 @@
-# Birarada indirme paketi
+# Birarada temiz mobil kaynak kodu
 
-Birarada-Sarkili-Notlar-Kaynak.zip güncel mobil uygulamanın kaynak kodudur. Şarkı adı ve Spotify/YouTube bağlantılı notlar eklendi. Ana Sayfa → Notlar · Şarkını paylaş veya Profil → Notum ve şarkım üzerinden açılır.
+Güncel indirme: Birarada-Temiz-Kod.zip.
 
-Bu paket hazır APK/AAB içermez ve Play Console'a doğrudan yüklenmez. Yayına hazır uygulama onayı değildir. İmzalı AAB, canlı Firebase kurulumu ve gerçek cihaz doğrulaması tamamlanmadı. 40 Firestore güvenlik testi henüz çalıştırılamadı. Ayrıntılar NOTLAR.md ve Birarada-1.0.0-TEST_REPORT.md içindedir.
+Bu ZIP tek bir Birarada klasörü içerir. App.tsx, src, assets, Firebase kuralları ve AAB_OLUSTUR.bat aynı proje içindedir. Eski Birarada.html, örnek hesapla giriş, demo BAT başlatıcıları, eski Express sunucusu ve derleme çıktıları içermez. hosting/public altındaki HTML dosyaları yalnız yasal bilgilendirme sayfalarıdır. Spotify/YouTube şarkı bağlantılı notlar korunmuştur.
 
-ZIP'i çıkarıp Node.js LTS, Java 21 ve Chrome/Edge kurulu bilgisayarda AAB_OLUSTUR.bat dosyasını açın. Araç testlerden sonra resmî Expo girişi ve EAS AAB derlemesini başlatır; başarısız testi atlamaz, Google Play'e otomatik yayın yapmaz. Derleme için Git/GitHub kurulumu gerekmez.
+ZIP ayrı bir klasöre çıkarılarak tip kontrolü, 17 birim, 6 yayın ayarı, 10 derleme yardımcısı ve 4 arayüz testi çalıştırıldı; hepsi geçti. BAT önkontrolü Node üzerinden geçti. Gerçek Windows çift tıklaması, Firestore çalışma zamanı ve cihaz kontrolleri tamamlanmadı.
 
-Birarada-Windows.zip, Birarada.zip ve Birarada-1.0.0-Kaynak.zip aynı güncel kaynak paketinin diğer adlarıdır. Ayrı HTML demosu mobil uygulama değildir ve yeni not özelliğini içermez.
+AAB_OLUSTUR.bat için Node.js LTS, Java 21 ve Chrome/Edge gerekir. Kontroller başarılıysa resmî Expo hesabı girişi ve EAS AAB derlemesi açılır. Git/GitHub kurulumu gerekmez. Ayrıntılar ZIP içindeki README.md ve docs altındadır.
+
+Bu ZIP kaynak kodudur. İmzalı AAB içermez; doğrudan Play Console'a yüklenmez ve yayın onayı değildir. İmzalı AAB, canlı Firebase ve yasal sayfa kurulumu, Firestore/cihaz kontrolleri tamamlanmadı.
+
+Birarada-Windows.zip, Birarada.zip, Birarada-1.0.0-Kaynak.zip ve Birarada-Sarkili-Notlar-Kaynak.zip bu temiz paketin diğer adlarıdır. Eski doğrudan HTML indirmeleri ayrı, eski demoya aittir; mobil uygulama yerine kullanılmamalıdır.

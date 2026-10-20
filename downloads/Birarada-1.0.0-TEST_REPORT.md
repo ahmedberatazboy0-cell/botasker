@@ -1,8 +1,12 @@
 # Birarada 1.0.0 doğrulama raporu
 
-Tarih: 20 Ekim 2026 (Türkiye saati). Linux, Node.js 24.19, Expo SDK 54, React Native 0.81.5. Bu rapor `mobile/` kaynak koduna aittir; kökteki eski Express uygulaması ve bağımsız HTML demosu ayrı ürünlerdir.
+Tarih: 20 Ekim 2026 (Türkiye saati). Linux, Node.js 24.19, Expo SDK 54, React Native 0.81.5. Bu rapor mobil uygulamanın kaynak koduna aittir. Temiz ZIP içinde proje doğrudan `Birarada/` altındadır. Eski Express uygulaması ve bağımsız HTML demosu ayrı ürünlerdir ve bu pakete dahil değildir.
 
 Uygulama adı **Birarada**, Android/iOS kimliği **`com.birarada.app`**, sürüm **`1.0.0`**, ilk Android sürüm kodu **`1`**, Firebase projesi **`birarada-5650c`**. İmzalı mağaza AAB'si, canlı Firebase kurulumu ve gerçek cihaz doğrulaması tamamlanmadı. Bu nedenle bu kaynak paketi üretim yayını onayı değildir.
+
+## Temiz kaynak teslimatı
+
+`Birarada-Temiz-Kod.zip` yalnız mobil projeyi tek `Birarada/` kökü altında içerir. Eski `downloads/Birarada.html`, ayrı HTML demo test dosyası, demo BAT başlatıcıları, eski Express sunucusu, node_modules/derleme çıktıları ve özel dosyalar dahil edilmez. Yasal sayfaların HTML dosyaları `hosting/public/` altında korunur. Şarkılı notlar dahil gerçek mobil kaynaklar, AAB aracı, kurallar ve mobil doğrulama testleri korunur. Arşivdeki her dosya `SOURCE_MANIFEST.json` ile doğrulanır. Bu değişiklik Firebase/Expo hesabı bağlamaz ve AAB üretmez. ZIP ayrı, boşluk ve Türkçe karakter içeren bir dizine açıldı. Bu çıkarılmış proje üzerinden tip kontrolü, 17 birim, 6 yayın ayarı, 10 derleme yardımcısı ve 4 arayüz testi geçti. Node üzerinden gerçek BAT önkontrolü de geçti. Bağımlılıklar bu ortamın mevcut lockfile kurulumundan kullanıldı; yeni Windows kurulumu veya çift tıklama doğrulaması değildir.
 
 ## Son ekleme: Spotify/YouTube bağlantılı notlar
 
