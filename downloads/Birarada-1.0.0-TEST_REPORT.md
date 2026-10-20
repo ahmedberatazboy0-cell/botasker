@@ -4,6 +4,12 @@ Tarih: 20 Ekim 2026 (Türkiye saati). Linux, Node.js 24.19, Expo SDK 54, React N
 
 Uygulama adı **Birarada**, Android/iOS kimliği **`com.birarada.app`**, sürüm **`1.0.0`**, ilk Android sürüm kodu **`1`**, Firebase projesi **`birarada-5650c`**. İmzalı mağaza AAB'si, canlı Firebase kurulumu ve gerçek cihaz doğrulaması tamamlanmadı. Bu nedenle bu kaynak paketi üretim yayını onayı değildir.
 
+## Son ekleme: Git/GitHub gerektirmeyen Windows derlemesi
+
+Kullanıcı GitHub kullanılmamasını istedi. Bu ekleme yerel dosyalarda yapıldı; yeni dosyalar GitHub'a gönderilmedi. `AAB_OLUSTUR.bat`, kaynaklardan gerçek yerel kontrolleri çalıştırır; başarılı olursa resmi Expo girişini ve gerçek proje oluşturma/bağlama akışını açıp EAS AAB derlemesini başlatır. Proje kimliği uydurulmaz ve Codex ortam değişkeni ekranına elle girilmez. Orijinal kaynaklar korunur, çalışma kopyası ve gerçek public proje bilgisi `.birarada-release` içinde tutulur. Git/VCS kullanımı kapalıdır, kaynak arşivi ve EAS yolu sabitlenir.
+
+`npm run test:no-github`: **10 geçti**. Hata/durdurma, eksik giriş ve ağ ayrımı, yanlış kimlik reddi, kimlik koruma, dosya/çalışma kilidi ve komut güvenliği testleri ile gerçek Expo config çözümlemesi geçmiştir. EAS ağ yanıtları modellenmiştir; gerçek hesap/AAB testi değildir. `typecheck` ve Windows'a uyarlanan Node başlangıç komutuyla `test:ui` tekrar geçti (**1**). BAT önkontrolü Node üzerinden Linux'ta geçti; gerçek Windows çift tıklaması yapılmadı. Aşağıdaki 34 Firestore testinin ve native derlemenin ağ engelleri devam eder. Ayrıntılar [derleme rehberindedir](docs/GITHUB_GEREKTIRMEYEN_DERLEME.md).
+
 ## Tamamlanan kontroller
 
 | Kontrol | Gerçek sonuç ve kapsam |
