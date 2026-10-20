@@ -1,0 +1,13 @@
+Bu ZIP'teki gerçek Birarada mobil projesini devral. Önce docs/GEMINI_DEVIR_NOTU.md dosyasını oku. Hedefim Google Play'e yüklenebilen, doğru kimlikle üretim imzası taşıyan AAB dosyası. Kaynak ZIP veya HTML demo vermeyi bu hedefin tamamlanması sayma.
+
+Uygulama: Birarada. Android applicationId ve iOS bundle identifier: com.birarada.app. Mevcut kaynak sürümü 1.0.0, ilk versionCode 1. Firebase: birarada-5650c. Destek: ahmedberatazboy0@gmail.com. Paket adını değiştirme. Play Console'da daha önce yükleme varsa geçerli imzayı ve en yüksek sürüm kodunu doğrula; daha yüksek versionCode gerekir.
+
+Kullanıcının en son Windows çalıştırmasında tip kontrolü, 17 birim testi, 6 yayın ayarı testi, 1 Auth emulator testi ve 40/40 Firestore güvenlik testi geçti. Arayüz testlerinde üç not testi geçti; onboarding testi page.goto(http://127.0.0.1:8081/) üzerinde 30 saniyede zaman aşımına uğradı. Son hata budur. Uygulamanın ilk Metro derleme/yükleme süresini araştır; gerçek hataları gider, gerekliyse makul ve sınırlı bekleme bütçesi tanımla. Testi silme, atlama veya başarısız sonucu başarılı gösterme.
+
+Şarkılı notları koru: şarkı adı ve Spotify/YouTube bağlantısı; bağlantı ilgili serviste açılır. Yeni özellik ses dosyası yüklemek veya uygulama içinde müzik çalmak değildir. Tek dosyalık eski HTML demosunu geri getirme.
+
+Çalışma ortamında terminal ve dosya araçların varsa bağımlılıkları kur, kontrolleri çalıştır, gerçek Expo/EAS projesini kullanıcının yetkili hesabında oluştur/bağla veya geçerli bir native üretim derleme yolu kullan. Henüz gerçek EAS projectId yok. Kimlik veya imza uydurma. Parola, token, service account veya imzalama anahtarını sohbetten isteme ya da koda/public depoya gömme; güvenli giriş ve imza yönetimi akışını kullan. Hesap sahibinin yapması zorunlu güvenli giriş/onayları tek ve kısa bir listede belirt; onun yerine oturum açtığını iddia etme.
+
+Canlı Firebase sağlayıcı/kurallar/indeks kurulumu, hesap silme, iki hesapla gerçek cihaz akışları ve yasal sayfaların erişimini doğrula. Mevcut Firebase web sitesini koru: hosting/public tek başına mevcut sitenin üstüne dağıtılmamalı. Mevcut site çıktısına yasal dosyalar ve kesin rotalar birleştirilmeli. Ayrıntı docs/HOSTING.md içindedir. Storage/medya yükleme kapalıdır; güvenli ve testli bir uygulama olmadan açma. Kapsam eksiklerini yayın raporunda açıkça belirt.
+
+İlerlemeyi yalnız gerçek komut çıktılarıyla bildir. Son teslimatta imzalı AAB'nin gerçek dosyasını veya çalışan indirme bağlantısını, paket/sürüm bilgilerini, imza ve native 16 KB uyumluluk kontrollerini, gerçek test sonuçlarını ve kalan engelleri ver. Derleme veya hesap yetkin yoksa bunu başta belirt; dosya üretilmediği halde hazır/yayımlandı deme. Sıfır hata garantisi yerine doğrulama kanıtı sun.

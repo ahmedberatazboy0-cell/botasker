@@ -4,6 +4,10 @@ Tarih: 20 Ekim 2026 (Türkiye saati). Linux, Node.js 24.19, Expo SDK 54, React N
 
 Uygulama adı **Birarada**, Android/iOS kimliği **`com.birarada.app`**, sürüm **`1.0.0`**, ilk Android sürüm kodu **`1`**, Firebase projesi **`birarada-5650c`**. İmzalı mağaza AAB'si, canlı Firebase kurulumu ve gerçek cihaz doğrulaması tamamlanmadı. Bu nedenle bu kaynak paketi üretim yayını onayı değildir.
 
+## En son Windows sonucu ve Gemini devri
+
+Kullanıcının sonraki Windows kaydında **40/40 Firestore güvenlik testi geçti**, fail 0. Önceki batch bağlantısı hatası çözülmüş görünüyor. Arayüz tarafında üç not testi geçti; onboarding testi ilk `page.goto` çağrısında 30000 ms zaman aşımıyla durdu. Başlatıcı bu yüzden Expo hesabı ve AAB adımına ulaşmadı. Onboarding için süre/ilk yükleme düzeltmesi henüz uygulanmadı; kullanıcı devam işini Gemini'ye devretmek istedi. Güncel ve ayrıntılı devir notu [GEMINI_DEVIR_NOTU.md](docs/GEMINI_DEVIR_NOTU.md), kopyalanacak prompt proje kökündeki GEMINIYE_YAPISTIR.txt dosyasındadır. Aşağıdaki 39/40 veya bulutta çalıştırılamadı kayıtları önceki çalışmalara aittir.
+
 ## Kullanıcının Windows çalıştırması ve batch fixture düzeltmesi
 
 20 Ekim 2026 tarihinde kullanıcının paylaştığı konsol kaydında tip kontrolü, 17 birim, 6 yayın ayarı ve 1 Auth emulator testi geçti. Firestore Emulator 1.22.0 üzerinde 40 testten 39'u geçti; notlara ait altı güvenlik testi de başarılıydı. Profil/kullanıcı adı atomik silme testi, `db(uid)` çağrılarının yeni Firestore örnekleri üretip batch ile belge referanslarını farklı bağlantılara ait kılması nedeniyle istemci tarafında `invalid-argument` hatası verdi. Bu sonuçlar kullanıcının Windows kaydına aittir; bulut ortamında yapılmış bir çalışma değildir.
