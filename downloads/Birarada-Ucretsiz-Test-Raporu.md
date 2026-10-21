@@ -54,3 +54,9 @@ Tek dosyalık WEB_BASLATMA_DUZELT.cjs güncelleyicisi beş sabit başlangıç/de
 - Play Console mağaza/veri güvenliği/yaş/erişim beyanları, hesabın test koşulları ve Google incelemesi tamamlanmalıdır. Onay veya yayımlanma süresi taahhüt edilmez.
 
 Kurulum: README.md ve docs/CANLI_KURULUM.md. Tam test kaynakları ZIP'tedir; node_modules, canlı veri, özel env dosyası ve hesap anahtarları pakete dahil değildir.
+
+## Yasal sayfa yayın yardımcısı
+
+`YASAL_YAYINLA.cjs` mevcut Hosting dosyalarının tam manifestini ve ilgili olmayan config'i korur, güncel dört sayfayı önizlemede doğrular ve sonra canlıya alır. Canlı doğrulama hatasında önceki sürüme döner; eşzamanlı üçüncü taraf yayınını üzerine yazmaz. Eski `check-live.cjs` yalnız bilinen SHA-256 eşleşirse yedeklenip güvenli yönlendirmeleri izleyen kontrolle güncellenir. Kontrol içeriği, paket/politika/Supabase kimlik şartları korunur.
+
+Yeni yardımcı için **12/12 yerel test** geçti: dosya/config koruma, önizleme, tam manifest, hatada yayın engeli, eşzamanlı değişiklik, geri dönüş, ilk yayın, eski kaynak reddi, kontrol yedeği/güncelleme ve adres güvenliği. Yayın kimliği6, derleme yardımcısı13 ve başlatıcı10 testiyle birlikte **41/41** geçti. Uygulama TypeScript kontrolü de tekrar geçti. Testler gerçek Google API yayını değildir; bulut oturumu ve izinli Google ağı olmadığı için siteye dağıtım yapılmadı ve yeni AAB üretilmedi. Kullanıcının Windows çıktısı Supabase canlı sağlık kontrolünün geçtiğini gösterir; bu buluttan bağımsız yeniden doğrulama değildir.
