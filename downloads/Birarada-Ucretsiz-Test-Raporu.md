@@ -29,6 +29,10 @@ Beş sosyal tarayıcı testi gerçek Auth emulator kullanır: fotoğrafın başa
 
 Auth testinin ilk CLI çalışması, test geçtiği hâlde bu bulut ortamının salt okunur ~/.config dizinindeki güncelleme bildiricisi nedeniyle çıkış2 verdi. CI=1, NO_UPDATE_NOTIFIER=1 ve görev kapsamındaki XDG_CONFIG_HOME ile yeniden çalıştırıldı; test ve CLI çıkışı0 oldu. Test atlanmadı. Standart Windows kullanıcı config dizini bu bulut kısıtının kapsamı dışındadır.
 
+## 401/403 zamanlama düzeltmesi
+
+Windows'ta test sırasında bir saniye sınırı aşılınca eski oturumun401 yerine403 beklenmesi kararsız bir sonuç üretiyordu. Gerçek davranış yeniden üretildi: eski oturum401, yenilenmiş kısıtlı oturum403. Test artık gerçek reauthAfter sınırının iki tarafını ayrı kimlik zamanlarıyla doğrular; kısıtlı kişinin belge API'sine erişimi de403 olmalıdır. Üretim yetkilendirme kodu değiştirilmedi ve test atlanmadı. Düzeltmeden sonra14/14 ücretsiz test ve iki TypeScript kontrolü tekrar geçti. Diğer yukarıdaki kontroller uygulama kodu değişmediği için önceki doğrulamalardır.
+
 ## Sınırlar ve tamamlanmayan canlı işler
 
 - Bu ortamda yetkili Supabase/Expo/Firebase oturumu yoktur. Gerçek Supabase migration/Edge/Storage dağıtımı, Google JWT/account lookup ve üretim özel-medya uçları canlı olarak doğrulanmadı. UCRETSIZ_KUR.bat kullanıcının resmî Supabase girişinden sonra dağıtır; veritabanı parolası gerekiyorsa yalnız resmî CLI istemine girilir.
