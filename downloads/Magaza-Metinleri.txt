@@ -1,0 +1,32 @@
+UYGULAMA ADI
+Birarada
+
+KISA AÇIKLAMA
+Anlarını paylaş, hikâyeler oluştur ve arkadaşlarınla sohbet et.
+
+TAM AÇIKLAMA
+Birarada, anlarını paylaşabileceğin ve insanlarla bağlantı kurabileceğin bir sosyal uygulama.
+
+ANLARINI PAYLAŞ
+Metin, fotoğraf ve video gönderileri oluştur. Hikâyeler paylaş, seçtiğin hikâyeleri öne çıkanlarında sakla. Diğer kullanıcıların paylaşımlarını takip et, beğen ve yorum yap.
+
+SOHBET ET
+Bire bir ve grup sohbetlerinde iletişim kur. Mesajlarına fotoğraf, video veya ses kaydı ekle.
+
+NOTLARINA ŞARKI EKLE
+Kısa notlarını paylaş; notuna şarkı adıyla birlikte Spotify şarkı veya YouTube video bağlantısı ekle. Şarkı bağlantıları ilgili hizmette açılır.
+
+KENDİ ÇEVRENİ OLUŞTUR
+Profilini düzenle, kullanıcıları bul ve takip et. Gizli hesap ayarıyla takip isteklerini yönet. Yabancılardan mesaj almayı tercihlerine göre aç veya kapat.
+
+HESABINI YÖNET
+İstemediğin kullanıcıları engelle, uygunsuz içerikleri bildir. Hesabını uygulama içinden silme seçeneğine ulaş.
+
+Destek: ahmedberatazboy0@gmail.com
+Gizlilik politikası: https://birarada-5650c.web.app/privacy
+
+GÖRSELLER
+Birarada-Simge-512.png: Uygulama simgesi alanına.
+Birarada-Ozellik-Grafigi-1024x500.png: Özellik grafiği alanına.
+Telefon ekran görüntüleri: Yüklediğin uygulamadan en az iki gerçek ekran görüntüsü ekle; bu pakette telefon ekran görüntüsü yoktur.
+Tanıtım videosu isteğe bağlı; boş bırakılabilir.
