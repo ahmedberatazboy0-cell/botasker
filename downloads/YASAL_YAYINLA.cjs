@@ -222,21 +222,42 @@ async function readPublic(base, resource, redirects = 0) {
     request.on("error", reject);
   });
 }
-async function checkPublished(base, plan, read) {
-  for (const route of ROUTES) {
-    const response = await read(base, "/" + route);
-    if (
-      response.status !== 200 || !/^text\/html/i.test(response.contentType) ||
-      !Buffer.from(response.body).equals(plan.pages.get(route))
-    ) throw Error("Yasal sayfa dogrulanamadi: " + route);
+function verifyResponse(response, expected, mime, label) {
+  const actual = Buffer.from(response.body);
+  const contentType = String(response.contentType || "");
+  if (response.status === 200 && mime.test(contentType) && actual.equals(expected)) return;
+  // Public response metadata only; never print authentication headers or content.
+  const error = Error("Yasal sayfa dogrulanamadi: " + label +
+    "; HTTP " + response.status + "; tur=" + contentType.replace(/[^a-zA-Z0-9;= /.+_-]/g, "").slice(0, 100) +
+    "; alinan=" + actual.length + " bayt; beklenen=" + expected.length +
+    " bayt; alinanSHA256=" + sha(actual) + "; beklenenSHA256=" + sha(expected));
+  error.diagnostic = {path: label, status: response.status, contentType,
+    actualBytes: actual.length, expectedBytes: expected.length,
+    actualSha256: sha(actual), expectedSha256: sha(expected)};
+  throw error;
+}
+async function checkPublished(base, plan, read, { wait, log, record }) {
+  const targets = [
+    ...ROUTES.map(route => ({path: "/" + route, expected: plan.pages.get(route), mime: /^text\/html/i})),
+    {path: PREFIX + "/birarada-legal.css", expected: plan.payload.get(PREFIX + "/birarada-legal.css"), mime: /^text\/css/i},
+  ];
+  for (const target of targets) {
+    const delays = [2000, 4000, 8000, 12000, 15000];
+    for (let attempt = 0; ; attempt++) {
+      try {
+        verifyResponse(await read(base, target.path), target.expected, target.mime, target.path);
+        break;
+      } catch (error) {
+        record({base, path: target.path, attempt: attempt + 1,
+          ...(error.diagnostic || {networkError: error.code || error.message})});
+        if (attempt >= delays.length) throw error;
+        log("Hosting dagitimi bekleniyor: " + target.path + " (" +
+          (attempt + 1) + "/" + delays.length + ", " + delays[attempt] / 1000 + " sn). " +
+          (error.diagnostic ? "HTTP " + error.diagnostic.status + ", " + error.diagnostic.actualBytes + " bayt" : "Gecici baglanti hatasi"));
+        await wait(delays[attempt]);
+      }
+    }
   }
-  const css = await read(base, PREFIX + "/birarada-legal.css");
-  if (
-    css.status !== 200 || !/^text\/css/i.test(css.contentType) ||
-    !Buffer.from(css.body).equals(
-      plan.payload.get(PREFIX + "/birarada-legal.css"),
-    )
-  ) throw Error("Yasal sayfa stili dogrulanamadi.");
 }
 async function publishLegal(
   {
@@ -245,6 +266,7 @@ async function publishLegal(
     read = readPublic,
     record = () => {},
     log = console.log,
+    wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms)),
     channelId = "birarada-legal-" + Date.now().toString(36) + "-" +
       crypto.randomBytes(3).toString("hex"),
   },
@@ -270,7 +292,7 @@ async function publishLegal(
   };
   record(state);
   log("2/5 Mevcut site korunarak yeni surum hazirlaniyor...");
-  const created = await api.createVersion(original.config || {});
+  const created = await api.createVersion(plan.config);
   const next = versionName(
     typeof created === "string" ? created : created.name,
   );
@@ -288,11 +310,17 @@ async function publishLegal(
   const preview = await api.createPreview(channelId);
   allowedPublicUrl(preview.url);
   await api.release(channelId, next);
-  await checkPublished(preview.url, plan, read);
   state.previewUrl = preview.url;
-  state.phase = "preview-verified";
+  state.phase = "preview-released";
   record(state);
   log("Onizleme: " + preview.url);
+  const verifyOptions = {wait, log, record: (diagnostic) => {
+    state.lastVerification = diagnostic;
+    record(state);
+  }};
+  await checkPublished(preview.url, plan, read, verifyOptions);
+  state.phase = "preview-verified";
+  record(state);
   if (releaseStamp(await api.getLive()) !== releaseStamp(baseline)) {
     throw Error(
       "Canli site baska bir islemde degisti. Bu surum yayimlanmadi; yeniden calistir.",
@@ -304,7 +332,7 @@ async function publishLegal(
     state.phase = "released";
     record(state);
     log("5/5 Canli dort yasal sayfa ve stil kontrol ediliyor...");
-    await checkPublished(LIVE_URL, plan, read);
+    await checkPublished(LIVE_URL, plan, read, verifyOptions);
     if (versionName((await api.getLive())?.release?.version?.name) !== next) {
       throw Error("Canli surum yayin sirasinda yeniden degisti.");
     }
