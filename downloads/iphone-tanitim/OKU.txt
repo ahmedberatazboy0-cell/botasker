@@ -1,0 +1,3 @@
+Birarada iPhone çerçeveli tanıtım görselleri
+
+Bu dört görsel, mevcut arayüz görüntüleri temel alınarak yapay zekâ ile hazırlanmış tanıtım tasarımlarıdır. Gerçek iOS ekran görüntüsü değildir; uygulamanın kaynak kodunu, Android AAB dosyasını veya iOS sürümünü değiştirmez. Google Play mağazası için gerçek Android görünümünü gösteren ekran görüntülerini kullan.
