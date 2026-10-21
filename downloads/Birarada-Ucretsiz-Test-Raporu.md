@@ -33,6 +33,14 @@ Auth testinin ilk CLI çalışması, test geçtiği hâlde bu bulut ortamının 
 
 Windows'ta test sırasında bir saniye sınırı aşılınca eski oturumun401 yerine403 beklenmesi kararsız bir sonuç üretiyordu. Gerçek davranış yeniden üretildi: eski oturum401, yenilenmiş kısıtlı oturum403. Test artık gerçek reauthAfter sınırının iki tarafını ayrı kimlik zamanlarıyla doğrular; kısıtlı kişinin belge API'sine erişimi de403 olmalıdır. Üretim yetkilendirme kodu değiştirilmedi ve test atlanmadı. Düzeltmeden sonra14/14 ücretsiz test ve iki TypeScript kontrolü tekrar geçti. Diğer yukarıdaki kontroller uygulama kodu değişmediği için önceki doğrulamalardır.
 
+## Windows web başlangıç süresi ve tanılama düzeltmesi
+
+Kullanıcının Windows çıktısında bütün birim/ücretsiz sunucu testleri geçti; test:social webServer120000ms başlangıç sınırında durdu. Bu çıktı hangi hizmetin beklediğini göstermiyordu; Windows'taki temel gecikmenin nedeni doğrudan doğrulanmış sayılmaz. Başlatıcı artık Auth/API/Expo aşamasını ve15s ilerlemeyi gösterir; her aşamanın180s sınırı, Playwright başlangıcının600s toplam bütçesi vardır. Hazır olma kontrolü dinleyen port/HTML yerine gerçek JavaScript paketini ister. Olağan ve üretilen Playwright config'iyle AAB BAT içindeki yardımcı aynı şekilde güncellendi; senaryo testleri atlanmadı.
+
+Chrome/Edge otomatik algılama normal/sosyal config'lerde de kullanılır. CHROMIUM_PATH verilmeden bu ortamda5/5 sosyal tarayıcı testi ve4/4 onboarding/not UI testi geçti. Uygulama tip kontrolü,13/13 derleme yardımcı ve10/10 başlatıcı testi geçti. Demo Firebase CLI config'i görev kapsamındaki yerel veri klasörüne ayrıldı; temiz kapanış da doğrulandı. Bu çalıştırma Linux'tadır; kullanıcının Windows bilgisayarında aynı sonuç henüz doğrulanmadı. Üretim API/app kodu bu düzeltmede değiştirilmedi.
+
+Tek dosyalık WEB_BASLATMA_DUZELT.cjs güncelleyicisi beş sabit başlangıç/derleme dosyasını SHA-256 ile doğrulayarak uygular; önce orijinalleri yeni bir yedek klasörüne kopyalar. Eski ZIP'ten çıkarılan projede önkontrol, doğru içerik/yedek, ilgisiz dosyayı koruma, tekrar çalıştırma ve yanlış paket kimliğini reddetme denendi. Bağımlılıkları yeniden kurmaz ve gerçek oturum bilgilerini değiştirmez.
+
 ## Sınırlar ve tamamlanmayan canlı işler
 
 - Bu ortamda yetkili Supabase/Expo/Firebase oturumu yoktur. Gerçek Supabase migration/Edge/Storage dağıtımı, Google JWT/account lookup ve üretim özel-medya uçları canlı olarak doğrulanmadı. UCRETSIZ_KUR.bat kullanıcının resmî Supabase girişinden sonra dağıtır; veritabanı parolası gerekiyorsa yalnız resmî CLI istemine girilir.
