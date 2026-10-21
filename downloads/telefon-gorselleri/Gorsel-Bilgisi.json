@@ -1,0 +1,36 @@
+{
+  "app": "Birarada",
+  "captureSource": "Actual unmodified Expo app rendered in Chromium with a mobile viewport; not captured from a physical Android device.",
+  "content": "Fictional local accounts and sample messages; no production accounts or private data used.",
+  "viewportCss": {
+    "width": 432,
+    "height": 768
+  },
+  "deviceScaleFactor": 2.5,
+  "files": {
+    "01-Akis-1080x1920.png": {
+      "width": 1080,
+      "height": 1920,
+      "bytes": 131641,
+      "sha256": "f081a225a87e1eb8972726dd18daefce7333d0710883b90fbeda2edd237a9adf"
+    },
+    "02-Profil-1080x1920.png": {
+      "width": 1080,
+      "height": 1920,
+      "bytes": 115817,
+      "sha256": "2d0ea6105cd781dec0c8559c3debac12dcd7d1b25512c8c884157c64bc6a803c"
+    },
+    "03-Sarkili-Not-1080x1920.png": {
+      "width": 1080,
+      "height": 1920,
+      "bytes": 144464,
+      "sha256": "a6c312b9439d6614a94ed136661ed5376f8cbf8de5c5f448ef58bddb9934b581"
+    },
+    "04-Sohbet-1080x1920.png": {
+      "width": 1080,
+      "height": 1920,
+      "bytes": 89967,
+      "sha256": "1e5b1c8103c29612cffe0cd6defa14dbadec9d619b05751c8df3218fbc0db944"
+    }
+  }
+}

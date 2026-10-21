@@ -1,0 +1,6 @@
+Birarada mağaza ekran görüntüleri
+
+4 adet PNG, 1080x1920 (9:16).
+Gerçek uygulama kodu mobil tarayıcıda açılarak alındı; fiziksel Android telefondan çekilmedi. Yerel örnek hesaplar ve örnek içerik kullanıldı. Arayüz sonradan çizilmedi veya değiştirilmedi.
+
+Play Console: Varsayılan mağaza girişi > Telefon ekran görüntüleri alanından PNG dosyalarını seç. Yayımladığın Android sürümünün görünümüyle karşılaştırarak eşleşen görselleri kullan.
