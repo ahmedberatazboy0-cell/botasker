@@ -1,0 +1,9 @@
+Birarada tanıtım videoları
+
+Birarada-Magaza-Yatay.mp4: 1920x1080 yatay; mevcut gerçek mobil web arayüzünün örnek hesaplarla alınmış görüntülerinden hazırlanmıştır. Fiziksel Android cihaz kaydı değildir. Android sürümünün görünümüyle karşılaştırarak kullan.
+
+Birarada-iPhone-Dikey.mp4: 1080x1920 dikey; yapay zekâ ile hazırlanan iPhone çerçeveli tanıtım tasarımlarını içerir. Gerçek iOS uygulama kaydı değildir. Sosyal paylaşım için hazırlanmıştır.
+
+İki video yaklaşık21.2 saniye, H264/AAC MP4, 30fps. Geçişler ve özgün olarak sentezlenmiş sade enstrümantal fon eklenmiştir; ekranda adı görünen şarkı çalınmaz.
+
+Google Play video alanına MP4 değil YouTube bağlantısı girilir. Yatay videoyu kendi YouTube kanalına herkese açık veya liste dışı olarak yükle; videoda reklamları kapat ve yaş kısıtlaması olmadan yayınla. Oluşan YouTube bağlantısını Play Console video alanına yapıştır. Bu teslimde YouTube’a yükleme yapılmadı.

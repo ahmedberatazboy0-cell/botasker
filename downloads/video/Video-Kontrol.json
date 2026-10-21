@@ -1,0 +1,22 @@
+{
+  "Birarada-Magaza-Yatay.mp4": {
+    "width": 1920,
+    "height": 1080,
+    "duration": 21.2,
+    "videoCodec": "h264",
+    "audioCodec": "aac",
+    "bytes": 1210628,
+    "sha256": "1576c10f2d5fdf1618c993a36c4bdcefe04ec1f8f6724db83de930e8532e4ab9",
+    "fullDecode": "passed"
+  },
+  "Birarada-iPhone-Dikey.mp4": {
+    "width": 1080,
+    "height": 1920,
+    "duration": 21.2,
+    "videoCodec": "h264",
+    "audioCodec": "aac",
+    "bytes": 2508424,
+    "sha256": "a67b1c7afed6a8fa6cfc2334fe15b1ce191e06080fbc01f6c006d8cd4effa006",
+    "fullDecode": "passed"
+  }
+}
