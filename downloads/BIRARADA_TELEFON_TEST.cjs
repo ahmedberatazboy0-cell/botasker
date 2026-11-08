@@ -58,21 +58,44 @@ function chooseDevice(list, requested) {
   if (rows.length !== 1 || rows[0][1] !== "device") throw Error("Tek bir yetkili telefon bagla; birden cok cihaz varsa cihaz kimligini komut sonuna ekle.");
   return rows[0][0];
 }
+function adbFailure(result, args) {
+  const detail = {
+    args, exitCode: result.status, signal: result.signal || null,
+    stdout: String(result.stdout || "").trim().slice(0, 2000),
+    stderr: String(result.stderr || "").trim().slice(0, 2000),
+    processError: result.error?.message || null,
+  };
+  const reason = detail.processError || detail.stderr || detail.stdout || "ADB hata metni dondurmedi.";
+  const error = Error(`ADB ${args.join(" ")} basarisiz (kod ${detail.exitCode}, sinyal ${detail.signal || "yok"}): ${reason}`);
+  error.detail = detail;
+  return error;
+}
+function resolvedComponent(text) {
+  const activities = text.split(/\r?\n/).map((line) => line.trim())
+    .filter((line) => /^com\.birarada\.app\/[a-zA-Z0-9_.$]+$/.test(line));
+  if (activities.length !== 1) throw Error("Birarada'nin tek bir baslatma etkinligi dogrulanamadi.");
+  return activities[0];
+}
 
 async function main() {
+  const args = process.argv.slice(2);
+  if (args.some((arg) => arg.startsWith("--") && arg !== "--observe")) throw Error("Bilinmeyen secenek.");
+  const observeOnly = args.includes("--observe");
+  const selected = args.filter((arg) => arg !== "--observe");
+  if (selected.length > 1) throw Error("En fazla bir cihaz kimligi verilebilir.");
   const adb = process.env.BIRARADA_ADB || path.join(process.env.LOCALAPPDATA || "", "BiraradaTools", "platform-tools", "adb.exe");
   if (!fs.existsSync(adb)) throw Error("ADB bulunamadi. Once verilen resmi Google ADB kurulumunu tamamla.");
   const devices = spawnSync(adb, ["devices"], { encoding: "utf8", windowsHide: true, timeout: 15000 });
   if (devices.error || devices.status !== 0) throw Error("ADB cihaz listesi okunamadi.");
-  const serial = chooseDevice(devices.stdout, process.argv[2]);
+  const serial = chooseDevice(devices.stdout, selected[0]);
   if (!/^[a-zA-Z0-9_.:-]{1,100}$/.test(serial)) throw Error("Gecersiz cihaz kimligi.");
   const downloads = path.join(os.homedir(), "Downloads");
   const output = fs.mkdtempSync(path.join(fs.existsSync(downloads) ? downloads : process.cwd(), "Birarada-Telefon-Test-"));
   const report = {
-    generatedAt: new Date().toISOString(), package: PACKAGE, serial,
+    helperVersion: 2, generatedAt: new Date().toISOString(), package: PACKAGE, serial, observeOnly,
     scope: "Physical Android launch and safe navigation observations, run by the owner on their PC",
     sourceCandidate: "1.1.6 / code8; this script does not install or update it",
-    installed: null, device: {}, launches: [], pages: [], errors: [],
+    installed: null, device: {}, launches: [], pages: [], errors: [], failedCommands: [],
     automaticWritesTested: false, physicalPushDeliveryVerified: false,
     allScreensPassed: false,
     limitations: [
@@ -89,8 +112,11 @@ async function main() {
       encoding: binary ? undefined : "utf8", windowsHide: true, timeout,
       maxBuffer: 24 * 1024 * 1024,
     });
-    if (result.error) throw Error("ADB calistirilamadi: " + result.error.message);
-    if (result.status !== 0) throw Error("ADB islemi basarisiz: " + String(result.stderr || "").trim().slice(0, 250));
+    if (result.error || result.status !== 0) {
+      const error = adbFailure(result, args);
+      report.failedCommands.push(error.detail);
+      throw error;
+    }
     return result.stdout;
   }
   function ensureApp() {
@@ -128,9 +154,16 @@ async function main() {
     if (!report.installed.versionName || !report.installed.versionCode) throw Error("Birarada bu cihazda kurulu bulunamadi.");
     console.log("Kurulu surum: " + report.installed.versionName + " / code " + report.installed.versionCode);
     save();
-    for (let i = 1; i <= 3; i++) {
+    if (observeOnly) {
+      console.log("Gezinme modu: acilis olcumu yapilmiyor, uygulama yeniden baslatilmiyor.");
+      ensureApp();
+    } else {
+      const component = resolvedComponent(command(["shell", "cmd", "package", "resolve-activity", "--brief", "-a", "android.intent.action.MAIN", "-c", "android.intent.category.LAUNCHER", "-p", PACKAGE]));
+      report.resolvedLaunchActivity = component;
+      for (let i = 1; i <= 3; i++) {
       console.log("Android baslatma olcumu " + i + "/3...");
-      const raw = command(["shell", "am", "start", "-W", "-S", "-a", "android.intent.action.MAIN", "-c", "android.intent.category.LAUNCHER", "-p", PACKAGE], { timeout: 60000 });
+      command(["shell", "am", "force-stop", PACKAGE]);
+      const raw = command(["shell", "am", "start", "-W", "-n", component], { timeout: 60000 });
       const status = /^Status:\s*(.+)$/m.exec(raw)?.[1]?.trim() || "unknown";
       const activity = /^Activity:\s*(.+)$/m.exec(raw)?.[1]?.trim() || "";
       report.launches.push({
@@ -144,6 +177,7 @@ async function main() {
       ensureApp();
       capture("acilis-" + i);
       save();
+      }
     }
     console.log("Uygulamanin gezinme cubugu en fazla 45 saniye bekleniyor...");
     const navigationStarted = Date.now();
@@ -214,5 +248,5 @@ async function main() {
   }
 }
 
-module.exports = { packageVersion, isAppForeground, parseNodes, tapTarget, progressCount, chooseDevice };
+module.exports = { packageVersion, isAppForeground, parseNodes, tapTarget, progressCount, chooseDevice, adbFailure, resolvedComponent };
 if (require.main === module) main().catch((error) => { console.error(error.message); process.exitCode = 1; });

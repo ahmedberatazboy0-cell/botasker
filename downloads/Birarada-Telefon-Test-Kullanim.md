@@ -16,4 +16,16 @@ Telefonun kilidi açık kalmalı. Araç kurulu Birarada'nın gerçek sürümün�
 
 Gönderi/mesaj yazma, takip, grup kurma, giriş yapma veya izin onaylama otomatik yapılmaz. Gerçek arka plan push teslimi ölçülmez. Hesap bilgileri veya anahtarlar alınmaz. APK/AAB kurulmaz, uygulama verisi temizlenmez, backend/Play Console değiştirilmez. Araç yeni 1.1.6 kaynağının kurulduğunu varsaymaz; telefonda hangi sürüm varsa raporlar.
 
-Yardımcının cihaz seçimi, sürüm okuma, ön plan kontrolü, güvenli düğme seçimi ve yükleme göstergesi ayrımına yönelik 5 yerel kontrol geçti. Bu kontroller fiziksel telefon testinin yerine geçmez; Windows/telefon çalışması kullanıcı bilgisayarında henüz doğrulanmalıdır.
+Yardımcının cihaz seçimi, sürüm okuma, ön plan kontrolü, güvenli düğme seçimi, yükleme göstergesi, stdout hata ayrıntıları ve doğrulanmış başlatma etkinliği için 7 yerel kontrol geçti. Bu kontroller fiziksel telefon testinin yerine geçmez; Windows/telefon çalışması kullanıcı bilgisayarında henüz doğrulanmalıdır.
+
+## Yardımcı v2: uygulamayı başlatmadan gözlem
+
+Telefonunda Birarada'yı kendin aç, kilidi açık bırak ve şu komutu kullan:
+
+```cmd
+node BIRARADA_TELEFON_TEST.cjs --observe
+```
+
+Bu mod uygulamayı kapatmaz/başlatmaz; açılış süresi ölçmez. Rapor observeOnly=true ve launches=[] içerir. Yalnız mevcut uygulamada bulunabilen güvenli gezinme düğmelerini kullanır. Ön planda Birarada yoksa durur.
+
+Varsayılan açılış modunda başlatma etkinliği package manager'dan doğrulanarak alınır, force-stop ile start ayrı çalıştırılır ve açık etkinlik adıyla am start -W kullanılır. Başarısız ADB komutunun stdout, stderr, çıkış kodu ve sinyali raporda failedCommands alanına kaydedilir. Yalnız stderr'e bakıp boş hata gösteren önceki yardımcı sorunu düzeltildi. Bu, telefondaki önceki başlatma hatasının asıl nedeninin doğrulandığı anlamına gelmez.
