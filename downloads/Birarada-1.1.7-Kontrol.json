@@ -1,0 +1,336 @@
+{
+  "verifiedAtUtc": "2026-11-09T20:20:22.794343+00:00",
+  "version": "1.1.7",
+  "versionCode": 9,
+  "versionCodeCheckedInPlayConsole": false,
+  "package": "com.birarada.app",
+  "sourceBaseVersion": "1.1.6",
+  "installedBinarySourceHashCompared": false,
+  "backendRevision": "2026-11-08-media2",
+  "checks": {
+    "clientTypes": true,
+    "serverTypesIncludingDenoAmbientTypes": true,
+    "unit": {
+      "passed": 40,
+      "failed": 0
+    },
+    "freeBackend": {
+      "passed": 31,
+      "failed": 0,
+      "includesParentAndChildTAPResults": true
+    },
+    "helpers": {
+      "passed": 48,
+      "failed": 0,
+      "nativeWindowsRuntimeTested": false
+    },
+    "authEmulator": {
+      "passed": 1,
+      "failed": 0
+    },
+    "integratedUI": {
+      "passed": 57,
+      "failed": 0,
+      "skipped": 0,
+      "scope": "local Firebase Auth emulator, PGlite, HTTP gateway and Chromium"
+    },
+    "notesOnboarding": {
+      "passed": 4,
+      "failed": 0
+    },
+    "uniqueBrowserCases": 61,
+    "isolatedStartupReruns": {
+      "newSource": 2,
+      "baseline": 1,
+      "passed": true
+    },
+    "productionJsExports": [
+      "android-hermes",
+      "ios-hermes",
+      "web"
+    ],
+    "androidPrebuild": true,
+    "androidNativeCompile": false
+  },
+  "browserComparison": {
+    "date": "2026-11-09",
+    "scope": "Sequential isolated local Chromium development runs with same JPEG and local persisted Auth session; no simultaneous native build or export. Not Android startup. Five reloads each, no statistical confidence claim.",
+    "before": {
+      "version": "1.1.6",
+      "date": "2026-11-09",
+      "environment": "Local Chromium development bundle, same JPEG, Firebase Auth emulator and PGlite; five persisted-session page reloads include browser/bundle work. NOT Android startup.",
+      "samples": [
+        {
+          "shellMs": 286,
+          "firstImageMs": 427
+        },
+        {
+          "shellMs": 256,
+          "firstImageMs": 402
+        },
+        {
+          "shellMs": 232,
+          "firstImageMs": 374
+        },
+        {
+          "shellMs": 246,
+          "firstImageMs": 401
+        },
+        {
+          "shellMs": 331,
+          "firstImageMs": 466
+        }
+      ],
+      "medianShellMs": 256,
+      "medianFirstImageMs": 402
+    },
+    "after": {
+      "version": "1.1.7",
+      "date": "2026-11-09",
+      "environment": "Local Chromium development bundle, same JPEG, Firebase Auth emulator and PGlite; five persisted-session page reloads include browser/bundle work. NOT Android startup.",
+      "samples": [
+        {
+          "shellMs": 362,
+          "firstImageMs": 518
+        },
+        {
+          "shellMs": 343,
+          "firstImageMs": 394
+        },
+        {
+          "shellMs": 246,
+          "firstImageMs": 409
+        },
+        {
+          "shellMs": 266,
+          "firstImageMs": 408
+        },
+        {
+          "shellMs": 244,
+          "firstImageMs": 415
+        }
+      ],
+      "medianShellMs": 266,
+      "medianFirstImageMs": 409
+    }
+  },
+  "imageAuthorizationComparison": {
+    "date": "2026-11-09",
+    "scenario": "Same authenticated JPEG and two local accounts; PGlite, gateway, in-memory storage; artificial 10ms per database RPC; NOT phone or live network latency.",
+    "before": {
+      "samples": [
+        {
+          "milliseconds": 167,
+          "rpc": {
+            "birarada_get": 16,
+            "birarada_commit": 2,
+            "birarada_claim_jobs": 1
+          },
+          "bytes": 389
+        },
+        {
+          "milliseconds": 164,
+          "rpc": {
+            "birarada_get": 16,
+            "birarada_commit": 2,
+            "birarada_claim_jobs": 1
+          },
+          "bytes": 389
+        },
+        {
+          "milliseconds": 165,
+          "rpc": {
+            "birarada_get": 16,
+            "birarada_commit": 2,
+            "birarada_claim_jobs": 1
+          },
+          "bytes": 389
+        },
+        {
+          "milliseconds": 164,
+          "rpc": {
+            "birarada_get": 16,
+            "birarada_commit": 2,
+            "birarada_claim_jobs": 1
+          },
+          "bytes": 389
+        },
+        {
+          "milliseconds": 163,
+          "rpc": {
+            "birarada_get": 16,
+            "birarada_commit": 2,
+            "birarada_claim_jobs": 1
+          },
+          "bytes": 389
+        }
+      ],
+      "medianMs": 164
+    },
+    "after": {
+      "samples": [
+        {
+          "milliseconds": 87,
+          "rpc": {
+            "birarada_get": 5,
+            "birarada_commit": 2,
+            "birarada_claim_jobs": 1
+          },
+          "bytes": 389
+        },
+        {
+          "milliseconds": 86,
+          "rpc": {
+            "birarada_get": 5,
+            "birarada_commit": 2,
+            "birarada_claim_jobs": 1
+          },
+          "bytes": 389
+        },
+        {
+          "milliseconds": 88,
+          "rpc": {
+            "birarada_get": 5,
+            "birarada_commit": 2,
+            "birarada_claim_jobs": 1
+          },
+          "bytes": 389
+        },
+        {
+          "milliseconds": 89,
+          "rpc": {
+            "birarada_get": 5,
+            "birarada_commit": 2,
+            "birarada_claim_jobs": 1
+          },
+          "bytes": 389
+        },
+        {
+          "milliseconds": 87,
+          "rpc": {
+            "birarada_get": 5,
+            "birarada_commit": 2,
+            "birarada_claim_jobs": 1
+          },
+          "bytes": 389
+        }
+      ],
+      "medianMs": 87
+    }
+  },
+  "startupStageSamples": {
+    "version": "1.1.7",
+    "date": "2026-11-09",
+    "environment": "Local Chromium development bundle, persisted Firebase Auth emulator session, local PGlite gateway; reload includes browser/bundle work, not Android cold/warm launch",
+    "samples": [
+      {
+        "shellMs": 265,
+        "imageMs": 445,
+        "stages": {
+          "firebase-initialization": 0,
+          "js-branding-visible": 55,
+          "auth-state-known": 39,
+          "profile-ready": 68,
+          "first-shell-layout": 119,
+          "feed-data-ready": 135,
+          "first-content-image-displayed": 227
+        }
+      },
+      {
+        "shellMs": 257,
+        "imageMs": 372,
+        "stages": {
+          "firebase-initialization": 0,
+          "js-branding-visible": 61,
+          "auth-state-known": 39,
+          "profile-ready": 67,
+          "first-shell-layout": 123,
+          "feed-data-ready": 140,
+          "first-content-image-displayed": 219
+        }
+      },
+      {
+        "shellMs": 255,
+        "imageMs": 426,
+        "stages": {
+          "firebase-initialization": 0,
+          "js-branding-visible": 64,
+          "auth-state-known": 50,
+          "profile-ready": 76,
+          "first-shell-layout": 129,
+          "feed-data-ready": 140,
+          "first-content-image-displayed": 192
+        }
+      }
+    ]
+  },
+  "warmNavigation": {
+    "version": "1.1.7",
+    "date": "2026-11-09",
+    "environment": "Local Chromium, Firebase Auth emulator, PGlite and real gateway; not a physical device",
+    "profileAndPostDetailsMs": 177,
+    "inboxAndConversationMs": 179,
+    "documentHttpReadsForEightProfileHomeCycles": 6,
+    "independentWarmupWhileHomeFeedHeld": 1,
+    "homeExploreRoundTripMs": 274
+  },
+  "nativeCheck": {
+    "date": "2026-11-09",
+    "version": "1.1.7",
+    "candidateVersionCode": 9,
+    "androidPrebuild": true,
+    "prebuildGoogleServicesWasSyntheticFixture": true,
+    "nativeKotlinCompile": false,
+    "requestedVariants": [
+      "debug",
+      "release"
+    ],
+    "blocker": {
+      "task": ":expo-modules-core:compileDebugKotlin / :app:checkDebugAarMetadata",
+      "dependency": "React Native/Hermes 0.81.5 Android AAR",
+      "host": "repo.reactnative.dev",
+      "httpStatus": 403,
+      "releaseCompileCompleted": false
+    },
+    "crashlytics": {
+      "androidBom": "35.0.2",
+      "sdk": "21.0.0",
+      "gradlePlugin": "3.0.8",
+      "downloadedSdkMethodSignaturesChecked": true,
+      "nativeRuntimeTested": false,
+      "consoleDeliveryVerified": false,
+      "defaultCollectionEnabled": false
+    },
+    "buildTools": {
+      "gradle": "8.14.3",
+      "javaCompiler": 17,
+      "androidCompileAndTargetApi": 36,
+      "minSdk": 24,
+      "ndk": "27.1.12297006"
+    },
+    "physicalAndroidTested": false,
+    "remoteDesktopControlled": false,
+    "signedAabProduced": false,
+    "lowRamDeviceMeasured": false,
+    "nativeSplashOrActivityMeasured": false
+  },
+  "signedAabProduced": false,
+  "backendDeployedByThisRun": false,
+  "legalPagesDeployedByThisRun": false,
+  "physicalDeviceTested": false,
+  "remoteDesktopControlled": false,
+  "fcmV1DeliveryVerified": false,
+  "smsConnected": false,
+  "nativeWarmStartupBelowTwoSecondsVerified": false,
+  "productionExportMetadataSha256": "0d577849417245c4602f1c5666a2b513c44843f2bfe124e3d9585ba01fd7d060",
+  "sourcePackageCheck": {
+    "manifestAndAllFileHashes": true,
+    "extractedInPathWithSpacesAndTurkishCharacters": true,
+    "clientTypes": true,
+    "serverTypes": true,
+    "helperTestsPassed": 48,
+    "helperTestsFailed": 0,
+    "dependencyMethod": "existing verified node_modules symlinked, not a fresh npm ci",
+    "privateKeysAndNativeBinariesIncluded": false
+  }
+}
